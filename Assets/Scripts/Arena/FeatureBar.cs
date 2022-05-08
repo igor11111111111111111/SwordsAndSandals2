@@ -6,15 +6,17 @@ namespace SwordsAndSandals.Arena
     public class FeatureBar : MonoBehaviour
     {
         [SerializeField] private Text _value;
+        [SerializeField] private Slider _slider;
 
         public void Init(FeatureData featureData)
         {
             featureData.OnValueChanged += Refresh;
         }
 
-        private void Refresh(string currentMaxValue)
+        private void Refresh(int current, int max)
         {
-            _value.text = currentMaxValue;
+            _slider.value = current / (float)max;
+            _value.text = current + " / " + max;
         }
     }
 }

@@ -22,34 +22,34 @@ namespace SwordsAndSandals
         public Action<Enums.AttackType> OnTakeDamage;
 
         public Action OnStartAction;
-        public Action OnEndAction;
+        public Action OnEndAction; 
 
         public Action<bool> OnInBattle;
 
-        private PlayerInput _input;
+        private PlayerInputUI _inputUI;
         private PlayerPhysics _physics;
         private PlayerData _data;
         private PlayerAnimationClips _animationClips;
 
         private Enums.CurrentState _currentState;
 
-        public PlayerController(PlayerInput input, PlayerPhysics physics, PlayerData data, PlayerAnimationClips animationClips)
+        public PlayerController(PlayerInputUI inputUI, PlayerInput input, PlayerPhysics physics, PlayerData data, PlayerAnimationClips animationClips)
         {
-            _input = input;
+            _inputUI = inputUI;
             _physics = physics;
             _data = data;
             _animationClips = animationClips;
             
-            _input.ActionIcons[0].OnClicked += Button0;
-            _input.ActionIcons[1].OnClicked += Button1;
-            _input.ActionIcons[2].OnClicked += Button2;
-            _input.ActionIcons[3].OnClicked += Button3;
-            _input.ActionIcons[4].OnClicked += Button4;
-            _input.ActionIcons[5].OnClicked += Button5;
-            _input.ActionIcons[6].OnClicked += Button6;
-            _input.ActionIcons[7].OnClicked += Button7;
+            _inputUI.ActionIcons[0].OnClicked += Button0;
+            _inputUI.ActionIcons[1].OnClicked += Button1;
+            _inputUI.ActionIcons[2].OnClicked += Button2;
+            _inputUI.ActionIcons[3].OnClicked += Button3;
+            _inputUI.ActionIcons[4].OnClicked += Button4;
+            _inputUI.ActionIcons[5].OnClicked += Button5;
+            _inputUI.ActionIcons[6].OnClicked += Button6;
+            _inputUI.ActionIcons[7].OnClicked += Button7;
 
-            _input.OnInBattle += (b) =>
+            input.OnInBattle += (b) =>
             {
                 _data.InBattle = b;
                 OnInBattle?.Invoke(b);
@@ -59,9 +59,12 @@ namespace SwordsAndSandals
         }
 
         public void Init(AttackHandler attackHandler)
-        {
-            attackHandler.OnBlock += () => OnBlock?.Invoke();
+        { 
+            attackHandler.OnBlock += (damage, pos) => OnBlock?.Invoke();
+            attackHandler.OnWin += () => OnWin?.Invoke();
             attackHandler.OnLose += () => OnLose?.Invoke();
+             
+            OnInBattle?.Invoke(true);
         }
 
         public PlayerController(AiInput input, PlayerPhysics physics, PlayerData data, PlayerAnimationClips animationClips)
@@ -86,11 +89,6 @@ namespace SwordsAndSandals
             };
 
             _physics.OnEndAction += EndAction;
-        }
-
-        public void LateInit()
-        {
-            OnInBattle?.Invoke(true);
         }
 
         private void Button0()

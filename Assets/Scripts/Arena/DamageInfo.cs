@@ -1,19 +1,26 @@
-﻿using TMPro;
+﻿using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace SwordsAndSandals.Arena
 {
     public class DamageInfo : MonoBehaviour
-    {
+    { 
         [SerializeField] private GameObject _body;
         [SerializeField] private TextMeshProUGUI _text;
 
-        public void Show(int value, PlayerInjector playerInjector)
+        public void Init(AttackHandler attackHandler)
+        {
+            attackHandler.OnTakeDamage += Show;
+            attackHandler.OnBlock += Show;
+        }
+
+        public async void Show(int value, Vector3 pos)
         {
             _body.SetActive(true);
-            var offset = new Vector3(0, 5, 0);
-            transform.position = playerInjector.transform.position + offset;
+            var offset = new Vector3(0, 5, 1);
+            _body.transform.position = new Vector3(pos.x, pos.y, 0) + offset;
 
             if (value == 0)
             {
@@ -26,7 +33,8 @@ namespace SwordsAndSandals.Arena
                 _text.text = value.ToString();
             }
 
-            Invoke(nameof(Close), 1f);
+            await Task.Delay(1000);
+            Close();
         }
 
         private void Close()

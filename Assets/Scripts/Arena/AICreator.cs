@@ -11,6 +11,7 @@ namespace SwordsAndSandals.Arena
 
             aiData.SkinColor = new ColorRandomizer().Get();
             aiData.Name = new PlayerNames().GetRandomFullName();
+            aiData.Reward = new Reward(500, 1000);
 
             var rand = Random.Range(0, 2);
             if(rand == 0)

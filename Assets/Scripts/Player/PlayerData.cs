@@ -1,4 +1,5 @@
 ﻿using CustomJson;
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace SwordsAndSandals
         public string Name;
         public float MoveRange = 1f;
         public float JumpForce = 2f;
-        public float Size = 1f;
+        public float Size = 1f; 
         public float Money;
         public bool InBattle = false;
         public SerializedColor SkinColor;
@@ -18,6 +19,10 @@ namespace SwordsAndSandals
         public PlayerDataSkills DataSkills;
         public PlayerDataArmors DataArmors;
         public PlayerDataWeapons DataWeapons;
+        [JsonIgnore]
+        public Enums.Team Team;
+        [JsonIgnore]
+        public Reward Reward;
 
         public PlayerData()
         {

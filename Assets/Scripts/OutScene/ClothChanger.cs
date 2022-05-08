@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using SwordsAndSandals.Arena;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Experimental.U2D.Animation;
 
@@ -23,11 +24,22 @@ namespace SwordsAndSandals
         [SerializeField] private SpriteResolver _shield;
 
         [SerializeField] private FallenArmor _fallenArmorPrefab;
+        private PlayerData _playerData;
 
-        public void SetAll(PlayerData playerData)
+        public void Init(PlayerData playerData)
         {
-            var armors = playerData.DataArmors.Array;
-            var weapon = playerData.DataWeapons.Current;
+            _playerData = playerData;
+        }
+
+        public void Init(AttackHandler attackHandler)
+        {
+            attackHandler.OnTakeDamage += Drop;
+        }
+
+        public void SetAll()
+        {
+            var armors = _playerData.DataArmors.Array;
+            var weapon = _playerData.DataWeapons.Current;
 
             foreach (var armor in armors)
             {
@@ -53,18 +65,18 @@ namespace SwordsAndSandals
             sr.SetCategoryAndLabel(armor.Name, armor.Level.ToString());
         }
 
-        public void Drop(PlayerDataArmors armors)
+        public void Drop(int damage, Vector3 pos)
         {
-            foreach (var armor in armors.Array)
+            foreach (var armor in _playerData.DataArmors.Array)
             {
                 if(armor.Level > 0)
                 {
                     armor.Level = 0;
                     var sr = GetSpriteResolver(armor);
                     var fallenArmor = Instantiate(_fallenArmorPrefab, sr.transform.position, Quaternion.identity);
-                    fallenArmor.Init(sr.GetComponent<SpriteRenderer>());
+                    fallenArmor.Init(sr.GetComponent<SpriteRenderer>(), _playerData.Team);
                     sr.SetCategoryAndLabel(armor.Name, "0");
-
+                     
                     break;
                 }
             }

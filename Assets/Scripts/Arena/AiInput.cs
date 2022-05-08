@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace SwordsAndSandals.Arena
 {
@@ -8,7 +7,6 @@ namespace SwordsAndSandals.Arena
     {
         public Action<bool> OnInBattle;
         public Action[] Actions;
-        private TurnLogic _turnLogic;
         private ArenaHandler _arenaHandler;
         private PlayerInjector _injector;
         private PlayerRotator _playerRotator;
@@ -16,7 +14,6 @@ namespace SwordsAndSandals.Arena
         public void Init(PlayerInjector aiInjector, TurnLogic turnLogic, ArenaHandler arenaHandler)
         {
             _injector = aiInjector;
-            _turnLogic = turnLogic;
             _arenaHandler = arenaHandler;
 
             _playerRotator = new PlayerRotator(_injector, _arenaHandler);
@@ -35,7 +32,7 @@ namespace SwordsAndSandals.Arena
 
             _playerRotator.CheckRotation();
 
-            Actions[UnityEngine.Random.Range(0, 8)]?.Invoke();
+            Actions[3/*UnityEngine.Random.Range(0, 8)*/]?.Invoke();
         }
     }
 }

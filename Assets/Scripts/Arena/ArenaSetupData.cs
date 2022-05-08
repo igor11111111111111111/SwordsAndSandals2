@@ -3,31 +3,78 @@ using UnityEngine;
 
 namespace SwordsAndSandals.Arena
 {
-    public class ArenaSetupData : MonoBehaviour
+    public class ArenaSetupData
     {
-        [SerializeField] private CameraMover _cameraMover;
-        [SerializeField] private PlayerInput _playerInput;
-        [SerializeField] private DamageInfo _damageInfo;
+        private ArenaPanel _arenaPanel;
+        private PlayerInjector _playerInjector;
+        private SwordsAndSandals.PlayerData _playerData;
+        private PlayerData _arenaPlayerData;
+        private PlayerInjector _aiInjector;
+        private SwordsAndSandals.PlayerData _aiData;
+        private PlayerData _arenaAiData;
+        private TurnLogic _turnLogic;
+        private ArenaHandler _arenaHandler;
+        private CameraMover _cameraMover;
+        private PlayerInputUI _playerInputUI;
+        private DamageInfo _damageInfo;
+        private AttackHandler _playerAttackHandler;
+        private AttackHandler _aiAttackHandler;
+        private EndBattlePanel _endBattlePanel;
 
-        public void Init(ArenaPanel arenaPanel, PlayerInjector playerInjector, SwordsAndSandals.PlayerData playerData, PlayerInjector aiInjector, SwordsAndSandals.PlayerData aiData, TurnLogic turnLogic)
+        public ArenaSetupData(ArenaPanel arenaPanel, PlayerInjector playerInjector, SwordsAndSandals.PlayerData playerData, PlayerInjector aiInjector, SwordsAndSandals.PlayerData aiData, TurnLogic turnLogic, CameraMover cameraMover, PlayerInputUI playerInputUI, DamageInfo damageInfo, EndBattlePanel endBattlePanel)
         {
-            var arenaPlayerData = Setup(playerData, playerInjector, Enums.Direction.Left);
-            var arenaAiData = Setup(aiData, aiInjector, Enums.Direction.Right);
+            _arenaPanel = arenaPanel; 
+            _playerInjector = playerInjector;
+            _playerData = playerData;
+            _aiInjector = aiInjector;
+            _aiData = aiData;
+            _turnLogic = turnLogic;
+            _cameraMover = cameraMover;
+            _playerInputUI = playerInputUI;
+            _damageInfo = damageInfo;
+            _endBattlePanel = endBattlePanel;
 
-            arenaPanel.InitPlayers(arenaPlayerData, arenaAiData);
-            var arenaHandler = new ArenaHandler(playerInjector, aiInjector);
+            Other();
+            Player();
+            AI();
+            InitAttackHandlers();
+        }
 
-            playerInjector.InitPlayerArenaInput(_playerInput, turnLogic, arenaHandler);
-            _cameraMover.Init(playerInjector, new Vector3(4, 2.5f, 0));
+        private void Other()
+        {
+            _arenaPlayerData = Setup(_playerData, _playerInjector, Enums.Direction.Left);
+            _arenaAiData = Setup(_aiData, _aiInjector, Enums.Direction.Right);
+            _arenaPanel.InitPlayers(_arenaPlayerData, _arenaAiData);
+            _arenaHandler = new ArenaHandler(_playerInjector, _aiInjector);
+            _cameraMover.Init(_arenaHandler);
+        }
 
-            aiInjector.InitAIArenaInput(new AiInput(), turnLogic, arenaHandler);
-            new PlayerRotator().Rotate(aiInjector);
+        private void Player()
+        {
+            _playerInjector.InitPlayerArenaInput(_playerInputUI, _turnLogic, _arenaHandler, _aiData);
 
-            var playerAttackHandler = new AttackHandler(arenaPlayerData, playerInjector, aiInjector, arenaHandler, _damageInfo);
-            playerInjector.InitAttackHandler(playerAttackHandler);
+            _playerAttackHandler = new AttackHandler(_arenaPlayerData, _playerInjector, _aiInjector, _arenaHandler);
+            _playerInjector.InitAttackHandler(_playerAttackHandler);
+            _damageInfo.Init(_playerAttackHandler);
+            var endBattleHandler = new EndBattleHandler(_playerAttackHandler);
+            _endBattlePanel.InitDatas(_playerData, _aiData, endBattleHandler);
+        }
 
-            var aiAttackHandler = new AttackHandler(arenaAiData, aiInjector, playerInjector, arenaHandler, _damageInfo);
-            aiInjector.InitAttackHandler(aiAttackHandler);
+        private void AI()
+        {
+            _aiInjector.InitAIArenaInput(_turnLogic, _arenaHandler);
+
+            _aiAttackHandler = new AttackHandler(_arenaAiData, _aiInjector, _playerInjector, _arenaHandler);
+            _aiInjector.InitAttackHandler(_aiAttackHandler);
+            _damageInfo.Init(_aiAttackHandler);
+
+            new PlayerRotator().Rotate(_aiInjector);
+        }
+
+        private void InitAttackHandlers()
+        {
+            _playerAttackHandler.InitEnemyAttackHandler(_aiAttackHandler);
+            _aiAttackHandler.InitEnemyAttackHandler(_playerAttackHandler);
         }
 
         private PlayerData Setup(SwordsAndSandals.PlayerData playerData, PlayerInjector injector, Enums.Direction direction)
@@ -36,7 +83,7 @@ namespace SwordsAndSandals.Arena
 
             injector.GetComponent<Rigidbody2D>().simulated = true;
 
-            injector.transform.position = new Vector3(4 * sign, -2.5f, 0);
+            injector.transform.position = new Vector3(4.89f * sign, -2.5f, 3);
 
             var sceneScale = new Vector3(3.2f, 3.2f, 3.2f);
             injector.transform.localScale = sceneScale * playerData.DataSkills.Get<Strength>().ScaleCoeff;

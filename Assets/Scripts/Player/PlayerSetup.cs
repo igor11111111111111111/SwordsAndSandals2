@@ -9,7 +9,7 @@ namespace SwordsAndSandals
         public PlayerSetup(PlayerData data, PlayerPaintableParts paintableParts, ClothChanger clothChanger)
         {
             paintableParts.Colorize(data.SkinColor);
-            clothChanger.SetAll(data);
+            clothChanger.SetAll();
         }
     }
 }

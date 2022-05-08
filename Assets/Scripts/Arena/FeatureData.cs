@@ -5,7 +5,7 @@ namespace SwordsAndSandals.Arena
 {
     public class FeatureData
     {
-        public Action<String> OnValueChanged;
+        public Action<int, int> OnValueChanged;
         public int Current
         {
             get 
@@ -17,17 +17,16 @@ namespace SwordsAndSandals.Arena
                 _current = value;
                 if (_current <= 0)
                     _current = 0;
-                OnValueChanged?.Invoke(_currentMaxValue);
+                OnValueChanged?.Invoke(_current, _max);
             }
         }
         protected int _current;
         public int Max => _max;
         protected int _max;
-        private string _currentMaxValue => _current + " / " + Max;
 
         public void Init()
         {
-            OnValueChanged?.Invoke(_currentMaxValue);
+            OnValueChanged?.Invoke(_current, _max);
         }
     }
 
@@ -41,7 +40,7 @@ namespace SwordsAndSandals.Arena
 
     public class HealthData : FeatureData
     {
-        private const int _baseValue = 10;
+        private const int _baseValue = 10; 
         private const int _valuePerPoint = 20;
 
         public HealthData(Skill skill)

@@ -15,12 +15,17 @@ namespace SwordsAndSandals.Arena
 
         public bool InBattleDistance()
         {
-            return Mathf.Abs(GetDistance()) <= 3 ? true : false;
+            return GetAbsDistance() <= 3 ? true : false;
         }
 
         public float GetDistance()
         {
             return _playerInjector.transform.position.x - _aiInjector.transform.position.x;
+        }
+
+        public float GetAbsDistance()
+        {
+            return Mathf.Abs(GetDistance());
         }
     }
 }

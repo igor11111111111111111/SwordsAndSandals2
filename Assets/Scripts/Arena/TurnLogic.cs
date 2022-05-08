@@ -6,14 +6,10 @@ namespace SwordsAndSandals.Arena
     { 
         public Enums.Team CurrentTeam;
         public Action<Enums.Team> OnStarted;
-        private PlayerInjector _playerInjector;
-        private PlayerInjector _aiInjector;
+        public Action<Enums.Team> OnEnded;
 
         public void Init(PlayerInjector playerInjector, PlayerInjector aiInjector)
         {
-            _playerInjector = playerInjector;
-            _aiInjector = aiInjector;
-
             CurrentTeam = Enums.Team.Player;
             OnStarted?.Invoke(CurrentTeam);
 
@@ -23,6 +19,8 @@ namespace SwordsAndSandals.Arena
 
         private void EndTurn()
         {
+            OnEnded?.Invoke(CurrentTeam);
+
             CurrentTeam = 
                 CurrentTeam == Enums.Team.AI 
                 ? Enums.Team.Player 

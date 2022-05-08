@@ -11,6 +11,7 @@ namespace SwordsAndSandals.Arena
         public Action OnClicked;
         [SerializeField] private Button _button;
         [SerializeField] private Image _image;
+        [SerializeField] private ActionChanceInfo _chanceInfo;
 
         public void Init()
         {
@@ -22,6 +23,11 @@ namespace SwordsAndSandals.Arena
             _image.sprite = sprite;
             if(isNeedRotate)
                 _image.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        public void SetChance(int chance, bool active)
+        {
+            _chanceInfo.Show(chance, active);
         }
     }
 }

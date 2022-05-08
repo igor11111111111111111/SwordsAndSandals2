@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 
 namespace SwordsAndSandals
 {
@@ -6,10 +7,11 @@ namespace SwordsAndSandals
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Rigidbody2D _rigidbody;
-
-        public void Init(SpriteRenderer spriteRenderer)
+         
+        public async void Init(SpriteRenderer spriteRenderer, Enums.Team team)
         {
             _spriteRenderer.sprite = spriteRenderer.sprite;
+            _spriteRenderer.sortingLayerName = team.ToString();
             _spriteRenderer.sortingOrder = 80;
             transform.localScale = spriteRenderer.transform.lossyScale;
             transform.rotation = spriteRenderer.transform.rotation;
@@ -17,18 +19,22 @@ namespace SwordsAndSandals
             _rigidbody.AddTorque(Random.Range(-360, 360), ForceMode2D.Impulse);
             _rigidbody.AddForce(new Vector2(Random.Range(-4, 4), Random.Range(0, 4)), ForceMode2D.Impulse);
 
-            Invoke(nameof(StopRotation), 0.1f);
-            Invoke(nameof(MoveToBG), 10);
+            await Task.Delay(300);
+            StopRotation();
+            await Task.Delay(9000);
+            MoveToBG();
         }
 
         private void MoveToBG()
         {
-            _spriteRenderer.sortingOrder = -10;
+            if (_spriteRenderer != null)
+                _spriteRenderer.sortingOrder = -10;
         }
 
         private void StopRotation()
         {
-            _rigidbody.angularVelocity = 0;
+            if (_rigidbody != null)
+                _rigidbody.angularVelocity = 0;
         }
     }
 }

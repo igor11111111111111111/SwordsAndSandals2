@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: 6721acabc30e80a4e8ee27cff80af0b8
+guid: 13183285272ebce4d8cbe55196dfea04
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2753597471096352698
-    second: Environment_0
+      213: -2191668444884831948
+    second: BG2_0
   - first:
-      213: -446867404522521166
-    second: Environment_1
-  - first:
-      213: 5089713165793692188
-    second: Environment_2
-  - first:
-      213: 2713915087196460949
-    second: Environment_3
+      213: -9105988504661176207
+    second: BG2_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,64 +121,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Environment_0
+      name: BG2_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 0
         y: 0
-        width: 75
-        height: 100
+        width: 528
+        height: 500
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64053e070b149c9d0800000000000000
-      internalID: -2753597471096352698
+      spriteID: 431f43d4921a591e0800000000000000
+      internalID: -2191668444884831948
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Environment_1
+      name: BG2_1
       rect:
         serializedVersion: 2
-        x: 93
+        x: 582
         y: 0
-        width: 75
-        height: 100
+        width: 528
+        height: 500
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2bdfbb396786cc9f0800000000000000
-      internalID: -446867404522521166
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Environment_2
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 0
-        width: 75
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c1a03c7682b42a640800000000000000
-      internalID: 5089713165793692188
+      spriteID: 17051ea53b701a180800000000000000
+      internalID: -9105988504661176207
       vertices: []
       indices: 
       edges: []
@@ -201,7 +174,7 @@ TextureImporter:
     secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
+  pSDShowRemoveMatteOption: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
