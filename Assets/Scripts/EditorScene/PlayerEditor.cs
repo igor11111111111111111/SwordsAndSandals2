@@ -6,7 +6,7 @@ using SwordsAndSandals.OutScene;
 namespace SwordsAndSandals.Editor
 { 
     public class PlayerEditor : MonoBehaviour
-    {
+    { 
         [SerializeField] private InputField _inputField;
         [SerializeField] private SkillsPanel _skillsPanel;
         [SerializeField] private SkinPanel _skinPanel;

@@ -10,10 +10,12 @@ namespace SwordsAndSandals
     { 
         [SerializeField] private PlayerGroundCheck _groundCheck;
         [SerializeField] private Animator _animator;
+        public Animator Animator => _animator;
         public PlayerData Data => _data;
         private PlayerData _data;
         public PlayerController Controller => _controller;
         private PlayerController _controller;
+        public ClothChanger ClothChanger => _clothChanger;
         private ClothChanger _clothChanger;
         public Enums.Direction Direction;
         private PlayerSortingLayer _sortingLayer;

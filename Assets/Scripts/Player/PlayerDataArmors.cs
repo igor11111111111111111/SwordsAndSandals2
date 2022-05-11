@@ -13,7 +13,7 @@ namespace SwordsAndSandals
             Array = new Armor[]
             { 
                 new Helmet(),
-                new Cuirass(),
+                new Cuirass(), 
                 new Shorts(),
                 new LeftFoot(),
                 new RightFoot(),
@@ -21,12 +21,17 @@ namespace SwordsAndSandals
                 new RightGaiter(),
                 new LeftLeggins(),
                 new RightLeggins(),
-                new LeftMitten(),
+                new LeftMitten(), 
                 new RightMitten(),
                 new LeftPauldron(),
                 new RightPauldron(),
                 new Shield()
             };
+        }
+
+        public T Get<T>() where T : Armor
+        {
+            return (T)System.Array.Find(Array, t => t is T);
         }
 
         public int GetDefence()

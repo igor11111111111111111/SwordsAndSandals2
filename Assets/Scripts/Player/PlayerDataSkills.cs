@@ -8,11 +8,12 @@ namespace SwordsAndSandals
     [Serializable]
     public class PlayerDataSkills
     {
-        [NonSerialized]
+        [NonSerialized] 
         public Action<int> OnUnallocatedPointsChanged;
 
         public int UnallocatedPoints;
-
+        [NonSerialized]
+        public const int POINTS_PER_LEVEL = 4;
         public Skill[] Array;
 
         public PlayerDataSkills()
@@ -28,7 +29,7 @@ namespace SwordsAndSandals
                 new Stamina(),
                 new Magicka()
             };
-            //Array.Find(Skills, s => s is Agility);
+
             UnallocatedPoints = 9;
 
             OnUnallocatedPointsChanged += ChangePoints;
@@ -42,6 +43,11 @@ namespace SwordsAndSandals
         public T Get<T>() where T : Skill
         {
             return (T)System.Array.Find(Array, t => t is T);
+        }
+
+        public void AddPointsPerLevel()
+        {
+            UnallocatedPoints += POINTS_PER_LEVEL;
         }
 
         private void ChangePoints(int delta)

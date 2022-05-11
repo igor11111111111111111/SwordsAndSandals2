@@ -37,7 +37,7 @@ namespace SwordsAndSandals.Arena
             Other();
             Player();
             AI();
-            InitAttackHandlers();
+            LateInit();
         }
 
         private void Other()
@@ -56,8 +56,6 @@ namespace SwordsAndSandals.Arena
             _playerAttackHandler = new AttackHandler(_arenaPlayerData, _playerInjector, _aiInjector, _arenaHandler);
             _playerInjector.InitAttackHandler(_playerAttackHandler);
             _damageInfo.Init(_playerAttackHandler);
-            var endBattleHandler = new EndBattleHandler(_playerAttackHandler);
-            _endBattlePanel.InitDatas(_playerData, _aiData, endBattleHandler);
         }
 
         private void AI()
@@ -71,10 +69,16 @@ namespace SwordsAndSandals.Arena
             new PlayerRotator().Rotate(_aiInjector);
         }
 
-        private void InitAttackHandlers()
+        private void LateInit()
         {
             _playerAttackHandler.InitEnemyAttackHandler(_aiAttackHandler);
             _aiAttackHandler.InitEnemyAttackHandler(_playerAttackHandler);
+
+            var endBattleHandler = new EndBattleHandler(_playerAttackHandler);
+            _endBattlePanel.InitDatas(_playerData, _aiData, endBattleHandler);
+            _turnLogic.Init(_playerInjector, _aiInjector, endBattleHandler);
+
+            //_aiAttackHandler.Test();//!
         }
 
         private PlayerData Setup(SwordsAndSandals.PlayerData playerData, PlayerInjector injector, Enums.Direction direction)

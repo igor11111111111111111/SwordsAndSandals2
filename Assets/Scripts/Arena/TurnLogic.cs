@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace SwordsAndSandals.Arena
 {
@@ -8,16 +9,23 @@ namespace SwordsAndSandals.Arena
         public Action<Enums.Team> OnStarted;
         public Action<Enums.Team> OnEnded;
 
-        public void Init(PlayerInjector playerInjector, PlayerInjector aiInjector)
+        private PlayerInjector _playerInjector;
+        private PlayerInjector _aiInjector;
+
+        public void Init(PlayerInjector playerInjector, PlayerInjector aiInjector, EndBattleHandler endBattleHandler)
         {
+            _playerInjector = playerInjector;
+            _aiInjector = aiInjector;
             CurrentTeam = Enums.Team.Player;
             OnStarted?.Invoke(CurrentTeam);
 
-            playerInjector.Controller.OnEndAction += EndTurn;
-            aiInjector.Controller.OnEndAction += EndTurn;
+            _playerInjector.Controller.OnEndAction += ChangeTurn;
+            _aiInjector.Controller.OnEndAction += ChangeTurn;
+
+            endBattleHandler.OnEndBattle += UnsubChangeTurn;
         }
 
-        private void EndTurn()
+        private void ChangeTurn()
         {
             OnEnded?.Invoke(CurrentTeam);
 
@@ -27,6 +35,12 @@ namespace SwordsAndSandals.Arena
                 : Enums.Team.AI;
 
             OnStarted?.Invoke(CurrentTeam);
+        }
+
+        private void UnsubChangeTurn(EndBattleHandler.Info _)
+        {
+            _playerInjector.Controller.OnEndAction -= ChangeTurn;
+            _aiInjector.Controller.OnEndAction -= ChangeTurn;
         }
     }
 }

@@ -5,7 +5,7 @@ namespace SwordsAndSandals.Arena
     public class EndBattleHandler
     {
         public Action<Info> OnEndBattle;
-
+         
         public EndBattleHandler(AttackHandler playerAttackHandler)
         {
             playerAttackHandler.OnWin += () => OnEndBattle?.Invoke(new Info(false, true));

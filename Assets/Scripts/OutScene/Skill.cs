@@ -22,6 +22,7 @@ namespace SwordsAndSandals
     public class Strength : Skill
     {
         private const float SIZE_PER_VALUE = 0.4f;
+        [JsonIgnore]
         public float ScaleCoeff => SIZE_PER_VALUE * Value * 0.01f + 1;
     }
      

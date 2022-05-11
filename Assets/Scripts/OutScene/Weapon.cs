@@ -8,8 +8,9 @@ namespace SwordsAndSandals
     [Serializable]
     public class Weapon
     {
-        public String Name => GetType().Name;
+        public string Name => GetType().Name;
         public int Level;
+        [JsonIgnore]
         public int Damage => LevelDamage[Level];
         [JsonIgnore]
         public Dictionary<int, int> LevelDamage;

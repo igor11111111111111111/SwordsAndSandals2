@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using CustomJson;
+using SwordsAndSandals.OutScene;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -31,6 +34,7 @@ namespace SwordsAndSandals.Arena
             _aiData = aiData;
 
             endBattle.OnEndBattle += EndBattle;
+            _accept.onClick.AddListener(Accept);
         }
 
         private async void EndBattle(EndBattleHandler.Info info)
@@ -38,22 +42,23 @@ namespace SwordsAndSandals.Arena
             if (info.IsWin)
             {
                 _aboutCharactersInfo.text = "First blood to " + _playerData.Name + "! " + _aiData.Name + " yields.";
-                _goldInfo.text = _aiData.Reward.Gold /*+ crowd apprecation*/ + " gold won."/* + "..% crowd apprecation"*/;
+                _goldInfo.text = _aiData.Reward.Money /*+ crowd apprecation*/ + " gold won."/* + "..% crowd apprecation"*/;
                 _battleXPInfo.text = _aiData.Reward.XP + " xp won for this fight";
 
-                var playerXP = _playerData.DataLevel.CurrentExp;
+                var playerXP = _playerData.DataLevel.CurrentXP;
                 var reward = _aiData.Reward.XP;
                 var newXP = playerXP + reward;
-                float XPToNewLevel = _playerData.DataLevel.ThresholdToLevel.FirstOrDefault(x => x.Value == _playerData.DataLevel.Level + 1).Key;
+                float XPToNewLevel = _playerData.DataLevel.GetXPToNewLevel();
+
                 _percentToNextLevelInfo.text = null;
 
                 Show(true);
 
                 await SliderAnimation(playerXP, newXP, XPToNewLevel);
-                // action invoke level up scene
+                
                 if (newXP < XPToNewLevel)
                 {
-                    _percentToNextLevelInfo.text = (1 - newXP / XPToNewLevel) * 100 + "% TO NEXT LEVEL";
+                    _percentToNextLevelInfo.text = (int)((1 - newXP / XPToNewLevel) * 100) + "% TO NEXT LEVEL";
                 }
                 else
                 {
@@ -90,6 +95,30 @@ namespace SwordsAndSandals.Arena
         private void Show(bool active)
         {
             _body.SetActive(active);
+        }
+
+        private void Accept()
+        {
+            var playerXP = _playerData.DataLevel.CurrentXP;
+            var reward = _aiData.Reward.XP;
+            var newXP = playerXP + reward;
+            float XPToNewLevel = _playerData.DataLevel.GetXPToNewLevel();
+
+            _playerData.DataLevel.CurrentXP = newXP;
+            _playerData.Money += _aiData.Reward.Money; // * coeff apprecation
+
+            if (newXP >= XPToNewLevel)
+            {
+                _playerData.DataSkills.AddPointsPerLevel();
+                new Json().Save(_playerData, Enums.SaveFilename.Player);
+                new SceneChanger().MoveTo(Enums.Scene.LevelUp);
+            }
+            else
+            {
+                new Json().Save(_playerData, Enums.SaveFilename.Player);
+                new SceneChanger().MoveTo(Enums.Scene.Street);
+            }
+
         }
     }
 }

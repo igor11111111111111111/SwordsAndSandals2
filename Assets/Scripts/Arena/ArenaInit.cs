@@ -49,7 +49,6 @@ namespace SwordsAndSandals.Arena
             var turnLogic = new TurnLogic();
             var cameraMover = new CameraMover(_playerCamera, _aiCamera, _ourCamera, _uiCamera, player, ai, turnLogic);
             new ArenaSetupData(_arenaPanel, player, _playerData, ai, _aiData, turnLogic, cameraMover, _playerInputUI, _damageInfo, _endBattlePanel);
-            turnLogic.Init(player, ai);
             _arenaPanel.Show(true);
         }
     } 

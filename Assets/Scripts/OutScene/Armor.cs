@@ -7,12 +7,13 @@ namespace SwordsAndSandals
     [Serializable]
     public class Armor
     {   
-        public String Name => GetType().Name;
+        public string Name => GetType().Name;
         public int Level;
+        [JsonIgnore]
         public int Defence => LevelDefence[Level];
         [JsonIgnore]
         public Dictionary<int, int> LevelDefence;
-
+         
         public Armor()
         {
             Level = 0;

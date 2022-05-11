@@ -15,6 +15,16 @@ namespace SwordsAndSandals.OutScene
             injector.GetComponent<Rigidbody2D>().simulated = false;
 
             return injector;
-        } 
+        }
+
+        public PlayerInjector Init(PlayerData playerData, Vector3 position, Vector3 sceneScale)
+        {
+            var injector = Instantiate(_playerPrefab, position, Quaternion.identity);
+            injector.InitData(playerData);
+            injector.transform.localScale = sceneScale;
+            injector.GetComponent<Rigidbody2D>().simulated = false;
+
+            return injector;
+        }
     }
 }

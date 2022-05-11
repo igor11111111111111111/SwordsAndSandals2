@@ -52,7 +52,9 @@
             PreArena,
             Arena,
             Editor,
-            Menu
+            Menu,
+            LevelUp,
+            ArmorShop
         }
 
         public enum Team

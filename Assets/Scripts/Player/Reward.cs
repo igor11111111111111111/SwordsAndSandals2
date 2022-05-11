@@ -3,12 +3,12 @@
     public class Reward
     {
         public readonly int XP;
-        public readonly int Gold;
+        public readonly int Money;
 
-        public Reward(int xp, int gold)
+        public Reward(int xp, int money)
         {
             XP = xp;
-            Gold = gold;
+            Money = money;
         }
     }
 }

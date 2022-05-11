@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace SwordsAndSandals.Street
 {
+
     public class ArenaPanel : MonoBehaviour
     {
         [SerializeField] private Button _button;

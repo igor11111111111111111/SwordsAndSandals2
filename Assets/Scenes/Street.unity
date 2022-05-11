@@ -641,6 +641,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1026450620 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1791348852146828139, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
+  m_PrefabInstance: {fileID: 1753528894}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1039582407
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +820,24 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1791348852306100238, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
   m_PrefabInstance: {fileID: 1585475504}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1656849418 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1791348852306100239, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
+  m_PrefabInstance: {fileID: 1753528894}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1656849419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656849418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a455cceb6cc8d40a580096e18b5398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1026450620}
 --- !u!1001 &1662453093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1183,7 +1212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1791348852306100239, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
       propertyPath: m_Name
-      value: ArmouryPanel
+      value: ArmoryPanel
       objectReference: {fileID: 0}
     - target: {fileID: 1791348852306100239, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
       propertyPath: m_IsActive
@@ -1191,7 +1220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1791348852344129061, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
       propertyPath: m_Text
-      value: Armoury
+      value: Armory
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba4a09343ceb0054193d667327ab552e, type: 3}

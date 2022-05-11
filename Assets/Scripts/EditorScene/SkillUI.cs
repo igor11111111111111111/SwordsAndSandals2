@@ -26,8 +26,8 @@ namespace SwordsAndSandals.Editor
 
             name = _name.text = _skill.Name;
             Refresh();
-
-            _minus.onClick.AddListener(Minus);
+            if(_minus != null)
+                _minus.onClick.AddListener(Minus);
             _plus.onClick.AddListener(Plus);
         }
 

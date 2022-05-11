@@ -11,8 +11,8 @@ namespace SwordsAndSandals
         public string Name;
         public float MoveRange = 1f;
         public float JumpForce = 2f;
-        public float Size = 1f; 
         public float Money;
+        [JsonIgnore]
         public bool InBattle = false;
         public SerializedColor SkinColor;
         public PlayerDataExperience DataLevel;
