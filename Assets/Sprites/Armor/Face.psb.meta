@@ -98,15 +98,15 @@ ScriptedImporter:
   rigSpriteImportData:
   - name: DumbFounded
     originalName: 
-    pivot: {x: 0.51970375, y: 0.67733276}
+    pivot: {x: 0.4928126, y: 0.5781801}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 60
+      x: 58
       y: 9
-      width: 18
-      height: 18
+      width: 23
+      height: 17
     spriteID: 2da3a0ffe79acfa4587b4a03566bbbb6
     internalID: 0
     spriteBone:
