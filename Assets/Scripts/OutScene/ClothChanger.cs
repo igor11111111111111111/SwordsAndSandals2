@@ -62,7 +62,7 @@ namespace SwordsAndSandals
         public void Set(Armor armor)
         {
             var sr = GetSpriteResolver(armor);
-            sr.SetCategoryAndLabel(armor.Name, armor.Level.ToString());
+            sr.SetCategoryAndLabel(armor.Category, armor.Level.ToString());
         }
 
         public void Drop(int damage, Vector3 pos)
@@ -75,7 +75,7 @@ namespace SwordsAndSandals
                     var sr = GetSpriteResolver(armor);
                     var fallenArmor = Instantiate(_fallenArmorPrefab, sr.transform.position, Quaternion.identity);
                     fallenArmor.Init(sr.GetComponent<SpriteRenderer>(), _playerData.Team);
-                    sr.SetCategoryAndLabel(armor.Name, "0");
+                    sr.SetCategoryAndLabel(armor.Category, "0");
                      
                     break;
                 }

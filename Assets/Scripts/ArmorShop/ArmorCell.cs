@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace SwordsAndSandals.ArmorShop
@@ -8,14 +10,12 @@ namespace SwordsAndSandals.ArmorShop
         [SerializeField] private Button _button;
         [SerializeField] private Image _image;
 
-        public void Init(Sprite sprite, GameObject armorListPanelBody, ArmorPricePanel armorPricePanel)
+        public void Init(Armor armor, Action<Armor> onClickAction)
         {
-            _image.sprite = sprite;
-            _button.onClick.AddListener(() => 
-            {
-                armorListPanelBody.SetActive(false);
-                armorPricePanel.Show();
-            });
+            _image.sprite = armor.Sprite; 
+            _image.transform.localScale = new Vector3(armor.CellScale, armor.CellScale, 1);
+
+            _button.onClick.AddListener(() => onClickAction(armor));
         }
     }
 }

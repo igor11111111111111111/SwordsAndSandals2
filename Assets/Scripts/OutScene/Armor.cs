@@ -1,24 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace SwordsAndSandals
 {
     [Serializable]
     public class Armor
-    {   
-        public string Name => GetType().Name;
+    {
+        [JsonIgnore]
+        public const int COUNT = 10; // PlayerLibraryAsset Category List Count
+        public string Category => GetType().Name;
         public int Level;
+        [JsonIgnore]  
+        public int Defence => _levelDefence[Level];
         [JsonIgnore]
-        public int Defence => LevelDefence[Level];
+        protected int[] _levelDefence;
         [JsonIgnore]
-        public Dictionary<int, int> LevelDefence;
-         
+        public int RequiredGladiatorLevel => _requiredGladiatorLevel[Level];
+        [JsonIgnore]
+        private int[] _requiredGladiatorLevel;
+        [JsonIgnore]
+        public int Cost => _cost[Level];
+        [JsonIgnore]
+        protected int[] _cost;
+        [JsonIgnore]
+        public string Name => _name[Level];
+        [JsonIgnore]
+        protected string[] _name;
+        [JsonIgnore]
+        public float CellScale => _cellScale;
+        [JsonIgnore]
+        protected float _cellScale;
+        [JsonIgnore]
+        public Sprite Sprite;
+
         public Armor()
         {
             Level = 0;
-            LevelDefence = new Dictionary<int, int>();
-            LevelDefence.Add(0, 0);
+
+            _requiredGladiatorLevel = new int[COUNT]
+            {
+                0,
+                1,
+                4,
+                8,
+                12,
+                16,
+                20,
+                25,  
+                30,
+                35
+            };
+        }
+
+
+        public Armor Clone(int level, Sprite sprite)
+        {
+            var armor = (Armor)MemberwiseClone();
+            armor.Level = level;
+            armor.Sprite = sprite;
+            return armor;
         }
     }
 
@@ -26,8 +68,49 @@ namespace SwordsAndSandals
     {
         public Helmet()
         {
-            LevelDefence.Add(1, 15);
-            LevelDefence.Add(2, 30);
+            _cellScale = 2;
+
+            _levelDefence = new int[COUNT]
+            {
+                0,
+                15,
+                30,
+                45,
+                60,
+                75,
+                90,
+                105,
+                120,
+                135
+            };
+
+            _cost = new int[COUNT]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+            };
+
+            _name = new string[COUNT]
+            {
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+            };
         }
     }
 
@@ -35,8 +118,21 @@ namespace SwordsAndSandals
     {
         public Cuirass()
         {
-            LevelDefence.Add(1, 30);
-            LevelDefence.Add(2, 60);
+            _cellScale = 2;
+
+            //_levelDefence = new int[COUNT]
+            //{
+            //    0,
+            //    30,
+            //    60,
+            //    45,
+            //    60,
+            //    75,
+            //    90,
+            //    105,
+            //    120,
+            //    135
+            //};
         }
     }
 
@@ -44,8 +140,9 @@ namespace SwordsAndSandals
     {
         public Shorts()
         {
-            LevelDefence.Add(1, 10);
-            LevelDefence.Add(2, 15);
+            _cellScale = 2;
+            //LevelDefence.Add(10);
+            //LevelDefence.Add(15);
         }
     }
 
@@ -53,8 +150,9 @@ namespace SwordsAndSandals
     {
         public LeftFoot()
         {
-            LevelDefence.Add(1, 5);
-            LevelDefence.Add(2, 10);
+            _cellScale = 3;
+            //LevelDefence.Add(5);
+            //LevelDefence.Add(10);
         }
     }
 
@@ -62,8 +160,9 @@ namespace SwordsAndSandals
     {
         public RightFoot()
         {
-            LevelDefence.Add(1, 5);
-            LevelDefence.Add(2, 10);
+            _cellScale = 3;
+            //LevelDefence.Add(5);
+            //LevelDefence.Add(10);
         }
     }
 
@@ -71,8 +170,9 @@ namespace SwordsAndSandals
     {
         public LeftGaiter()
         {
-            LevelDefence.Add(1, 5);
-            LevelDefence.Add(2, 10);
+            _cellScale = 3;
+            //LevelDefence.Add(5);
+            //LevelDefence.Add(10);
         }
     }
 
@@ -80,8 +180,9 @@ namespace SwordsAndSandals
     {
         public RightGaiter()
         {
-            LevelDefence.Add(1, 5);
-            LevelDefence.Add(2, 10);
+            _cellScale = 3;
+            //LevelDefence.Add(5);
+            //LevelDefence.Add(10);
         }
     }
 
@@ -89,8 +190,9 @@ namespace SwordsAndSandals
     {
         public LeftLeggins()
         {
-            LevelDefence.Add(1, 5);
-            LevelDefence.Add(2, 10);
+            _cellScale = 3;
+            //LevelDefence.Add(5);
+            //LevelDefence.Add(10);
         }
     }
 
@@ -98,8 +200,9 @@ namespace SwordsAndSandals
     {
         public RightLeggins()
         {
-            LevelDefence.Add(1, 5);
-            LevelDefence.Add(2, 10);
+            _cellScale = 3;
+            //LevelDefence.Add(5);
+            //LevelDefence.Add(10);
         }
     }
 
@@ -107,8 +210,9 @@ namespace SwordsAndSandals
     {
         public LeftMitten()
         {
-            LevelDefence.Add(1, 5);
-            LevelDefence.Add(2, 10);
+            _cellScale = 3;
+            //LevelDefence.Add(5);
+            //LevelDefence.Add(10);
         }
     }
 
@@ -116,8 +220,9 @@ namespace SwordsAndSandals
     {
         public RightMitten()
         {
-            LevelDefence.Add(1, 5);
-            LevelDefence.Add(2, 10);
+            _cellScale = 3;
+            //LevelDefence.Add(5);
+            //LevelDefence.Add(10);
         }
     }
 
@@ -125,8 +230,9 @@ namespace SwordsAndSandals
     {
         public LeftPauldron()
         {
-            LevelDefence.Add(1, 5);
-            LevelDefence.Add(2, 10);
+            _cellScale = 3;
+            //LevelDefence.Add(5);
+            //LevelDefence.Add(10);
         }
     }
 
@@ -134,8 +240,9 @@ namespace SwordsAndSandals
     {
         public RightPauldron()
         {
-            LevelDefence.Add(1, 5);
-            LevelDefence.Add(2, 10);
+            _cellScale = 3;
+            //LevelDefence.Add(5);
+            //LevelDefence.Add(10);
         }
     }
 
@@ -143,8 +250,9 @@ namespace SwordsAndSandals
     {
         public Shield()
         {
-            LevelDefence.Add(1, 5);
-            LevelDefence.Add(2, 10);
+            _cellScale = 2;
+            //LevelDefence.Add(5);
+            //LevelDefence.Add(10);
         }
     }
 }

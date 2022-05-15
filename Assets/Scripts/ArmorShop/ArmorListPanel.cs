@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace SwordsAndSandals.ArmorShop
 {
@@ -8,27 +9,43 @@ namespace SwordsAndSandals.ArmorShop
         [SerializeField] private ArmorCell _armorCell;
         [SerializeField] private Transform _content;
         [SerializeField] private ArmorPricePanel _armorPricePanel;
+        [SerializeField] private Button _deny;
 
         public void Init()
         {
             _armorPricePanel.Init();
 
             _body.SetActive(false);
+
+            _deny.onClick.AddListener
+                (
+                () => { _body.SetActive(false); 
+                    // armorpanel activate
+                });
         }
 
         public void Show(Armor armor, ClothChanger clothChanger)
         {
             _body.SetActive(true);
-            for (int i = 1; i < 2; i++) // cause have 1 variant clothes
+
+            for (int level = 1; level < Armor.COUNT; level++)
             {
                 var sprite = clothChanger
                     .GetSpriteResolver(armor)
                     .spriteLibrary
-                    .GetSprite(armor.Name, i.ToString());
+                    .GetSprite(armor.Category, level.ToString());
+
+                Armor armorClone = armor.Clone(level, sprite);
 
                 Instantiate(_armorCell, _content)
-                    .Init(sprite, _body, _armorPricePanel);
+                    .Init(armorClone, ArmorCellOnClickAction);
             }
+        }
+
+        private void ArmorCellOnClickAction(Armor armor)
+        {
+            _body.SetActive(false);
+            _armorPricePanel.Show(armor);
         }
     }
 }

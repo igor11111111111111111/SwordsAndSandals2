@@ -439,9 +439,48 @@ MonoBehaviour:
     - m_Name: 0
       m_Hash: -186917087
       m_Sprite: {fileID: 1908934618655437769, guid: 199d8fcedd6005a43831af5a46792cef, type: 3}
-    - m_Name: 1
-      m_Hash: -2082672713
-      m_Sprite: {fileID: -5523241733681038898, guid: 199d8fcedd6005a43831af5a46792cef, type: 3}
+    - m_Name: b.1
+      m_Hash: -288633014
+      m_Sprite: {fileID: 523024184658144701, guid: e69ff46af7b285f498cb69a2f129dd25, type: 3}
+    - m_Name: b.2
+      m_Hash: 2009243376
+      m_Sprite: {fileID: 8240296961830286906, guid: e69ff46af7b285f498cb69a2f129dd25, type: 3}
+    - m_Name: b.3
+      m_Hash: 12955238
+      m_Sprite: {fileID: 5649423705704740669, guid: e69ff46af7b285f498cb69a2f129dd25, type: 3}
+    - m_Name: b.4
+      m_Hash: -1633600571
+      m_Sprite: {fileID: -8558088733360152015, guid: e69ff46af7b285f498cb69a2f129dd25, type: 3}
+    - m_Name: b.5
+      m_Hash: -374994093
+      m_Sprite: {fileID: 7659768715253411395, guid: e69ff46af7b285f498cb69a2f129dd25, type: 3}
+    - m_Name: b.6
+      m_Hash: 1890540265
+      m_Sprite: {fileID: 2144856985846588410, guid: e69ff46af7b285f498cb69a2f129dd25, type: 3}
+    - m_Name: b.7
+      m_Hash: 128477823
+      m_Sprite: {fileID: -4064806514657487577, guid: e69ff46af7b285f498cb69a2f129dd25, type: 3}
+    - m_Name: h.1
+      m_Hash: -480490852
+      m_Sprite: {fileID: -4604238190351234379, guid: 79fc3de7797094d438acc9ba62d5c951, type: 3}
+    - m_Name: h.2
+      m_Hash: 2052397862
+      m_Sprite: {fileID: -8910469588398475559, guid: 79fc3de7797094d438acc9ba62d5c951, type: 3}
+    - m_Name: h.3
+      m_Hash: 223488944
+      m_Sprite: {fileID: -7782917364565489240, guid: 79fc3de7797094d438acc9ba62d5c951, type: 3}
+    - m_Name: h.4
+      m_Hash: -1825128941
+      m_Sprite: {fileID: 526272724769976857, guid: 79fc3de7797094d438acc9ba62d5c951, type: 3}
+    - m_Name: h.5
+      m_Hash: -466514299
+      m_Sprite: {fileID: 3769811574455071136, guid: 79fc3de7797094d438acc9ba62d5c951, type: 3}
+    - m_Name: h.6
+      m_Hash: 2100879167
+      m_Sprite: {fileID: -8363891480611014150, guid: 79fc3de7797094d438acc9ba62d5c951, type: 3}
+    - m_Name: h.7
+      m_Hash: 171962281
+      m_Sprite: {fileID: -2472073859958490628, guid: 79fc3de7797094d438acc9ba62d5c951, type: 3}
   - m_Name: LeftFoot
     m_Hash: 1486391408
     m_CategoryList:
