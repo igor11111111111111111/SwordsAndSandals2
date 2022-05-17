@@ -9,13 +9,22 @@ namespace SwordsAndSandals.ArmorShop
     {
         [SerializeField] private Button _button;
         [SerializeField] private Image _image;
+        [SerializeField] private GameObject _filteredImage;
 
-        public void Init(Armor armor, Action<Armor> onClickAction)
+        public void Init(Sprite[] sprites, Armor armor, PlayerData playerData, Action<Armor> onButtonClick)
         {
-            _image.sprite = armor.Sprite; 
+            _image.sprite = sprites[armor.ID];
+            _filteredImage.SetActive(false);
+
+            if (playerData.DataLevel.Level < armor.RequiredLevel)
+            {
+                _filteredImage.SetActive(true);
+            }
+            
+
             _image.transform.localScale = new Vector3(armor.CellScale, armor.CellScale, 1);
 
-            _button.onClick.AddListener(() => onClickAction(armor));
+            _button.onClick.AddListener(() => onButtonClick(armor));
         }
     }
 }

@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: 57e172b7cc8730f4f876d00be559da06
 ScriptedImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 7032443489719017623
+    second: 0
   externalObjects: {}
   serializedVersion: 2
   userData: 
@@ -334,6 +337,28 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -11, y: -20}
+  - name: 0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 107
+      y: 222
+      width: 66
+      height: 72
+    spriteID: 790e5bb2812489160800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 107, y: 222}
   platformSettings:
   - name: DefaultTexturePlatform
     overridden: 0

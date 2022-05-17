@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace SwordsAndSandals.ArmorShop
@@ -11,41 +14,58 @@ namespace SwordsAndSandals.ArmorShop
         [SerializeField] private ArmorPricePanel _armorPricePanel;
         [SerializeField] private Button _deny;
 
-        public void Init()
-        {
-            _armorPricePanel.Init();
+        public Action<int> OnRequiredLevel;
 
+        private List<ArmorCell> _armorCells;
+        private PlayerData _playerData;
+
+        public void Init(PlayerData playerData, UnityAction onClickDeny)
+        {
+            _playerData = playerData;
+            _armorPricePanel.Init(() =>_body.SetActive(true));
+
+            _armorCells = new List<ArmorCell>();
             _body.SetActive(false);
 
-            _deny.onClick.AddListener
-                (
-                () => { _body.SetActive(false); 
-                    // armorpanel activate
+            _deny.onClick.AddListener(onClickDeny);
+            _deny.onClick.AddListener(() => 
+                {
+                    foreach (var cell in _armorCells)
+                    {
+                        Destroy(cell.gameObject);
+                    }
+                    _armorCells.Clear();
+
+                    _body.SetActive(false);
                 });
         }
 
-        public void Show(Armor armor, ClothChanger clothChanger)
+        public void Show(List<Armor> armors)
         {
             _body.SetActive(true);
 
-            for (int level = 1; level < Armor.COUNT; level++)
+            var sprites = Resources.LoadAll<Sprite>(armors[0].SpritesPath);
+
+            foreach (var armor in armors)
             {
-                var sprite = clothChanger
-                    .GetSpriteResolver(armor)
-                    .spriteLibrary
-                    .GetSprite(armor.Category, level.ToString());
+                var armorCell = Instantiate(_armorCell, _content);
+                armorCell.Init(sprites, armor, _playerData, OnButtonClick);
 
-                Armor armorClone = armor.Clone(level, sprite);
-
-                Instantiate(_armorCell, _content)
-                    .Init(armorClone, ArmorCellOnClickAction);
+                _armorCells.Add(armorCell);
             }
         }
 
-        private void ArmorCellOnClickAction(Armor armor)
+        private void OnButtonClick(Armor armor)
         {
-            _body.SetActive(false);
-            _armorPricePanel.Show(armor);
+            if (_playerData.DataLevel.Level < armor.RequiredLevel)
+            {
+                OnRequiredLevel?.Invoke(armor.RequiredLevel);
+            }
+            else
+            {
+                _body.SetActive(false);
+                _armorPricePanel.Show(armor);
+            }
         }
     }
 }

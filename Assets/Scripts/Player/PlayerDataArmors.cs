@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace SwordsAndSandals
@@ -7,31 +8,36 @@ namespace SwordsAndSandals
     public class PlayerDataArmors
     {
         public Armor[] Array;
-         
+          
         public PlayerDataArmors()
         {
             Array = new Armor[]
-            { 
-                new Helmet(),
-                new Cuirass(), 
-                new Shorts(),
-                new LeftFoot(),
-                new RightFoot(),
-                new LeftGaiter(),
-                new RightGaiter(),
-                new LeftLeggins(),
-                new RightLeggins(),
-                new LeftMitten(), 
-                new RightMitten(),
-                new LeftPauldron(),
-                new RightPauldron(),
-                new Shield()
+            {
+                new Armor(Armor.CategoryEnum.Helmet),
+                new Armor(Armor.CategoryEnum.Cuirass),
+                new Armor(Armor.CategoryEnum.Short),
+                new Armor(Armor.CategoryEnum.LeftBoot),
+                new Armor(Armor.CategoryEnum.RightBoot),
+                new Armor(Armor.CategoryEnum.LeftGaiter),
+                new Armor(Armor.CategoryEnum.RightGaiter),
+                new Armor(Armor.CategoryEnum.LeftLeggin),
+                new Armor(Armor.CategoryEnum.RightLeggin),
+                new Armor(Armor.CategoryEnum.LeftMitten),
+                new Armor(Armor.CategoryEnum.RightMitten),
+                new Armor(Armor.CategoryEnum.LeftPauldron),
+                new Armor(Armor.CategoryEnum.RightPauldron),
+                new Armor(Armor.CategoryEnum.Shield),
             };
         }
 
-        public T Get<T>() where T : Armor
+        //public T Get<T>() where T : Armor
+        //{
+        //    return (T)System.Array.Find(Array, t => t is T);
+        //}
+
+        public Armor Get(Armor.CategoryEnum category)
         {
-            return (T)System.Array.Find(Array, t => t is T);
+            return System.Array.Find(Array, t => t.Category == category);
         }
 
         public int GetDefence()
@@ -48,17 +54,24 @@ namespace SwordsAndSandals
 
         public void SetRandom()
         {
-            foreach (var armor in Array)
-            {
-                armor.Level = UnityEngine.Random.Range(0, 2);
-            }
+            //foreach (var armor in Array)
+            //{
+            //    armor.Level = UnityEngine.Random.Range(0, 2);
+            //}
         }
 
-        public void SetFull(int level)
+        public void Set(Armor.CategoryEnum category, int id)
         {
+            
+        }
+
+        public void SetFull(int id)
+        {
+            ArmorInit armorInit = new ArmorInit();
+
             foreach (var armor in Array)
             {
-                armor.Level = level;
+                armor.Change(id, armorInit);
             }
         }
     }

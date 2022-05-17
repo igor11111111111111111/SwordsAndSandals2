@@ -16,7 +16,7 @@ namespace SwordsAndSandals.Arena
             _actionIcons = actionIcons;
             _playerDataSkills = playerDataSkills;
             _aiDataSkills = aiDataSkills;
-            _sprites = Resources.LoadAll<Sprite>("");
+            _sprites = Resources.LoadAll<Sprite>("Icons");
 
             SetFixedIcons();
             controller.OnInBattle += SetIcons;

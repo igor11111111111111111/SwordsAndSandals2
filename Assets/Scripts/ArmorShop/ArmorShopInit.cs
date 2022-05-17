@@ -25,7 +25,7 @@ namespace SwordsAndSandals.ArmorShop
             playerInjector.Animator.enabled = false;
             playerInjector.transform.parent = _armorButtonsPanel.Body.transform;
 
-            _armorButtonsPanel.Init(playerData.DataArmors, playerInjector.ClothChanger);
+            _armorButtonsPanel.Init(playerData);
             _moneyInfo.Init(playerData.Money);
 
             _moveToStreet.onClick.AddListener(() =>
