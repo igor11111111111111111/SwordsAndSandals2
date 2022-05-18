@@ -9,16 +9,27 @@ namespace SwordsAndSandals.ArmorShop
         [SerializeField] private TextMeshProUGUI _text;
         private float _infoTime = 2f;
 
-        public void Init(ArmorListPanel armorListPanel)
+        public void Init(ArmorListPanel armorListPanel, ArmorPriceHandler armorPriceHandler)
         {
             _body.SetActive(false);
 
             armorListPanel.OnRequiredLevel += (level) =>
             {
-                _text.text = "Need " + level + " level";
-                _body.SetActive(true);
-                Invoke(nameof(CloseInfo), _infoTime);
+                Message(36, "Need " + level + " level");
             };
+
+            armorPriceHandler.OnRejectPrice += () =>
+            {
+                Message(22, "Pay or get lost, don't scratch my eyes with your presence");
+            };
+        }
+
+        private void Message(int fontSize, string text)
+        {
+            _text.fontSize = fontSize;
+            _text.text = text;
+            _body.SetActive(true);
+            Invoke(nameof(CloseInfo), _infoTime);
         }
 
         private void CloseInfo()

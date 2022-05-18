@@ -8,6 +8,7 @@ namespace SwordsAndSandals.ArmorShop
     public class ArmorShopInit : MonoBehaviour
     {
         [SerializeField] private ArmorButtonsPanel _armorButtonsPanel;
+        [SerializeField] private ArmorPricePanel _armorPricePanel;
         [SerializeField] private PlayerSpawner _playerSpawner;
         [SerializeField] private MoneyInfo _moneyInfo;
         [SerializeField] private Button _moveToStreet;
@@ -22,14 +23,16 @@ namespace SwordsAndSandals.ArmorShop
                     new Vector3(4.75f, -3.28f, 0),
                     new Vector3(8, 6.4f, 1)
                 );
-            playerInjector.Animator.enabled = false;
+
             playerInjector.transform.parent = _armorButtonsPanel.Body.transform;
 
-            _armorButtonsPanel.Init(playerData);
-            _moneyInfo.Init(playerData.Money);
+            var armorPriceHandler = new ArmorPriceHandler(_armorPricePanel, playerData, playerInjector.ClothChanger);
+            _armorButtonsPanel.Init(playerData, armorPriceHandler);
+            _moneyInfo.Init(playerData, armorPriceHandler);
 
             _moveToStreet.onClick.AddListener(() =>
             {
+                new Json().Save(playerData, Enums.SaveFilename.Player);
                 new SceneChanger().MoveTo(Enums.Scene.Street);
             });
         }

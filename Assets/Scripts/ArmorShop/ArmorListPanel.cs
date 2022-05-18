@@ -22,30 +22,26 @@ namespace SwordsAndSandals.ArmorShop
         public void Init(PlayerData playerData, UnityAction onClickDeny)
         {
             _playerData = playerData;
-            _armorPricePanel.Init(() =>_body.SetActive(true));
+            _armorPricePanel.Init(() => 
+            {
+                _body.SetActive(true);
+            });
 
             _armorCells = new List<ArmorCell>();
             _body.SetActive(false);
 
             _deny.onClick.AddListener(onClickDeny);
             _deny.onClick.AddListener(() => 
-                {
-                    foreach (var cell in _armorCells)
-                    {
-                        Destroy(cell.gameObject);
-                    }
-                    _armorCells.Clear();
-
-                    _body.SetActive(false);
-                });
+            {
+                _body.SetActive(false);
+            });
         }
 
         public void Show(List<Armor> armors)
         {
-            _body.SetActive(true);
+            Clear();
 
             var sprites = Resources.LoadAll<Sprite>(armors[0].SpritesPath);
-
             foreach (var armor in armors)
             {
                 var armorCell = Instantiate(_armorCell, _content);
@@ -53,6 +49,8 @@ namespace SwordsAndSandals.ArmorShop
 
                 _armorCells.Add(armorCell);
             }
+
+            _body.SetActive(true);
         }
 
         private void OnButtonClick(Armor armor)
@@ -66,6 +64,15 @@ namespace SwordsAndSandals.ArmorShop
                 _body.SetActive(false);
                 _armorPricePanel.Show(armor);
             }
+        }
+
+        private void Clear()
+        {
+            foreach (var cell in _armorCells)
+            {
+                Destroy(cell.gameObject);
+            }
+            _armorCells.Clear();
         }
     }
 }

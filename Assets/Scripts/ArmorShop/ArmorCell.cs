@@ -20,7 +20,6 @@ namespace SwordsAndSandals.ArmorShop
             {
                 _filteredImage.SetActive(true);
             }
-            
 
             _image.transform.localScale = new Vector3(armor.CellScale, armor.CellScale, 1);
 

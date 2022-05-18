@@ -24,10 +24,12 @@ namespace SwordsAndSandals.ArmorShop
 
         private ArmorInit _armorInit = new ArmorInit();
 
-        public void Init(PlayerData playerData)
+        public void Init(PlayerData playerData, ArmorPriceHandler armorPriceHandler)
         {
-            _sellerMessage.Init(_armorListPanel);
-            _armorListPanel.Init(playerData,() => _body.SetActive(true));
+            _sellerMessage.Init(_armorListPanel, armorPriceHandler);
+            _armorListPanel.Init(playerData, () => _body.SetActive(true));
+
+            armorPriceHandler.OnAcceptPrice += () => _body.SetActive(true);
 
             _helmet.onClick.AddListener(
                 () => Show(playerData.DataArmors.Get(Armor.CategoryEnum.Helmet)));

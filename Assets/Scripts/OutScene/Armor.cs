@@ -52,23 +52,16 @@ namespace SwordsAndSandals
             CellScale = cellScale;
         }
 
-        public Armor Clone()
-        {
-            return (Armor)MemberwiseClone();
-        }
-
-        public void Change(int newID, ArmorInit armorInit)
-        {
-            var armor = armorInit.Armors.Where(a => a.Category == Category && a.ID == newID).FirstOrDefault();
-
-            ID = armor.ID;
-            Category = armor.Category;
-            Name = armor.Name;
-            Cost = armor.Cost;
-            Defence = armor.Defence;
-            RequiredLevel = armor.RequiredLevel;
-            CellScale = armor.CellScale;
-        }
+        //public void Set(Armor armor)
+        //{
+        //    ID = armor.ID;
+        //    Category = armor.Category;
+        //    Name = armor.Name;
+        //    Cost = armor.Cost;
+        //    Defence = armor.Defence;
+        //    RequiredLevel = armor.RequiredLevel;
+        //    CellScale = armor.CellScale;
+        //}
     }
 }
 

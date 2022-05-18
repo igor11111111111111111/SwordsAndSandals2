@@ -52,26 +52,20 @@ namespace SwordsAndSandals
             return value;
         }
 
-        public void SetRandom()
+        public void Set(Armor newArmor)
         {
-            //foreach (var armor in Array)
-            //{
-            //    armor.Level = UnityEngine.Random.Range(0, 2);
-            //}
-        }
-
-        public void Set(Armor.CategoryEnum category, int id)
-        {
-            
+            Armor armor = Array.Where(a => a.Category == newArmor.Category).FirstOrDefault();
+            var index = System.Array.IndexOf(Array, armor);// fix later
+            Array[index] = newArmor;//
         }
 
         public void SetFull(int id)
         {
             ArmorInit armorInit = new ArmorInit();
-
-            foreach (var armor in Array)
+            for (int i = 0; i < Array.Length; i++)
             {
-                armor.Change(id, armorInit);
+                var newArmor = armorInit.Armors.Where(a => a.Category == Array[i].Category && a.ID == id).FirstOrDefault();
+                Array[i] = newArmor;
             }
         }
     }

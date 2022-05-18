@@ -6,13 +6,6 @@ using UnityEngine.UI;
 
 namespace SwordsAndSandals.ArmorShop
 {
-    //public class ArmorPriceHandler
-    //{
-    //    public ArmorPriceHandler()
-    //    {
-
-    //    }
-    //}
     public class ArmorPricePanel : MonoBehaviour
     {
         [SerializeField] private GameObject _body;
@@ -21,29 +14,15 @@ namespace SwordsAndSandals.ArmorShop
         [SerializeField] private Button _accept;
         [SerializeField] private Button _deny;
 
+        public Action<Armor> OnClickAccept;
+
+        private Armor _armor;
+
         public void Init(UnityAction onClickDeny)
         {
             _body.SetActive(false);
 
-            //_accept.onClick.AddListener(() => new ArmorPriceHandler());
-            _accept.onClick.AddListener(() => 
-            {
-                PlayerData playerData;
-                Armor armor;
-                ClothChanger clothChanger;
-
-                if (playerData.Money >= armor.Cost)
-                {
-                    // buy
-                    playerData.Money -= armor.Cost;
-                    playerData.DataArmors.Set();
-                    clothChanger.Set();
-
-                }
-                {
-                    // throw message not enough money
-                }
-            });
+            _accept.onClick.AddListener(() => OnClickAccept(_armor));
 
             _deny.onClick.AddListener(onClickDeny);
             _deny.onClick.AddListener(() =>
@@ -52,8 +31,14 @@ namespace SwordsAndSandals.ArmorShop
             });
         }
 
+        public void Init(ArmorPriceHandler armorPriceHandler)
+        {
+            armorPriceHandler.OnAcceptPrice += () => _body.SetActive(false);
+        }
+
         public void Show(Armor armor)
         {
+            _armor = armor;
             _body.SetActive(true);
 
             _name.text = armor.Name;
