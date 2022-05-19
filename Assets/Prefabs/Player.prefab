@@ -159,7 +159,7 @@ MonoBehaviour:
   _leftPauldron: {fileID: 6596620186896517423}
   _rightPauldron: {fileID: 9184354766348086605}
   _shield: {fileID: 4276624440444946098}
-  _sword: {fileID: 4661404278703638803}
+  _weapon: {fileID: 3559148757013586017}
   _fallenArmorPrefab: {fileID: 3549901423718346591, guid: 130022c7afae5b04b85fb56a5aa5870b, type: 3}
 --- !u!114 &8659811832950768132
 MonoBehaviour:
@@ -1249,9 +1249,8 @@ GameObject:
   - component: {fileID: 5787933034196932162}
   - component: {fileID: 3559148757013586017}
   - component: {fileID: 3636209369692587426}
-  - component: {fileID: 4661404278703638803}
   m_Layer: 6
-  m_Name: Sword
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1342,20 +1341,6 @@ MonoBehaviour:
     m_Extent: {x: 0.2982542, y: 0.19934657, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
---- !u!114 &4661404278703638803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3178223006762812502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CategoryHash: 4.641703e+16
-  m_labelHash: 195075.31
 --- !u!1 &3286845180073210962
 GameObject:
   m_ObjectHideFlags: 0

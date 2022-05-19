@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 
 namespace SwordsAndSandals
 {
-    public class ArmorInit
+    public class AllArmorData
     {
-        public List<Armor> Armors => _armors;
         private List<Armor> _armors;
 
-        public ArmorInit()
+        public AllArmorData()
         {
             _armors = new List<Armor>();
 
@@ -16,16 +15,11 @@ namespace SwordsAndSandals
             Cuirass();
             Shield();
             Short();
-            Pauldron(Armor.CategoryEnum.RightPauldron);
-            Pauldron(Armor.CategoryEnum.LeftPauldron);
-            Mitten(Armor.CategoryEnum.RightMitten);
-            Mitten(Armor.CategoryEnum.LeftMitten);
-            Gaiter(Armor.CategoryEnum.RightGaiter);
-            Gaiter(Armor.CategoryEnum.LeftGaiter);
-            Leggins(Armor.CategoryEnum.RightLeggin);
-            Leggins(Armor.CategoryEnum.LeftLeggin);
-            Foot(Armor.CategoryEnum.RightBoot);
-            Foot(Armor.CategoryEnum.LeftBoot);
+            Pauldron();
+            Mitten();
+            Gaiter();
+            Leggins();
+            Boot();
         }
 
         private void Helmet()
@@ -497,8 +491,10 @@ namespace SwordsAndSandals
             ));
         }
 
-        private void Pauldron(Armor.CategoryEnum category)
+        private void Pauldron()
         {
+            var category = Armor.CategoryEnum.Pauldron;
+
             // extra charge distance
             _armors.Add(new Armor
             (
@@ -609,8 +605,9 @@ namespace SwordsAndSandals
             ));
         }
 
-        private void Mitten(Armor.CategoryEnum category)
+        private void Mitten()
         {
+            var category = Armor.CategoryEnum.Mitten;
             // extra shove distance
             _armors.Add(new Armor
             (
@@ -721,8 +718,9 @@ namespace SwordsAndSandals
             ));
         }
 
-        private void Gaiter(Armor.CategoryEnum category)
+        private void Gaiter()
         {
+            var category = Armor.CategoryEnum.Gaiter;
             // critical hit protection
             _armors.Add(new Armor
             (
@@ -833,8 +831,9 @@ namespace SwordsAndSandals
             ));
         }
 
-        private void Leggins(Armor.CategoryEnum category)
+        private void Leggins()
         {
+            var category = Armor.CategoryEnum.Leggin;
             // extra jumping distance
             _armors.Add(new Armor
             (
@@ -945,8 +944,9 @@ namespace SwordsAndSandals
            ));
         }
 
-        private void Foot(Armor.CategoryEnum category)
+        private void Boot()
         {
+            var category = Armor.CategoryEnum.Boot;
             // extra movement speed
             _armors.Add(new Armor
             (
@@ -1055,6 +1055,16 @@ namespace SwordsAndSandals
                 18,
                 3
             ));
+        }
+
+        public List<Armor> Get(Armor.CategoryEnum category)
+        {
+            return _armors.Where(a => a.Category == category).ToList();
+        }
+
+        public Armor Get(Armor.CategoryEnum category, int id)
+        {
+            return _armors.Where(a => a.Category == category && a.ID == id).FirstOrDefault();
         }
     }
 }

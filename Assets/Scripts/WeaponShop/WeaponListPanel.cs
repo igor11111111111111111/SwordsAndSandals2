@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace SwordsAndSandals.ArmorShop
+namespace SwordsAndSandals.WeaponShop
 {
-    public class ArmorListPanel : MonoBehaviour
+    public class WeaponListPanel : MonoBehaviour
     {
         [SerializeField] private GameObject _body;
         [SerializeField] private Cell _armorCell;
@@ -37,22 +37,17 @@ namespace SwordsAndSandals.ArmorShop
             });
         }
 
-        public void Show(List<Armor> armors)
+        public void Show(List<Weapon> weapons)
         {
             Clear();
 
-            var path = "Armor/" + armors[0].Category.ToString();// fix later
+            var path = "Weapon/" + weapons[0].Category.ToString();
             var sprites = Resources.LoadAll<Sprite>(path);
 
-            if (sprites.Length == 0)
-            {
-                path = "Armor/" + "Right" + armors[0].Category.ToString();
-                sprites = Resources.LoadAll<Sprite>(path);
-            }//
-            foreach (var armor in armors)
+            foreach (var weapon in weapons)
             {
                 var armorCell = Instantiate(_armorCell, _content);
-                armorCell.Init(sprites, armor, _playerData, OnButtonClick);
+                armorCell.Init(sprites, weapon, _playerData, OnButtonClick);
 
                 _armorCells.Add(armorCell);
             }
@@ -60,16 +55,16 @@ namespace SwordsAndSandals.ArmorShop
             _body.SetActive(true);
         }
 
-        private void OnButtonClick(Armor armor)
+        private void OnButtonClick(Weapon weapon)
         {
-            if (_playerData.DataLevel.Level < armor.RequiredLevel)
+            if (_playerData.DataLevel.Level < weapon.RequiredStrength)
             {
-                OnRequiredLevel?.Invoke(armor.RequiredLevel);
+                OnRequiredLevel?.Invoke(weapon.RequiredStrength);
             }
             else
             {
                 _body.SetActive(false);
-                _armorPricePanel.Show(armor);
+                _armorPricePanel.Show(weapon);
             }
         }
 

@@ -10,28 +10,28 @@ namespace SwordsAndSandals
     {
         public CategoryEnum Category;
         public int ID;
-        [JsonIgnore] public string SpritesPath => "Armor/" + Category.ToString();
         public string Name;
         public int Cost;
         public int Defence;
         public int RequiredLevel;
         public float CellScale;
+        //[JsonIgnore] public bool IsHavePair => 
+        //    Category == CategoryEnum.Boot ||
+        //    Category == CategoryEnum.Gaiter ||
+        //    Category == CategoryEnum.Leggin ||
+        //    Category == CategoryEnum.Mitten ||
+        //    Category == CategoryEnum.Pauldron;
 
         public enum CategoryEnum
         {
             Helmet,
             Cuirass,
             Short,
-            LeftBoot,
-            RightBoot,
-            LeftGaiter,
-            RightGaiter,
-            LeftLeggin,
-            RightLeggin,
-            LeftMitten, 
-            RightMitten,
-            LeftPauldron,
-            RightPauldron,
+            Boot,
+            Gaiter,
+            Leggin,
+            Mitten,
+            Pauldron,
             Shield
         }
 
@@ -39,10 +39,10 @@ namespace SwordsAndSandals
         {
             Category = category;
             ID = 0;
-        }
+        } 
 
         public Armor(int id, CategoryEnum category, string name, int cost, int defence, int requiredLevel, float cellScale)
-        {
+        { 
             ID = id;
             Category = category;
             Name = name;
@@ -51,17 +51,6 @@ namespace SwordsAndSandals
             RequiredLevel = requiredLevel;
             CellScale = cellScale;
         }
-
-        //public void Set(Armor armor)
-        //{
-        //    ID = armor.ID;
-        //    Category = armor.Category;
-        //    Name = armor.Name;
-        //    Cost = armor.Cost;
-        //    Defence = armor.Defence;
-        //    RequiredLevel = armor.RequiredLevel;
-        //    CellScale = armor.CellScale;
-        //}
     }
 }
 

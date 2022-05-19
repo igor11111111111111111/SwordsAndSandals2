@@ -6,30 +6,21 @@ namespace SwordsAndSandals
     [Serializable]
     public class PlayerDataWeapons
     {
-        public Weapon[] Array;
-        [JsonIgnore]
         public Weapon Current;
 
         public PlayerDataWeapons()
         {
-            Array = new Weapon[]
-            {
-                new Sword()
-            };
-
-            Current = Array[0];
+            Current = new Weapon();
         }
 
-        public int GetAttack()
+        public void Set()
         {
-            return Current.Damage;
-        } 
+            Current = new AllWeaponData().Get(Weapon.CategoryEnum.Bashing, 3);
+        }
 
-        public void SetRandom()
+        public void Set(Weapon newWeapon)
         {
-            var weapon = new Sword();
-            weapon.Level = UnityEngine.Random.Range(0, 2);
-            Current = weapon;
+            Current = newWeapon;
         }
     }
 }

@@ -54,7 +54,8 @@
             Editor,
             Menu,
             LevelUp,
-            ArmorShop
+            ArmorShop,
+            WeaponShop
         }
 
         public enum Team

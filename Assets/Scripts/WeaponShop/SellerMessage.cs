@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace SwordsAndSandals.ArmorShop
+namespace SwordsAndSandals.WeaponShop
 {
     public class SellerMessage : MonoBehaviour
     {
@@ -9,7 +9,7 @@ namespace SwordsAndSandals.ArmorShop
         [SerializeField] private TextMeshProUGUI _text;
         private float _infoTime = 2f;
 
-        public void Init(ArmorListPanel armorListPanel, PriceHandler armorPriceHandler)
+        public void Init(WeaponListPanel armorListPanel, PriceHandler armorPriceHandler)
         {
             _body.SetActive(false);
 

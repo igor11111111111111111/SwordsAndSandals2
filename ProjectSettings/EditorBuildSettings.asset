@@ -25,5 +25,8 @@ EditorBuildSettings:
     guid: 8535da3eb8b48c44ca987a29cf897930
   - enabled: 1
     path: Assets/Scenes/ArmorShop.unity
-    guid: 3b80fc6d9229f9443931f5fcc29521d2
+    guid: 1f6652bec75e0894180df500b8863f20
+  - enabled: 1
+    path: Assets/Scenes/WeaponShop.unity
+    guid: 96cdf5b1954c4344f87785a492a9552b
   m_configObjects: {}

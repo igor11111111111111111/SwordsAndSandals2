@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace SwordsAndSandals.ArmorShop
 {
-    public class ArmorCell : MonoBehaviour
+    public class Cell : MonoBehaviour
     {
         [SerializeField] private Button _button;
         [SerializeField] private Image _image;

@@ -1,4 +1,6 @@
 ﻿using SwordsAndSandals.Arena;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
@@ -23,7 +25,7 @@ namespace SwordsAndSandals
         [SerializeField] private SpriteRenderer _rightPauldron;
         [SerializeField] private SpriteRenderer _shield;
 
-        [SerializeField] private SpriteResolver _sword;
+        [SerializeField] private SpriteRenderer _weapon;
         [SerializeField] private FallenArmor _fallenArmorPrefab;
         private PlayerData _playerData;
 
@@ -43,29 +45,43 @@ namespace SwordsAndSandals
             var weapon = _playerData.DataWeapons.Current;
 
             foreach (var armor in armors)
-            {
                 Set(armor);
-            }
 
             Set(weapon);
         }
 
         public void Set(Weapon weapon)
         {
-            SpriteResolver sr = null;
-
-            if (weapon is Sword)
-                sr = _sword;
-
-            sr.SetCategoryAndLabel(weapon.Name, weapon.Level.ToString());
+            var path = "Weapon/" + weapon.Category.ToString();
+            var sprites = Resources.LoadAll<Sprite>(path);
+            _weapon.sprite = sprites[weapon.ID];
         }
 
         public void Set(Armor armor)
         {
-            var sr = GetSpriteRenderer(armor);
+            var spriteRenderers = GetSpriteRenderer(armor);
+            foreach (var spriteRenderer in spriteRenderers)
+            {
+                string path = null;
+                if(spriteRenderers.Count == 1)// fix later
+                {
+                    path = "Armor/" + armor.Category.ToString();
+                }
+                else
+                {
+                    if(spriteRenderers.IndexOf(spriteRenderer) == 0)
+                    {
+                        path = "Armor/" + "Left" + armor.Category.ToString();
+                    }
+                    else if(spriteRenderers.IndexOf(spriteRenderer) == 1)
+                    {
+                        path = "Armor/" + "Right" + armor.Category.ToString();
+                    }
+                }//
 
-            var sprites = Resources.LoadAll<Sprite>(armor.SpritesPath);
-            sr.sprite = sprites[armor.ID];
+                var sprites = Resources.LoadAll<Sprite>(path);
+                spriteRenderer.sprite = sprites[armor.ID];
+            }
         }
 
         public void Drop(int damage, Vector3 pos)
@@ -75,48 +91,55 @@ namespace SwordsAndSandals
                 if (armor.ID > 0)
                 {
                     armor.ID = 0;
-                    var sr = GetSpriteRenderer(armor);
-                    var fallenArmor = Instantiate(_fallenArmorPrefab, sr.transform.position, Quaternion.identity);
-                    fallenArmor.Init(sr, _playerData.Team);
-                    sr.sprite = null;
-
+                    var srs = GetSpriteRenderer(armor);
+                    foreach (var sr in srs)
+                    {
+                        var fallenArmor = Instantiate(_fallenArmorPrefab, sr.transform.position, Quaternion.identity);
+                        fallenArmor.Init(sr, _playerData.Team);
+                        sr.sprite = null;
+                    }
                     break;
                 }
             }
         }
 
-        public SpriteRenderer GetSpriteRenderer(Armor armor)
+        public List<SpriteRenderer> GetSpriteRenderer(Armor armor)
         {
-            SpriteRenderer sr = null;
+            List<SpriteRenderer> sr = new List<SpriteRenderer>();
 
             if (armor.Category == Armor.CategoryEnum.Helmet)
-                sr = _helmet;
+                sr.Add(_helmet);
             else if (armor.Category == Armor.CategoryEnum.Cuirass)
-                sr = _cuirass;
+                sr.Add(_cuirass);
             else if (armor.Category == Armor.CategoryEnum.Short)
-                sr = _shorts;
-            else if (armor.Category == Armor.CategoryEnum.LeftBoot)
-                sr = _leftBoot;
-            else if (armor.Category == Armor.CategoryEnum.RightBoot)
-                sr = _rightBoot;
-            else if (armor.Category == Armor.CategoryEnum.LeftGaiter)
-                sr = _leftGaiter;
-            else if (armor.Category == Armor.CategoryEnum.RightGaiter)
-                sr = _rightGaiter;
-            else if (armor.Category == Armor.CategoryEnum.LeftLeggin)
-                sr = _leftLeggins;
-            else if (armor.Category == Armor.CategoryEnum.RightLeggin)
-                sr = _rightLeggins;
-            else if (armor.Category == Armor.CategoryEnum.LeftMitten)
-                sr = _leftMitten;
-            else if (armor.Category == Armor.CategoryEnum.RightMitten)
-                sr = _rightMitten;
-            else if (armor.Category == Armor.CategoryEnum.LeftPauldron)
-                sr = _leftPauldron;
-            else if (armor.Category == Armor.CategoryEnum.RightPauldron)
-                sr = _rightPauldron;
+                sr.Add(_shorts);
             else if (armor.Category == Armor.CategoryEnum.Shield)
-                sr = _shield;
+                sr.Add(_shield);
+            else if (armor.Category == Armor.CategoryEnum.Boot)
+            {
+                sr.Add(_leftBoot);
+                sr.Add(_rightBoot);
+            }
+            else if (armor.Category == Armor.CategoryEnum.Gaiter)
+            {
+                sr.Add(_leftGaiter);
+                sr.Add(_rightGaiter);
+            }
+            else if (armor.Category == Armor.CategoryEnum.Leggin)
+            {
+                sr.Add(_leftLeggins);
+                sr.Add(_rightLeggins);
+            }
+            else if (armor.Category == Armor.CategoryEnum.Mitten)
+            {
+                sr.Add(_leftMitten);
+                sr.Add(_rightMitten);
+            }
+            else if (armor.Category == Armor.CategoryEnum.Pauldron)
+            {
+                sr.Add(_leftPauldron);
+                sr.Add(_rightPauldron);
+            }
 
             return sr;
         }

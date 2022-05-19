@@ -4,15 +4,15 @@ using UnityEngine.UI;
 
 namespace SwordsAndSandals.Street
 {
-    public class ArmoryPanel : MonoBehaviour
+    public class BuildingPanel : MonoBehaviour
     {
         [SerializeField] private Button _button;
 
-        private void Awake()
+        public void Init(Enums.Scene scene)
         {
             _button.onClick.AddListener(() =>
             {
-                new SceneChanger().MoveTo(Enums.Scene.ArmorShop);
+                new SceneChanger().MoveTo(scene);
             });
         }
     }

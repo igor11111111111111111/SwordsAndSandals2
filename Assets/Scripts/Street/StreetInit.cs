@@ -8,16 +8,24 @@ namespace SwordsAndSandals.Street
     {
         [SerializeField] private OutScene.PlayerSpawner _playerSpawner;
 
+        [SerializeField] private BuildingPanel _arenaPanel;
+        [SerializeField] private BuildingPanel _weaponPanel;
+        [SerializeField] private BuildingPanel _armorPanel;
+
         private void Awake()
         {
             var playerData = new Json().Load<PlayerData>(Enums.SaveFilename.Player);
 
             _playerSpawner.Init
-                (
-                    playerData,
-                    new Vector3(0, -5.25f, 0),
-                    3.2f
-                );
+            (
+                playerData,
+                new Vector3(0, -5.25f, 0),
+                3.2f
+            );
+
+            _arenaPanel.Init(Enums.Scene.PreArena);
+            _weaponPanel.Init(Enums.Scene.WeaponShop);
+            _armorPanel.Init(Enums.Scene.ArmorShop);
         }
     }
 }

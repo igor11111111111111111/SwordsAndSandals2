@@ -2,7 +2,7 @@
 
 namespace SwordsAndSandals.ArmorShop
 {
-    public class ArmorPriceHandler
+    public class PriceHandler
     {
         public Action OnAcceptPrice;
         public Action OnRejectPrice;
@@ -10,7 +10,7 @@ namespace SwordsAndSandals.ArmorShop
         private PlayerData _playerData;
         private ClothChanger _clothChanger;
 
-        public ArmorPriceHandler(ArmorPricePanel armorPricePanel, PlayerData playerData, ClothChanger clothChanger)
+        public PriceHandler(PricePanel armorPricePanel, PlayerData playerData, ClothChanger clothChanger)
         {
             _playerData = playerData;
             _clothChanger = clothChanger;

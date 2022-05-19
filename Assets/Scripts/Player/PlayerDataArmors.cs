@@ -16,24 +16,14 @@ namespace SwordsAndSandals
                 new Armor(Armor.CategoryEnum.Helmet),
                 new Armor(Armor.CategoryEnum.Cuirass),
                 new Armor(Armor.CategoryEnum.Short),
-                new Armor(Armor.CategoryEnum.LeftBoot),
-                new Armor(Armor.CategoryEnum.RightBoot),
-                new Armor(Armor.CategoryEnum.LeftGaiter),
-                new Armor(Armor.CategoryEnum.RightGaiter),
-                new Armor(Armor.CategoryEnum.LeftLeggin),
-                new Armor(Armor.CategoryEnum.RightLeggin),
-                new Armor(Armor.CategoryEnum.LeftMitten),
-                new Armor(Armor.CategoryEnum.RightMitten),
-                new Armor(Armor.CategoryEnum.LeftPauldron),
-                new Armor(Armor.CategoryEnum.RightPauldron),
+                new Armor(Armor.CategoryEnum.Boot),
+                new Armor(Armor.CategoryEnum.Gaiter),
+                new Armor(Armor.CategoryEnum.Leggin),
+                new Armor(Armor.CategoryEnum.Mitten),
+                new Armor(Armor.CategoryEnum.Pauldron),
                 new Armor(Armor.CategoryEnum.Shield),
             };
         }
-
-        //public T Get<T>() where T : Armor
-        //{
-        //    return (T)System.Array.Find(Array, t => t is T);
-        //}
 
         public Armor Get(Armor.CategoryEnum category)
         {
@@ -61,11 +51,10 @@ namespace SwordsAndSandals
 
         public void SetFull(int id)
         {
-            ArmorInit armorInit = new ArmorInit();
+            AllArmorData allArmorData = new AllArmorData();
             for (int i = 0; i < Array.Length; i++)
             {
-                var newArmor = armorInit.Armors.Where(a => a.Category == Array[i].Category && a.ID == id).FirstOrDefault();
-                Array[i] = newArmor;
+                Array[i] = allArmorData.Get(Array[i].Category, id);
             }
         }
     }

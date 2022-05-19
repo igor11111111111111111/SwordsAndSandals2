@@ -710,6 +710,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpawner: {fileID: 1039582408}
+  _arenaPanel: {fileID: 1791348852567614265}
+  _weaponPanel: {fileID: 1862295121}
+  _armorPanel: {fileID: 1656849419}
 --- !u!1001 &1585475504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -834,7 +837,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1656849418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9a455cceb6cc8d40a580096e18b5398, type: 3}
+  m_Script: {fileID: 11500000, guid: f6c30104d94c4db4a892bc899ca0e1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 1026450620}
@@ -1212,7 +1215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1791348852306100239, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
       propertyPath: m_Name
-      value: ArmoryPanel
+      value: ArmorShopPanel
       objectReference: {fileID: 0}
     - target: {fileID: 1791348852306100239, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
       propertyPath: m_IsActive
@@ -1322,7 +1325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1791348852306100239, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
       propertyPath: m_Name
-      value: WeaponsmithPanel
+      value: WeaponShopPanel
       objectReference: {fileID: 0}
     - target: {fileID: 1791348852306100239, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
       propertyPath: m_IsActive
@@ -1339,6 +1342,35 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1791348852306100238, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
   m_PrefabInstance: {fileID: 1862295117}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1862295119 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1791348852146828139, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
+  m_PrefabInstance: {fileID: 1862295117}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1862295120 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1791348852306100239, guid: ba4a09343ceb0054193d667327ab552e, type: 3}
+  m_PrefabInstance: {fileID: 1862295117}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1862295121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862295120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c30104d94c4db4a892bc899ca0e1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1862295119}
 --- !u!1 &2141958018
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,7 +1592,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1791348852567614264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be7bdcd406e7a894f9ef258973d43ab8, type: 3}
+  m_Script: {fileID: 11500000, guid: f6c30104d94c4db4a892bc899ca0e1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 1791348852567614266}

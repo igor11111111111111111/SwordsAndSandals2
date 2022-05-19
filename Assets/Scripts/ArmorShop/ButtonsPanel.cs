@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace SwordsAndSandals.ArmorShop
 {
-    public class ArmorButtonsPanel : MonoBehaviour
+    public class ButtonsPanel : MonoBehaviour
     {
         public GameObject Body => _body;
         [SerializeField] private GameObject _body;
@@ -22,9 +22,9 @@ namespace SwordsAndSandals.ArmorShop
         [SerializeField] private Button _shorts;
         [SerializeField] private Button _shield;
 
-        private ArmorInit _armorInit = new ArmorInit();
+        private AllArmorData _allArmorData = new AllArmorData();
 
-        public void Init(PlayerData playerData, ArmorPriceHandler armorPriceHandler)
+        public void Init(PlayerData playerData, PriceHandler armorPriceHandler)
         {
             _sellerMessage.Init(_armorListPanel, armorPriceHandler);
             _armorListPanel.Init(playerData, () => _body.SetActive(true));
@@ -32,32 +32,32 @@ namespace SwordsAndSandals.ArmorShop
             armorPriceHandler.OnAcceptPrice += () => _body.SetActive(true);
 
             _helmet.onClick.AddListener(
-                () => Show(playerData.DataArmors.Get(Armor.CategoryEnum.Helmet)));
+                () => Show(Armor.CategoryEnum.Helmet));
             _cuirass.onClick.AddListener(
-                () => Show(playerData.DataArmors.Get(Armor.CategoryEnum.Cuirass)));
+                () => Show(Armor.CategoryEnum.Cuirass));
             _shorts.onClick.AddListener(
-                () => Show(playerData.DataArmors.Get(Armor.CategoryEnum.Short)));
+                () => Show(Armor.CategoryEnum.Short));
             _leggins.onClick.AddListener(
-                () => Show(playerData.DataArmors.Get(Armor.CategoryEnum.RightLeggin)));
+                () => Show(Armor.CategoryEnum.Leggin));
             _boots.onClick.AddListener(
-                () => Show(playerData.DataArmors.Get(Armor.CategoryEnum.RightBoot)));
+                () => Show(Armor.CategoryEnum.Boot));
             _gaiters.onClick.AddListener(
-                () => Show(playerData.DataArmors.Get(Armor.CategoryEnum.RightGaiter)));
+                () => Show(Armor.CategoryEnum.Gaiter));
             _mittens.onClick.AddListener(
-                () => Show(playerData.DataArmors.Get(Armor.CategoryEnum.RightMitten)));
+                () => Show(Armor.CategoryEnum.Mitten));
             _pauldrons.onClick.AddListener(
-                () => Show(playerData.DataArmors.Get(Armor.CategoryEnum.RightPauldron)));
+                () => Show(Armor.CategoryEnum.Pauldron));
             _shield.onClick.AddListener(
-                () => Show(playerData.DataArmors.Get(Armor.CategoryEnum.Shield)));
+                () => Show(Armor.CategoryEnum.Shield));
 
             _body.SetActive(true);
         }
 
-        private void Show(Armor armor)
+        private void Show(Armor.CategoryEnum category)
         {
             _body.SetActive(false);
 
-            List<Armor> armors = _armorInit.Armors.Where(a => a.Category == armor.Category).ToList();
+            List<Armor> armors = _allArmorData.Get(category);
             _armorListPanel.Show(armors);
         }
     }

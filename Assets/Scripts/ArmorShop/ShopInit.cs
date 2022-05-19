@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 namespace SwordsAndSandals.ArmorShop
 {
-    public class ArmorShopInit : MonoBehaviour
+    public class ShopInit : MonoBehaviour
     {
-        [SerializeField] private ArmorButtonsPanel _armorButtonsPanel;
-        [SerializeField] private ArmorPricePanel _armorPricePanel;
+        [SerializeField] private ButtonsPanel _armorButtonsPanel;
+        [SerializeField] private PricePanel _armorPricePanel;
         [SerializeField] private PlayerSpawner _playerSpawner;
         [SerializeField] private MoneyInfo _moneyInfo;
         [SerializeField] private Button _moveToStreet;
@@ -26,7 +26,7 @@ namespace SwordsAndSandals.ArmorShop
 
             playerInjector.transform.parent = _armorButtonsPanel.Body.transform;
 
-            var armorPriceHandler = new ArmorPriceHandler(_armorPricePanel, playerData, playerInjector.ClothChanger);
+            var armorPriceHandler = new PriceHandler(_armorPricePanel, playerData, playerInjector.ClothChanger);
             _armorButtonsPanel.Init(playerData, armorPriceHandler);
             _moneyInfo.Init(playerData, armorPriceHandler);
 

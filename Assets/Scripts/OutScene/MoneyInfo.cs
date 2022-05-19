@@ -1,8 +1,8 @@
-﻿using SwordsAndSandals.ArmorShop;
+﻿
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SwordsAndSandals
+namespace SwordsAndSandals.OutScene
 {
     public class MoneyInfo : MonoBehaviour
     {
@@ -12,8 +12,8 @@ namespace SwordsAndSandals
         {
             _text.text = money.ToString();
         }
-
-        public void Init(PlayerData playerData, ArmorPriceHandler armorPriceHandler)
+        // fix later: merge 2 init betw ArmorShop & WeaponShop
+        public void Init(PlayerData playerData, ArmorShop.PriceHandler armorPriceHandler)
         {
             _text.text = playerData.Money.ToString();
 
@@ -22,6 +22,17 @@ namespace SwordsAndSandals
                 _text.text = playerData.Money.ToString();
             };
         }
+
+        public void Init(PlayerData playerData, WeaponShop.PriceHandler armorPriceHandler)
+        {
+            _text.text = playerData.Money.ToString();
+
+            armorPriceHandler.OnAcceptPrice += () =>
+            {
+                _text.text = playerData.Money.ToString();
+            };
+        }
+        //
     }
 }
 

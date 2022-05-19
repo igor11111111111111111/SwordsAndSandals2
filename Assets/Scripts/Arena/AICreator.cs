@@ -13,7 +13,7 @@ namespace SwordsAndSandals.Arena
             aiData.Name = new PlayerNames().GetRandomFullName();
             aiData.Reward = new Reward(500, 1000);
 
-            aiData.DataWeapons.SetRandom();
+            aiData.DataWeapons.Set();
             aiData.DataArmors.SetFull(3);
 
             return aiData;

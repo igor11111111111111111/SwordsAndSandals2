@@ -8,27 +8,36 @@ namespace SwordsAndSandals
     [Serializable]
     public class Weapon
     {
-        public string Name => GetType().Name;
-        public int Level;
-        [JsonIgnore]
-        public int Damage => LevelDamage[Level];
-        [JsonIgnore]
-        public Dictionary<int, int> LevelDamage;
+        public CategoryEnum Category;
+        public int ID;
+        public string Name;
+        public int Cost;
+        public int Damage;
+        public int RequiredStrength;
+        public float CellScale;
+
+        public enum CategoryEnum
+        {
+            Bashing,
+            Hacking
+        }
 
         public Weapon()
         {
-            Level = 0;
-            LevelDamage = new Dictionary<int, int>();
-            LevelDamage.Add(0, 10);
+            Category = CategoryEnum.Bashing;
+            ID = 0;
+            Damage = 5;
         }
-    }
 
-    public class Sword : Weapon
-    {
-        public Sword()
+        public Weapon(CategoryEnum category, int id, string name, int cost, int damage, int requiredStrength, float cellScale)
         {
-            LevelDamage.Add(1, 20);
-            LevelDamage.Add(2, 30);
+            Category = category;
+            ID = id;
+            Name = name;
+            Cost = cost;
+            Damage = damage;
+            RequiredStrength = requiredStrength;
+            CellScale = cellScale;
         }
     }
 }

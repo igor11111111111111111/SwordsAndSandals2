@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace SwordsAndSandals.ArmorShop
+namespace SwordsAndSandals.WeaponShop
 {
-    public class ArmorPricePanel : MonoBehaviour
+    public class PricePanel : MonoBehaviour
     {
         [SerializeField] private GameObject _body;
         [SerializeField] private TextMeshProUGUI _name;
@@ -14,15 +14,15 @@ namespace SwordsAndSandals.ArmorShop
         [SerializeField] private Button _accept;
         [SerializeField] private Button _deny;
 
-        public Action<Armor> OnClickAccept;
+        public Action<Weapon> OnClickAccept;
 
-        private Armor _armor;
+        private Weapon _weapon;
 
         public void Init(UnityAction onClickDeny)
         {
             _body.SetActive(false);
 
-            _accept.onClick.AddListener(() => OnClickAccept(_armor));
+            _accept.onClick.AddListener(() => OnClickAccept(_weapon));
 
             _deny.onClick.AddListener(onClickDeny);
             _deny.onClick.AddListener(() =>
@@ -31,23 +31,22 @@ namespace SwordsAndSandals.ArmorShop
             });
         }
 
-        public void Init(ArmorPriceHandler armorPriceHandler)
+        public void Init(PriceHandler armorPriceHandler)
         {
             armorPriceHandler.OnAcceptPrice += () => _body.SetActive(false);
         }
 
-        public void Show(Armor armor)
+        public void Show(Weapon weapon)
         {
-            _armor = armor;
+            _weapon = weapon;
             _body.SetActive(true);
-
-            _name.text = armor.Name;
+            _name.text = weapon.Name;
 
             _info.text = null;
             //4 % extra charge distance
-            _info.text += "Adds " + armor.Defence + " to your armour";
-            _info.text += "\n Required gladiator level " + armor.RequiredLevel;
-            _info.text += "\n Original armour cost: " + armor.Cost + " gold";
+            _info.text += "Adds " + weapon.Damage + " to your armour";
+            _info.text += "\n Required gladiator level " + weapon.RequiredStrength;
+            _info.text += "\n Original armour cost: " + weapon.Cost + " gold";
 
             //Charisma discount: 365 gold
             //Trade~in discount: 270 gold
