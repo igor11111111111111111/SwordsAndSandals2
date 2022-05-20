@@ -11,15 +11,22 @@ namespace SwordsAndSandals
         {
             _weapons = new List<Weapon>();
 
+            Hacking();
+            Bashing();
+        }
+
+        public void Hacking()
+        {
             _weapons.Add(
             new Weapon
             (
                 Weapon.CategoryEnum.Hacking,
                 1,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Cleaver",
+                2274,
+                4,
+                16,
+                3,
                 2.5f
             ));
 
@@ -28,10 +35,11 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Hacking,
                 2,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Hand axe",
+                2841,
+                5,
+                20,
+                6,
                 2.3f
             ));
 
@@ -40,10 +48,11 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Hacking,
                 3,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Bronze axe",
+                3408,
+                6,
+                24,
+                9,
                 2
             ));
 
@@ -52,10 +61,11 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Hacking,
                 4,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Hatchet",
+                4542,
+                8,
+                32,
+                12,
                 2.4f
             ));
 
@@ -64,10 +74,11 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Hacking,
                 5,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Warrior axe",
+                5676,
+                10,
+                40,
+                15,
                 1.8f
             ));
 
@@ -76,10 +87,11 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Hacking,
                 6,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Berserker axe",
+                8511,
+                15,
+                60,
+                18,
                 1.5f
             ));
 
@@ -88,22 +100,27 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Hacking,
                 7,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Greensteel axe",
+                10212,
+                18,
+                72,
+                21,
                 1.3f
             ));
+        }
 
+        public void Bashing()
+        {
             _weapons.Add(
             new Weapon
             (
                 Weapon.CategoryEnum.Bashing,
                 1,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Blackjack",
+                1714,
+                4,
+                12,
+                3,
                 2
             ));
 
@@ -112,10 +129,11 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Bashing,
                 2,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Hammer",
+                2142,
+                5,
+                15,
+                6,
                 2
             ));
 
@@ -124,10 +142,11 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Bashing,
                 3,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Knuckle Duster",
+                3424,
+                8,
+                24,
+                9,
                 2
             ));
 
@@ -136,10 +155,11 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Bashing,
                 4,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Wooden club",
+                4279,
+                10,
+                30,
+                12,
                 1.7f
             ));
 
@@ -148,10 +168,11 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Bashing,
                 5,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Iron Mace",
+                6417,
+                15,
+                45,
+                15,
                 1.4f
             ));
 
@@ -160,10 +181,11 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Bashing,
                 6,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Steel Mace",
+                8554,
+                20,
+                60,
+                18,
                 1.4f
             ));
 
@@ -172,10 +194,11 @@ namespace SwordsAndSandals
             (
                 Weapon.CategoryEnum.Bashing,
                 7,
-                "1",
-                1 * 100,
-                1 * 10,
-                1,
+                "Spiked Mace",
+                10692,
+                25,
+                75,
+                21,
                 1.4f
             ));
         }

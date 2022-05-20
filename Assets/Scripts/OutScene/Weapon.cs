@@ -13,6 +13,7 @@ namespace SwordsAndSandals
         public string Name;
         public int Cost;
         public int Damage;
+        public int Damage2;
         public int RequiredStrength;
         public float CellScale;
 
@@ -29,13 +30,14 @@ namespace SwordsAndSandals
             Damage = 5;
         }
 
-        public Weapon(CategoryEnum category, int id, string name, int cost, int damage, int requiredStrength, float cellScale)
+        public Weapon(CategoryEnum category, int id, string name, int cost, int damage, int damage2, int requiredStrength, float cellScale)
         {
             Category = category;
             ID = id;
             Name = name;
             Cost = cost;
             Damage = damage;
+            Damage2 = damage2;
             RequiredStrength = requiredStrength;
             CellScale = cellScale;
         }

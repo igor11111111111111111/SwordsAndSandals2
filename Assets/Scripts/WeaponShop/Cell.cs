@@ -16,7 +16,7 @@ namespace SwordsAndSandals.WeaponShop
             _image.sprite = sprites[weapon.ID];
             _filteredImage.SetActive(false);
 
-            if (playerData.DataLevel.Level < weapon.RequiredStrength)
+            if (playerData.DataSkills.Get<Strength>().Value < weapon.RequiredStrength)
             {
                 _filteredImage.SetActive(true);
             }

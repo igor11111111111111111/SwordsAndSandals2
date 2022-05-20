@@ -23,9 +23,11 @@ namespace SwordsAndSandals.ArmorShop
                     new Vector3(4.75f, -3.28f, 0),
                     new Vector3(8, 6.4f, 1)
                 );
-
+            //!!!
             playerInjector.transform.parent = _armorButtonsPanel.Body.transform;
-
+            playerInjector.transform.localPosition = new Vector3(-0.95f, -190.8f, 1f);
+            playerInjector.transform.localScale = new Vector3(382.4f, 305.92f, 1f);
+            //
             var armorPriceHandler = new PriceHandler(_armorPricePanel, playerData, playerInjector.ClothChanger);
             _armorButtonsPanel.Init(playerData, armorPriceHandler);
             _moneyInfo.Init(playerData, armorPriceHandler);

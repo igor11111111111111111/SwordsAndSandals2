@@ -14,7 +14,7 @@ namespace SwordsAndSandals.WeaponShop
         [SerializeField] private PricePanel _armorPricePanel;
         [SerializeField] private Button _deny;
 
-        public Action<int> OnRequiredLevel;
+        public Action<int> OnRequiredStrength;
 
         private List<Cell> _armorCells;
         private PlayerData _playerData;
@@ -57,9 +57,9 @@ namespace SwordsAndSandals.WeaponShop
 
         private void OnButtonClick(Weapon weapon)
         {
-            if (_playerData.DataLevel.Level < weapon.RequiredStrength)
+            if (_playerData.DataSkills.Get<Strength>().Value < weapon.RequiredStrength)
             {
-                OnRequiredLevel?.Invoke(weapon.RequiredStrength);
+                OnRequiredStrength?.Invoke(weapon.RequiredStrength);
             }
             else
             {

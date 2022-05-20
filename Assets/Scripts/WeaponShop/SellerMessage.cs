@@ -13,14 +13,14 @@ namespace SwordsAndSandals.WeaponShop
         {
             _body.SetActive(false);
 
-            armorListPanel.OnRequiredLevel += (level) =>
+            armorListPanel.OnRequiredStrength += (strength) =>
             {
-                Message(36, "Need " + level + " level");
+                Message(36, "Need " + strength + " strength");
             };
 
             armorPriceHandler.OnRejectPrice += () =>
             {
-                Message(22, "Pay or get lost, don't scratch my eyes with your presence");
+                Message(22, "no no no... This will not work, I accept payment in cash, by card or bitcoins");
             };
         }
 

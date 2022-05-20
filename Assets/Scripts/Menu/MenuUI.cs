@@ -17,7 +17,7 @@ namespace SwordsAndSandals.Menu
         [SerializeField] private AboutUI _aboutUI;
 
         public void Init()
-        {
+        { 
             _new.onClick.AddListener(New);
             _save.onClick.AddListener(Save);
             _load.onClick.AddListener(Load);
@@ -41,7 +41,7 @@ namespace SwordsAndSandals.Menu
 
         private void Load()
         {
-
+            new SceneChanger().MoveTo(Enums.Scene.Street);
         }
 
         private void Settings()
