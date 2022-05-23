@@ -201,6 +201,8 @@ MonoBehaviour:
   - {fileID: 3986667311756489546}
   - {fileID: 3559148757013586017}
   - {fileID: 4813011397911420818}
+  - {fileID: 2141416657729231944}
+  - {fileID: 3602835944520128264}
 --- !u!61 &919778529489623340
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1987,7 +1989,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5597592325019160240}
   m_Bounds:
-    m_Center: {x: -0.031012952, y: 0.0071632266, z: 0}
+    m_Center: {x: -0.025666669, y: 0.008109808, z: 0}
     m_Extent: {x: 0.12928505, y: 0.15146172, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1

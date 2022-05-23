@@ -42,7 +42,7 @@ namespace SwordsAndSandals.Arena
         }
 
         public void Test()
-        {
+        { 
             OnLose?.Invoke();
         }
 

@@ -23,18 +23,24 @@ namespace SwordsAndSandals.Arena
         private SwordsAndSandals.PlayerData _playerData;
         private SwordsAndSandals.PlayerData _aiData;
 
-        public void Init()
+        public void Init(FatalityPanel fatalityPanel)
         {
             Show(false);
+
+            _accept.onClick.AddListener(Accept);
+            fatalityPanel.OnClicked += () => 
+            { 
+                Show(false);
+                _accept.transform.parent = transform.parent;
+            };
         }
 
-        public void InitDatas(SwordsAndSandals.PlayerData playerData, SwordsAndSandals.PlayerData aiData, EndBattleHandler endBattle)
+        public void Init(SwordsAndSandals.PlayerData playerData, SwordsAndSandals.PlayerData aiData, EndBattleHandler endBattle)
         {
             _playerData = playerData;
             _aiData = aiData;
 
             endBattle.OnEndBattle += EndBattle;
-            _accept.onClick.AddListener(Accept);
         }
 
         private async void EndBattle(EndBattleHandler.Info info)

@@ -8,9 +8,11 @@ namespace SwordsAndSandals.Arena
         [SerializeField] public FeauturePanel _playerPanel;
         [SerializeField] public FeauturePanel _aiPanel;
 
-        public void Init()
+        public void Init(FatalityPanel fatalityPanel)
         {
             Show(false);
+
+            fatalityPanel.OnClicked += () => { Show(false); };
         }
 
         public void InitPlayers(PlayerData playerData, PlayerData aiData)

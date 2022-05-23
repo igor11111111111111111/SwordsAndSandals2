@@ -6,6 +6,7 @@ namespace SwordsAndSandals.Arena
 {
     public class ArenaInit : MonoBehaviour
     {
+        [SerializeField] private PlayersFatality _fatalityPrefab;
         [SerializeField] private PlayerSpawner _playerSpawner;
         [SerializeField] private IntroductionPanel _introductionPanel;
         [SerializeField] private ArenaPanel _arenaPanel;
@@ -16,6 +17,8 @@ namespace SwordsAndSandals.Arena
         [SerializeField] private Camera _aiCamera;
         [SerializeField] private Camera _ourCamera;
         [SerializeField] private Camera _uiCamera;
+        [SerializeField] private FatalityLogic _fatalityLogic;
+        [SerializeField] private FatalityPanel _fatalityPanel;
         private SwordsAndSandals.PlayerData _playerData;
         private SwordsAndSandals.PlayerData _aiData;
 
@@ -38,8 +41,9 @@ namespace SwordsAndSandals.Arena
                 );
 
             _introductionPanel.Init(_playerData, _aiData);
-            _arenaPanel.Init();
-            _endBattlePanel.Init();
+            _arenaPanel.Init(_fatalityPanel);
+            _endBattlePanel.Init(_fatalityPanel);
+            _fatalityLogic.Init(playerInjector, aiInjector, _fatalityPrefab, _fatalityPanel, _ourCamera);
 
             _introductionPanel.OnEnterArena += () => EnterArena(playerInjector, aiInjector);
         }
@@ -48,7 +52,8 @@ namespace SwordsAndSandals.Arena
         {
             var turnLogic = new TurnLogic();
             var cameraMover = new CameraMover(_playerCamera, _aiCamera, _ourCamera, _uiCamera, player, ai, turnLogic);
-            new ArenaSetupData(_arenaPanel, player, _playerData, ai, _aiData, turnLogic, cameraMover, _playerInputUI, _damageInfo, _endBattlePanel);
+
+            new ArenaSetupData(_arenaPanel, player, _playerData, ai, _aiData, turnLogic, cameraMover, _playerInputUI, _damageInfo, _endBattlePanel, _fatalityLogic);
             _arenaPanel.Show(true);
         }
     } 

@@ -30,10 +30,15 @@ namespace SwordsAndSandals.Arena
             SetBodyActive(false);
         }
 
+        public void Init(EndBattleHandler endBattleHandler)
+        {
+            endBattleHandler.OnEndBattle += (info) => { SetBodyActive(false); };
+        }
+
         public void LateInit(PlayerController controller, SwordsAndSandals.PlayerData aiData)
         {
             _controller = controller;
-            _controller.OnStartAction += StartAction;
+            _controller.OnStartAction += () => SetBodyActive(false);
 
             new ActionIconsChanger(_actionIcons, _controller, _injector.Data.DataSkills, aiData.DataSkills);
         }
@@ -45,11 +50,6 @@ namespace SwordsAndSandals.Arena
 
             SetBodyActive(true);
             MoveBody();
-        }
-
-        private void StartAction()
-        {
-            SetBodyActive(false);
         }
 
         private void MoveBody()

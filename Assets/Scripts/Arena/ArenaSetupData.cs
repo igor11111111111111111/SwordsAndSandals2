@@ -20,8 +20,9 @@ namespace SwordsAndSandals.Arena
         private AttackHandler _playerAttackHandler;
         private AttackHandler _aiAttackHandler;
         private EndBattlePanel _endBattlePanel;
+        private FatalityLogic _fatalityLogic;
 
-        public ArenaSetupData(ArenaPanel arenaPanel, PlayerInjector playerInjector, SwordsAndSandals.PlayerData playerData, PlayerInjector aiInjector, SwordsAndSandals.PlayerData aiData, TurnLogic turnLogic, CameraMover cameraMover, PlayerInputUI playerInputUI, DamageInfo damageInfo, EndBattlePanel endBattlePanel)
+        public ArenaSetupData(ArenaPanel arenaPanel, PlayerInjector playerInjector, SwordsAndSandals.PlayerData playerData, PlayerInjector aiInjector, SwordsAndSandals.PlayerData aiData, TurnLogic turnLogic, CameraMover cameraMover, PlayerInputUI playerInputUI, DamageInfo damageInfo, EndBattlePanel endBattlePanel, FatalityLogic fatalityLogic)
         {
             _arenaPanel = arenaPanel; 
             _playerInjector = playerInjector;
@@ -33,6 +34,7 @@ namespace SwordsAndSandals.Arena
             _playerInputUI = playerInputUI;
             _damageInfo = damageInfo;
             _endBattlePanel = endBattlePanel;
+            _fatalityLogic = fatalityLogic;
 
             Other();
             Player();
@@ -75,10 +77,12 @@ namespace SwordsAndSandals.Arena
             _aiAttackHandler.InitEnemyAttackHandler(_playerAttackHandler);
 
             var endBattleHandler = new EndBattleHandler(_playerAttackHandler);
-            _endBattlePanel.InitDatas(_playerData, _aiData, endBattleHandler);
+            _endBattlePanel.Init(_playerData, _aiData, endBattleHandler);
             _turnLogic.Init(_playerInjector, _aiInjector, endBattleHandler);
+            _fatalityLogic.Init(endBattleHandler);
+            _playerInputUI.Init(endBattleHandler);
 
-            //_aiAttackHandler.Test();//!
+            _aiAttackHandler.Test();//!
         }
 
         private PlayerData Setup(SwordsAndSandals.PlayerData playerData, PlayerInjector injector, Enums.Direction direction)
