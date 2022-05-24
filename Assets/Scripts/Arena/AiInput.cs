@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 namespace SwordsAndSandals.Arena
 {
-    public class AiInput
+    public class AiInput : IUseInput
     {
-        public Action<bool> OnInBattle;
-        public Action[] Actions;
+        public Action<bool> OnInBattle { get; set; }
+        public Action[] Actions { get; set; }
         private ArenaHandler _arenaHandler;
         private PlayerInjector _injector;
         private PlayerRotator _playerRotator;
 
         public void Init(PlayerInjector aiInjector, TurnLogic turnLogic, ArenaHandler arenaHandler)
-        {
+        { 
             _injector = aiInjector;
             _arenaHandler = arenaHandler;
 
             _playerRotator = new PlayerRotator(_injector, _arenaHandler);
 
-            Actions = new Action[8];
+            Actions = new Action[9];
 
             turnLogic.OnStarted += TurnStarted;
         }
@@ -32,7 +32,7 @@ namespace SwordsAndSandals.Arena
 
             _playerRotator.CheckRotation();
 
-            Actions[UnityEngine.Random.Range(0, 8)]?.Invoke();
+            Actions[UnityEngine.Random.Range(0, 9)]?.Invoke();
         }
     }
 }

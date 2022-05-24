@@ -36,7 +36,7 @@ namespace SwordsAndSandals.Arena
             _player.Controller.OnTakeDamage += TakeDamage;
         }
 
-        public void InitEnemyAttackHandler(AttackHandler enemyAttackHandler)
+        public void Init(AttackHandler enemyAttackHandler)
         {
             enemyAttackHandler.OnLose += () => OnWin?.Invoke();
         }
@@ -89,7 +89,7 @@ namespace SwordsAndSandals.Arena
         private bool Hit(Enums.AttackType attackType)
         {
             var enemyAttackChance = _enemy.Data.DataSkills.Get<Attack>().GetHitChance(attackType);
-            var playerDefenceChance = _player.Data.DataSkills.Get<Defence>().GetDodgeChance(attackType);
+            var playerDefenceChance = _player.Data.DataSkills.Get<Defence>().GetDefenceChance(attackType);
             var totalChance = Mathf.Clamp(enemyAttackChance - playerDefenceChance, 1, 99);
             var randomChance = UnityEngine.Random.Range(0, 101);
 

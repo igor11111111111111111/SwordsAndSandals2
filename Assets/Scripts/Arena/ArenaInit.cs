@@ -25,7 +25,8 @@ namespace SwordsAndSandals.Arena
         private void Awake()
         {
             _playerData = new Json().Load<SwordsAndSandals.PlayerData>(Enums.SaveFilename.Player);
-            _aiData = AICreator.GetRandom();
+
+            _aiData = new AllEnemyData().Get(_playerData.DataLevel.Level);
 
             var playerInjector = _playerSpawner.Init
                 (

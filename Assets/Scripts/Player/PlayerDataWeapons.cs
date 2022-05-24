@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using static SwordsAndSandals.Weapon;
 
 namespace SwordsAndSandals
 {
@@ -11,6 +12,11 @@ namespace SwordsAndSandals
         public PlayerDataWeapons()
         {
             Current = new Weapon();
+        }
+
+        public PlayerDataWeapons(CategoryEnum category, int id)
+        {
+            Current = new Weapon(category, id);
         }
 
         public void Set()

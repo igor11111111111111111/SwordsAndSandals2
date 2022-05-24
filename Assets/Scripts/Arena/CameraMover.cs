@@ -1,9 +1,9 @@
-﻿using SwordsAndSandals.Arena;
+﻿
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
-
-namespace SwordsAndSandals
+ 
+namespace SwordsAndSandals.Arena
 {
     public class CameraMover
     {
@@ -19,7 +19,6 @@ namespace SwordsAndSandals
 
         private float _speed = 0.1f;
         private Enums.Team _oldTeam;
-        private bool _isSplited;
 
         public CameraMover(Camera playerCamera, Camera aiCamera, Camera ourCamera, Camera uiCamera, PlayerInjector playerInjector, PlayerInjector aiInjector, TurnLogic turnLogic)
         {
@@ -31,31 +30,15 @@ namespace SwordsAndSandals
             _aiInjector = aiInjector;
             _turnLogic = turnLogic;
 
-            _turnLogic.OnStarted += TurnStarted;
             _turnLogic.OnEnded += TurnEnded;
 
+            _ourCamera.transform.transform.position = new Vector3(0, 0, 2);
             _uiCamera.cullingMask = 1 << LayerMask.NameToLayer("UI");
         } 
 
         public void Init(ArenaHandler arenaHandler)
         {
             _arenaHandler = arenaHandler;
-        }
-
-        private void TurnStarted(Enums.Team team)
-        {
-            if (team != Enums.Team.Player)
-                return;
-
-            if (_isSplited)
-            {
-                _uiCamera.transform.SetParent(_playerCamera.transform);
-            }
-            else
-            {
-                _uiCamera.transform.SetParent(_ourCamera.transform);
-                _uiCamera.transform.localPosition = new Vector3(0, 0, -2);
-            }
         }
 
         private void TurnEnded(Enums.Team team)
@@ -78,20 +61,29 @@ namespace SwordsAndSandals
                 var target = new Vector3(_playerInjector.transform.position.x + _arenaHandler.GetAbsDistance() / 2f, _playerInjector.transform.position.y + 2.5f, 2);
 
                 Move(_ourCamera, target, team);
-                SwitchOurCamera(true);
+                SwitchCameras(true);
             }
             else
             {
-                SwitchOurCamera(false);
+                SwitchCameras(false);
             }
         }
 
-        private void SwitchOurCamera(bool active)
+        private void SwitchCameras(bool active)
         {
+            if (active)
+            {
+                _uiCamera.transform.SetParent(_ourCamera.transform);
+                _uiCamera.transform.localPosition = new Vector3(0, 0, -2);
+            }
+            else
+            {
+                _uiCamera.transform.SetParent(_playerCamera.transform);
+            }
+
             _ourCamera.gameObject.SetActive(active);
             _playerCamera.gameObject.SetActive(!active);
             _aiCamera.gameObject.SetActive(!active);
-            _isSplited = !active;
         }
 
         private async void Move(Camera camera, Vector3 target, Enums.Team team)

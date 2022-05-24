@@ -15,7 +15,7 @@ namespace SwordsAndSandals.Arena
             fatalityPanel.OnClicked += () => { Show(false); };
         }
 
-        public void InitPlayers(PlayerData playerData, PlayerData aiData)
+        public void Init(PlayerData playerData, PlayerData aiData)
         {
             _playerPanel.Init(playerData);
             _aiPanel.Init(aiData);

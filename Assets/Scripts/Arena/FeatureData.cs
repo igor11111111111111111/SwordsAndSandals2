@@ -17,6 +17,8 @@ namespace SwordsAndSandals.Arena
                 _current = value;
                 if (_current <= 0)
                     _current = 0;
+                else if (_current > _max)
+                    _current = _max;
                 OnValueChanged?.Invoke(_current, _max);
             }
         }

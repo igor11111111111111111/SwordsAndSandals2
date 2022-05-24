@@ -17,18 +17,38 @@ namespace SwordsAndSandals
         {
             Value = 1;
         }
-    }
+
+        public Skill(int value)
+        {
+            Value = value;
+        }
+    } 
 
     public class Strength : Skill
     {
         private const float SIZE_PER_VALUE = 0.4f;
+
         [JsonIgnore]
         public float ScaleCoeff => SIZE_PER_VALUE * Value * 0.01f + 1;
+
+        public Strength()
+        {
+        }
+
+        public Strength(int value) : base(value)
+        {
+        }
     }
      
     public class Agility : Skill
     {
+        public Agility()
+        {
+        }
 
+        public Agility(int value) : base(value)
+        {
+        }
     }
 
     public class Attack : Skill
@@ -39,6 +59,16 @@ namespace SwordsAndSandals
         public Dictionary<Enums.AttackType, int> ValueChance;
 
         public Attack()
+        {
+            Init();
+        }
+
+        public Attack(int value) : base(value)
+        {
+            Init();
+        }
+
+        private void Init()
         {
             BaseChance = new Dictionary<Enums.AttackType, int>();
             BaseChance.Add(Enums.AttackType.Charge, 32);
@@ -68,6 +98,16 @@ namespace SwordsAndSandals
 
         public Defence()
         {
+            Init();
+        }
+
+        public Defence(int value) : base(value)
+        {
+            Init();
+        }
+
+        private void Init()
+        {
             BaseChance = new Dictionary<Enums.AttackType, int>();
             BaseChance.Add(Enums.AttackType.Charge, 0);
             BaseChance.Add(Enums.AttackType.WeakAttack, 0);
@@ -81,7 +121,7 @@ namespace SwordsAndSandals
             ValueChance.Add(Enums.AttackType.HardAttack, 4);
         }
 
-        public int GetDodgeChance(Enums.AttackType attackType)
+        public int GetDefenceChance(Enums.AttackType attackType)
         {
             return BaseChance[attackType] + Value * ValueChance[attackType];
         }
@@ -89,21 +129,45 @@ namespace SwordsAndSandals
 
     public class Vitality : Skill
     {
+        public Vitality()
+        {
+        }
 
+        public Vitality(int value) : base(value)
+        {
+        }
     }
 
     public class Charisma : Skill
     {
+        public Charisma()
+        {
+        }
 
+        public Charisma(int value) : base(value)
+        {
+        }
     }
 
     public class Stamina : Skill
     {
+        public Stamina()
+        {
+        }
 
+        public Stamina(int value) : base(value)
+        {
+        }
     }
 
     public class Magicka : Skill
     {
+        public Magicka()
+        {
+        }
 
+        public Magicka(int value) : base(value)
+        {
+        }
     }
 }

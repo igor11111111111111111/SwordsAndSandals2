@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SwordsAndSandals
 {
-    public class PlayerController 
+    public class PlayerController : IUseController
     {
         public Action<Enums.AttackType> OnAttack;
         public Action<Enums.Direction> OnMove;
@@ -21,53 +21,19 @@ namespace SwordsAndSandals
 
         public Action<Enums.AttackType> OnTakeDamage;
 
-        public Action OnStartAction;
+        public Action<Enums.CurrentState> OnStartAction { get; set; }
+
         public Action OnEndAction; 
 
         public Action<bool> OnInBattle;
 
-        private PlayerInputUI _inputUI;
         private PlayerPhysics _physics;
         private PlayerData _data;
         private PlayerAnimationClips _animationClips;
 
         private Enums.CurrentState _currentState;
 
-        public PlayerController(PlayerInputUI inputUI, PlayerInput input, PlayerPhysics physics, PlayerData data, PlayerAnimationClips animationClips)
-        {
-            _inputUI = inputUI;
-            _physics = physics;
-            _data = data;
-            _animationClips = animationClips;
-            
-            _inputUI.ActionIcons[0].OnClicked += Button0;
-            _inputUI.ActionIcons[1].OnClicked += Button1;
-            _inputUI.ActionIcons[2].OnClicked += Button2;
-            _inputUI.ActionIcons[3].OnClicked += Button3;
-            _inputUI.ActionIcons[4].OnClicked += Button4;
-            _inputUI.ActionIcons[5].OnClicked += Button5;
-            _inputUI.ActionIcons[6].OnClicked += Button6;
-            _inputUI.ActionIcons[7].OnClicked += Button7;
-
-            input.OnInBattle += (b) =>
-            {
-                _data.InBattle = b;
-                OnInBattle?.Invoke(b);
-            };
-
-            _physics.OnEndAction += EndAction;
-        }
-
-        public void Init(AttackHandler attackHandler)
-        { 
-            attackHandler.OnBlock += (damage, pos) => OnBlock?.Invoke();
-            attackHandler.OnWin += () => OnWin?.Invoke();
-            attackHandler.OnLose += () => OnLose?.Invoke();
-             
-            OnInBattle?.Invoke(true);
-        }
-
-        public PlayerController(AiInput input, PlayerPhysics physics, PlayerData data, PlayerAnimationClips animationClips)
+        public PlayerController(IUseInput input, PlayerPhysics physics, PlayerData data, PlayerAnimationClips animationClips)
         {
             _physics = physics;
             _data = data;
@@ -81,34 +47,42 @@ namespace SwordsAndSandals
             input.Actions[5] += Button5;
             input.Actions[6] += Button6;
             input.Actions[7] += Button7;
+            input.Actions[8] += Button8;
 
             input.OnInBattle += (b) =>
             {
                 _data.InBattle = b;
                 OnInBattle?.Invoke(b);
-            };
+            }; 
 
             _physics.OnEndAction += EndAction;
         }
 
+        public void Init(AttackHandler attackHandler)
+        {
+            attackHandler.OnBlock += (damage, pos) => OnBlock?.Invoke();
+            attackHandler.OnWin += () => OnWin?.Invoke();
+            attackHandler.OnLose += () => OnLose?.Invoke();
+
+            OnInBattle?.Invoke(true);
+        }
+
         private void Button0()
         {
-            OnStartAction?.Invoke();
-            OnJump?.Invoke(Enums.Direction.Left);
             _currentState = Enums.CurrentState.Jump;
+            OnStartAction?.Invoke(_currentState);
+            OnJump?.Invoke(Enums.Direction.Left);
         }
 
         private void Button1()
         {
-            OnStartAction?.Invoke();
-            OnMove?.Invoke(Enums.Direction.Left);
             _currentState = Enums.CurrentState.Move;
+            OnStartAction?.Invoke(_currentState);
+            OnMove?.Invoke(Enums.Direction.Left);
         }
         
         private async void Button2()
         {
-            OnStartAction?.Invoke();
-
             if (_data.InBattle)
             {
                 OnPunch?.Invoke();
@@ -118,9 +92,9 @@ namespace SwordsAndSandals
             {
                 OnRage?.Invoke();
                 _currentState = Enums.CurrentState.Rage;
-                // low stamina
-                // sleep
             }
+
+            OnStartAction?.Invoke(_currentState);
 
             await _animationClips.EndClip(_currentState);
             OnEndAction?.Invoke();
@@ -128,10 +102,9 @@ namespace SwordsAndSandals
 
         private async void Button3()
         {
-            OnStartAction?.Invoke();
-            OnDance?.Invoke();
-
-            _currentState = Enums.CurrentState.Dance;
+            _currentState = Enums.CurrentState.Sleep;
+            OnStartAction?.Invoke(_currentState);
+            OnSleep?.Invoke();
 
             await _animationClips.EndClip(_currentState);
             OnEndAction?.Invoke();
@@ -139,65 +112,73 @@ namespace SwordsAndSandals
 
         private async void Button4()
         {
-            OnStartAction?.Invoke();
+            _currentState = Enums.CurrentState.Dance;
+            OnStartAction?.Invoke(_currentState);
+            OnDance?.Invoke();
 
-            if (_data.InBattle)
-            {
-                OnAttack?.Invoke(Enums.AttackType.HardAttack);
-                _currentState = Enums.CurrentState.HardAttack;
-
-                await _animationClips.EndClip(_currentState);
-                OnEndAction?.Invoke();
-            }
-            else
-            {
-                OnJump?.Invoke(Enums.Direction.Right);
-                _currentState = Enums.CurrentState.Jump;
-            }
+            await _animationClips.EndClip(_currentState);
+            OnEndAction?.Invoke();
         }
 
         private async void Button5()
         {
-            OnStartAction?.Invoke();
-
             if (_data.InBattle)
             {
-                OnAttack?.Invoke(Enums.AttackType.MediumAttack);
-                _currentState = Enums.CurrentState.MediumAttack;
+                _currentState = Enums.CurrentState.HardAttack;
+                OnAttack?.Invoke(Enums.AttackType.HardAttack);
+                OnStartAction?.Invoke(_currentState);
 
                 await _animationClips.EndClip(_currentState);
                 OnEndAction?.Invoke();
             }
             else
             {
-                OnMove?.Invoke(Enums.Direction.Right);
-                _currentState = Enums.CurrentState.Move;
+                _currentState = Enums.CurrentState.Jump;
+                OnJump?.Invoke(Enums.Direction.Right);
+                OnStartAction?.Invoke(_currentState);
             }
         }
 
         private async void Button6()
         {
-            OnStartAction?.Invoke();
-
             if (_data.InBattle)
             {
-                OnAttack?.Invoke(Enums.AttackType.WeakAttack);
-                _currentState = Enums.CurrentState.WeakAttack;
+                _currentState = Enums.CurrentState.MediumAttack;
+                OnAttack?.Invoke(Enums.AttackType.MediumAttack);
+                OnStartAction?.Invoke(_currentState);
+
+                await _animationClips.EndClip(_currentState);
+                OnEndAction?.Invoke();
             }
             else
             {
-                OnAttack?.Invoke(Enums.AttackType.Charge);
+                _currentState = Enums.CurrentState.Move;
+                OnMove?.Invoke(Enums.Direction.Right);
+                OnStartAction?.Invoke(_currentState);
+            }
+        }
+
+        private async void Button7()
+        {
+            if (_data.InBattle)
+            {
+                _currentState = Enums.CurrentState.WeakAttack;
+                OnAttack?.Invoke(Enums.AttackType.WeakAttack);
+                OnStartAction?.Invoke(_currentState);
+            }
+            else
+            {
                 _currentState = Enums.CurrentState.Charge;
+                OnAttack?.Invoke(Enums.AttackType.Charge);
+                OnStartAction?.Invoke(_currentState);
             }
 
             await _animationClips.EndClip(_currentState);
             OnEndAction?.Invoke();
         }
 
-        private async void Button7()
+        private async void Button8()
         {
-            OnStartAction?.Invoke();
-
             if(_currentState == Enums.CurrentState.SuperAttack1)
             {
                 OnSuperAttack?.Invoke(Enums.SuperAttackState.SuperAttack2);
@@ -214,6 +195,8 @@ namespace SwordsAndSandals
                 OnSuperAttack?.Invoke(Enums.SuperAttackState.SuperAttack1);
                 _currentState = Enums.CurrentState.SuperAttack1;
             }
+
+            OnStartAction?.Invoke(_currentState);
 
             await _animationClips.EndClip(_currentState);
             OnEndAction?.Invoke();

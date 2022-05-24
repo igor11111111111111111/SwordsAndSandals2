@@ -26,8 +26,9 @@ namespace SwordsAndSandals.Arena
         {
             _actionIcons[0].SetSprite(Get(Enums.CurrentState.Jump), true);
             _actionIcons[1].SetSprite(Get(Enums.CurrentState.Move), true);
-            _actionIcons[3].SetSprite(Get(Enums.CurrentState.Dance), false);
-            _actionIcons[7].SetSprite(Get(Enums.CurrentState.SuperAttack1), false);
+            _actionIcons[3].SetSprite(Get(Enums.CurrentState.Sleep), false);
+            _actionIcons[4].SetSprite(Get(Enums.CurrentState.Dance), false);
+            _actionIcons[8].SetSprite(Get(Enums.CurrentState.SuperAttack1), false);
         }
         // clean some shit later
         private void SetIcons(bool inBattle)
@@ -35,24 +36,24 @@ namespace SwordsAndSandals.Arena
             if (inBattle)
             {
                 _actionIcons[2].SetSprite(Get(Enums.CurrentState.Punch), false);
-                _actionIcons[4].SetSprite(Get(Enums.CurrentState.HardAttack), false);
-                _actionIcons[5].SetSprite(Get(Enums.CurrentState.MediumAttack), false);
-                _actionIcons[6].SetSprite(Get(Enums.CurrentState.WeakAttack), false);
+                _actionIcons[5].SetSprite(Get(Enums.CurrentState.HardAttack), false);
+                _actionIcons[6].SetSprite(Get(Enums.CurrentState.MediumAttack), false);
+                _actionIcons[7].SetSprite(Get(Enums.CurrentState.WeakAttack), false);
 
-                _actionIcons[4].SetChance(GetChance(Enums.AttackType.HardAttack), true);
-                _actionIcons[5].SetChance(GetChance(Enums.AttackType.MediumAttack), true);
-                _actionIcons[6].SetChance(GetChance(Enums.AttackType.WeakAttack), true);
+                _actionIcons[5].SetChance(GetChance(Enums.AttackType.HardAttack), true);
+                _actionIcons[6].SetChance(GetChance(Enums.AttackType.MediumAttack), true);
+                _actionIcons[7].SetChance(GetChance(Enums.AttackType.WeakAttack), true);
             }
             else
             {
                 _actionIcons[2].SetSprite(Get(Enums.CurrentState.Rage), false);
-                _actionIcons[4].SetSprite(Get(Enums.CurrentState.Jump), false);
-                _actionIcons[5].SetSprite(Get(Enums.CurrentState.Move), false);
-                _actionIcons[6].SetSprite(Get(Enums.CurrentState.Charge), false);
+                _actionIcons[5].SetSprite(Get(Enums.CurrentState.Jump), false);
+                _actionIcons[6].SetSprite(Get(Enums.CurrentState.Move), false);
+                _actionIcons[7].SetSprite(Get(Enums.CurrentState.Charge), false);
 
-                _actionIcons[4].SetChance(GetChance(Enums.AttackType.HardAttack), false);
-                _actionIcons[5].SetChance(GetChance(Enums.AttackType.MediumAttack), false);
-                _actionIcons[6].SetChance(GetChance(Enums.AttackType.Charge), true);
+                _actionIcons[5].SetChance(GetChance(Enums.AttackType.HardAttack), false);
+                _actionIcons[6].SetChance(GetChance(Enums.AttackType.MediumAttack), false);
+                _actionIcons[7].SetChance(GetChance(Enums.AttackType.Charge), true);
             }
         }
 
@@ -64,7 +65,7 @@ namespace SwordsAndSandals.Arena
         private int GetChance(Enums.AttackType attackType)
         {
             var playerAttackChance = _playerDataSkills.Get<Attack>().GetHitChance(attackType);
-            var enemyDefenceChance = _aiDataSkills.Get<Defence>().GetDodgeChance(attackType);
+            var enemyDefenceChance = _aiDataSkills.Get<Defence>().GetDefenceChance(attackType);
             var totalChance = Mathf.Clamp(playerAttackChance - enemyDefenceChance, 1, 99);
             return totalChance;
         }

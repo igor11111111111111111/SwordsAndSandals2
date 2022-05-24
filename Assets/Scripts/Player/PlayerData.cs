@@ -21,7 +21,7 @@ namespace SwordsAndSandals
         public PlayerDataWeapons DataWeapons;
         [JsonIgnore]
         public Enums.Team Team;
-        [JsonIgnore]
+        [JsonIgnore] 
         public Reward Reward;
 
         public PlayerData()
@@ -31,6 +31,19 @@ namespace SwordsAndSandals
             DataSkills = new PlayerDataSkills();
             DataArmors = new PlayerDataArmors();
             DataWeapons = new PlayerDataWeapons();
-        } 
+            Team = Enums.Team.Player;
+        }
+
+        public PlayerData(string name, SerializedColor skinColor, PlayerDataExperience dataLevel, PlayerDataSkills dataSkills, Reward reward, PlayerDataArmors dataArmors, PlayerDataWeapons dataWeapons)
+        {
+            Name = name;
+            SkinColor = skinColor;
+            DataLevel = dataLevel;
+            DataSkills = dataSkills;
+            DataArmors = dataArmors;
+            DataWeapons = dataWeapons;
+            Reward = reward;
+            Team = Enums.Team.AI;
+        }
     }
 }

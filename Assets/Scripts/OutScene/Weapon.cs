@@ -30,6 +30,12 @@ namespace SwordsAndSandals
             Damage = 5;
         }
 
+        public Weapon(CategoryEnum category, int id)
+        {
+            Category = category;
+            ID = id;
+        }
+         
         public Weapon(CategoryEnum category, int id, string name, int cost, int damage, int damage2, int requiredStrength, float cellScale)
         {
             Category = category;

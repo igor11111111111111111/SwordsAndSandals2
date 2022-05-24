@@ -35,6 +35,22 @@ namespace SwordsAndSandals
             OnUnallocatedPointsChanged += ChangePoints;
         }
 
+        public PlayerDataSkills(int strength, int agility, int attack, int defence, int vitality, int charisma, int stamina, int magicka)
+        {
+            Array = new Skill[]
+            {
+                new Strength(strength),
+                new Agility(agility),
+                new Attack(attack),
+                new Defence(defence),
+                new Vitality(vitality),
+                new Charisma(charisma),
+                new Stamina(stamina),
+                new Magicka(magicka)
+            };
+
+        }
+
         ~ PlayerDataSkills()
         {
             OnUnallocatedPointsChanged -= ChangePoints;

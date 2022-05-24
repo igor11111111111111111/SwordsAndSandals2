@@ -10,7 +10,7 @@ namespace SwordsAndSandals.OutScene
         public PlayerInjector Init(PlayerData playerData, Vector3 position, float sceneScale)
         {
             var injector = Instantiate(_playerPrefab, position, Quaternion.identity);
-            injector.InitData(playerData);
+            injector.Init(playerData);
             injector.transform.localScale = new Vector3(sceneScale, sceneScale, 1);
             injector.GetComponent<Rigidbody2D>().simulated = false;
 
@@ -20,7 +20,7 @@ namespace SwordsAndSandals.OutScene
         public PlayerInjector Init(PlayerData playerData, Vector3 position, Vector3 sceneScale)
         {
             var injector = Instantiate(_playerPrefab, position, Quaternion.identity);
-            injector.InitData(playerData);
+            injector.Init(playerData);
             injector.transform.localScale = sceneScale;
             injector.GetComponent<Rigidbody2D>().simulated = false;
 

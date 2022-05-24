@@ -25,6 +25,22 @@ namespace SwordsAndSandals
             };
         }
 
+        public PlayerDataArmors(int helmetId, int cuirassId, int shortsId, int bootId, int gaiterId, int legginId, int mittenId, int pauldronId, int shieldId)
+        {
+            Array = new Armor[]
+            {
+                new Armor(Armor.CategoryEnum.Helmet, helmetId),
+                new Armor(Armor.CategoryEnum.Cuirass, cuirassId),
+                new Armor(Armor.CategoryEnum.Short, shortsId),
+                new Armor(Armor.CategoryEnum.Boot, bootId),
+                new Armor(Armor.CategoryEnum.Gaiter, gaiterId),
+                new Armor(Armor.CategoryEnum.Leggin, legginId),
+                new Armor(Armor.CategoryEnum.Mitten, mittenId),
+                new Armor(Armor.CategoryEnum.Pauldron, pauldronId),
+                new Armor(Armor.CategoryEnum.Shield, shieldId),
+            };
+        }
+
         public Armor Get(Armor.CategoryEnum category)
         {
             return System.Array.Find(Array, t => t.Category == category);

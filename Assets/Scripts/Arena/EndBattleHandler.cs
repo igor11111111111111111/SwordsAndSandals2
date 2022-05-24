@@ -6,11 +6,16 @@ namespace SwordsAndSandals.Arena
     {
         public Action<Info> OnEndBattle;
          
-        public EndBattleHandler(AttackHandler playerAttackHandler)
+        public EndBattleHandler()
         {
+
+        }
+
+        public void Init(AttackHandler playerAttackHandler)
+        {
+            // !!!false tournament
             playerAttackHandler.OnWin += () => OnEndBattle?.Invoke(new Info(false, true));
             playerAttackHandler.OnLose += () => OnEndBattle?.Invoke(new Info(false, false));
-            // !!!false tournament
         }
 
         public class Info

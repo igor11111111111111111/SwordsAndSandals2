@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace SwordsAndSandals.Arena
-{ 
+{
     public class PlayersFatality : MonoBehaviour
     {
         [SerializeField] private PlayerInjector _attacker;
@@ -21,7 +21,7 @@ namespace SwordsAndSandals.Arena
 
         private void SetupPlayer(PlayerInjector newInjector, PlayerInjector oldInjector, Enums.Direction direction)
         {
-            newInjector.InitData(oldInjector.Data);
+            newInjector.Init(oldInjector.Data);
 
             int sign = direction == Enums.Direction.Left ? -1 : 1;
             var offset = new Vector3(1.7f, 0, 0);

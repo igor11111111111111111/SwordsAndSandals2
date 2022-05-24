@@ -39,7 +39,13 @@ namespace SwordsAndSandals
         {
             Category = category;
             ID = 0;
-        } 
+        }
+
+        public Armor(CategoryEnum category, int id)
+        {
+            Category = category;
+            ID = id;
+        }
 
         public Armor(int id, CategoryEnum category, string name, int cost, int defence, int requiredLevel, float cellScale)
         { 

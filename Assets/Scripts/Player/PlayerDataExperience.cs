@@ -17,8 +17,19 @@ namespace SwordsAndSandals
 
         public PlayerDataExperience()
         {
-            _thresholdToLevel = new int[] 
-            { 
+            Init();
+        }
+
+        public PlayerDataExperience(int xp)
+        {
+            CurrentXP = xp;
+            Init();
+        }
+
+        private void Init()
+        {
+            _thresholdToLevel = new int[]
+{
                 0,
                 1000,
                 2500,
@@ -31,7 +42,7 @@ namespace SwordsAndSandals
                 20000,
                 24000,
                 28500
-            };
+};
         }
 
         private int GetLevel()

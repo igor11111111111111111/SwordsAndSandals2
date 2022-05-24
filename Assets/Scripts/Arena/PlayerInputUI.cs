@@ -1,24 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
 namespace SwordsAndSandals.Arena
 {
     public class PlayerInputUI : MonoBehaviour
-    {
+    { 
         [SerializeField] private ActionIcon iconPrefab;
         [SerializeField] private GameObject _body;
-        private PlayerInjector _injector;
         public List<ActionIcon> ActionIcons => _actionIcons;
         private List<ActionIcon> _actionIcons;
         private PlayerController _controller;
+        private PlayerInjector _injector;
 
         public void Init(PlayerInjector injector, TurnLogic turnLogic)
         {
             _injector = injector;
             _actionIcons = new List<ActionIcon>();
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 9; i++)
             {
                 var icon = Instantiate(iconPrefab, _body.transform);
                 icon.Init();
@@ -38,7 +39,7 @@ namespace SwordsAndSandals.Arena
         public void LateInit(PlayerController controller, SwordsAndSandals.PlayerData aiData)
         {
             _controller = controller;
-            _controller.OnStartAction += () => SetBodyActive(false);
+            _controller.OnStartAction += (_) => SetBodyActive(false);
 
             new ActionIconsChanger(_actionIcons, _controller, _injector.Data.DataSkills, aiData.DataSkills);
         }

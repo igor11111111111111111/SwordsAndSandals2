@@ -21,6 +21,7 @@ namespace SwordsAndSandals.Arena
         private AttackHandler _aiAttackHandler;
         private EndBattlePanel _endBattlePanel;
         private FatalityLogic _fatalityLogic;
+        private EndBattleHandler _endBattleHandler;
 
         public ArenaSetupData(ArenaPanel arenaPanel, PlayerInjector playerInjector, SwordsAndSandals.PlayerData playerData, PlayerInjector aiInjector, SwordsAndSandals.PlayerData aiData, TurnLogic turnLogic, CameraMover cameraMover, PlayerInputUI playerInputUI, DamageInfo damageInfo, EndBattlePanel endBattlePanel, FatalityLogic fatalityLogic)
         {
@@ -36,70 +37,61 @@ namespace SwordsAndSandals.Arena
             _endBattlePanel = endBattlePanel;
             _fatalityLogic = fatalityLogic;
 
-            Other();
+            Handlers();
             Player();
             AI();
             LateInit();
         }
 
-        private void Other()
+        private void Handlers()
         {
-            _arenaPlayerData = Setup(_playerData, _playerInjector, Enums.Direction.Left);
-            _arenaAiData = Setup(_aiData, _aiInjector, Enums.Direction.Right);
-            _arenaPanel.InitPlayers(_arenaPlayerData, _arenaAiData);
             _arenaHandler = new ArenaHandler(_playerInjector, _aiInjector);
-            _cameraMover.Init(_arenaHandler);
+            _endBattleHandler = new EndBattleHandler();
         }
 
         private void Player()
         {
-            _playerInjector.InitPlayerArenaInput(_playerInputUI, _turnLogic, _arenaHandler, _aiData);
+            _arenaPlayerData = new PlayerData(_playerData, _playerInjector, Enums.Direction.Left);
+            _playerInputUI.Init(_playerInjector, _turnLogic);
+            PlayerInput input = new PlayerInput(_playerInjector, _turnLogic, _arenaHandler, _playerInputUI);
 
+            _playerInjector.Init(input);
             _playerAttackHandler = new AttackHandler(_arenaPlayerData, _playerInjector, _aiInjector, _arenaHandler);
-            _playerInjector.InitAttackHandler(_playerAttackHandler);
+            _playerInjector.Init(_playerAttackHandler);
+
+            _playerInputUI.LateInit(_playerInjector.Controller, _aiData);
+
             _damageInfo.Init(_playerAttackHandler);
+            new StaminaLogic(_playerInjector.Controller, _arenaPlayerData);
         }
 
         private void AI()
         {
-            _aiInjector.InitAIArenaInput(_turnLogic, _arenaHandler);
+            _arenaAiData = new PlayerData(_aiData, _aiInjector, Enums.Direction.Right);
+            var aiInput = new AiInput();
+            aiInput.Init(_aiInjector, _turnLogic, _arenaHandler);
+            _aiInjector.Init(aiInput);
 
             _aiAttackHandler = new AttackHandler(_arenaAiData, _aiInjector, _playerInjector, _arenaHandler);
-            _aiInjector.InitAttackHandler(_aiAttackHandler);
+            _aiInjector.Init(_aiAttackHandler);
             _damageInfo.Init(_aiAttackHandler);
 
             new PlayerRotator().Rotate(_aiInjector);
+            new StaminaLogic(_aiInjector.Controller, _arenaAiData);
         }
 
         private void LateInit()
         {
-            _playerAttackHandler.InitEnemyAttackHandler(_aiAttackHandler);
-            _aiAttackHandler.InitEnemyAttackHandler(_playerAttackHandler);
-
-            var endBattleHandler = new EndBattleHandler(_playerAttackHandler);
-            _endBattlePanel.Init(_playerData, _aiData, endBattleHandler);
-            _turnLogic.Init(_playerInjector, _aiInjector, endBattleHandler);
-            _fatalityLogic.Init(endBattleHandler);
-            _playerInputUI.Init(endBattleHandler);
-
-            _aiAttackHandler.Test();//!
-        }
-
-        private PlayerData Setup(SwordsAndSandals.PlayerData playerData, PlayerInjector injector, Enums.Direction direction)
-        {
-            int sign = direction == Enums.Direction.Left ? -1 : 1;
-
-            injector.GetComponent<Rigidbody2D>().simulated = true;
-
-            injector.transform.position = new Vector3(4.89f * sign, -2.5f, 3);
-
-            var sceneScale = new Vector3(3.2f, 3.2f, 3.2f);
-            injector.transform.localScale = sceneScale * playerData.DataSkills.Get<Strength>().ScaleCoeff;
-
-            var armorData = new ArmorData(playerData.DataArmors.GetDefence());
-            var healthData = new HealthData(playerData.DataSkills.Get<Vitality>());
-            var staminaData = new StaminaData(playerData.DataSkills.Get<Stamina>());
-            return new PlayerData(armorData, healthData, staminaData, playerData.Name);
+            _playerAttackHandler.Init(_aiAttackHandler);
+            _aiAttackHandler.Init(_playerAttackHandler);
+            _endBattleHandler.Init(_playerAttackHandler);
+            _turnLogic.Init(_playerInjector, _aiInjector, _endBattleHandler);
+            _arenaPanel.Init(_arenaPlayerData, _arenaAiData);
+            _cameraMover.Init(_arenaHandler);
+            _endBattlePanel.Init(_playerData, _aiData, _endBattleHandler);
+            _fatalityLogic.Init(_endBattleHandler);
+            _playerInputUI.Init(_endBattleHandler);
+            //_aiAttackHandler.Test();//!
         }
     }
 }

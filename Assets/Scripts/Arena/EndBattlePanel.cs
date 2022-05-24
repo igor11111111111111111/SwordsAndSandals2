@@ -31,7 +31,7 @@ namespace SwordsAndSandals.Arena
             fatalityPanel.OnClicked += () => 
             { 
                 Show(false);
-                _accept.transform.parent = transform.parent;
+                _accept.transform.SetParent(transform, true);
             };
         }
 
