@@ -16,10 +16,10 @@ namespace SwordsAndSandals.Editor
             playerColorChanger.Init(skinUI);
 
             skinUI = Instantiate(_skinPrefab, transform);
-            skinUI.Init("Hairstyle");
+            skinUI.Init("Hairstyle \n (later)");
 
             skinUI = Instantiate(_skinPrefab, transform);
-            skinUI.Init("Stubble");
+            skinUI.Init("Stubble \n (later)");
         }
     }
 }

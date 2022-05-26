@@ -44,9 +44,9 @@ namespace SwordsAndSandals.WeaponShop
 
             _info.text = null;
             //4 % extra charge distance
-            _info.text += "Adds " + weapon.Damage + " to your armour";
-            _info.text += "\n Required gladiator level " + weapon.RequiredStrength;
-            _info.text += "\n Original armour cost: " + weapon.Cost + " gold";
+            _info.text += "Adds " + weapon.MinDamage;
+            _info.text += "\n Required gladiator strength " + weapon.RequiredStrength;
+            _info.text += "\n Original weapon cost: " + weapon.Cost + " gold";
 
             //Charisma discount: 365 gold
             //Trade~in discount: 270 gold

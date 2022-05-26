@@ -12,8 +12,8 @@ namespace SwordsAndSandals
         public int ID;
         public string Name;
         public int Cost;
-        public int Damage;
-        public int Damage2;
+        public int MinDamage; 
+        public int MaxDamage;
         public int RequiredStrength;
         public float CellScale;
 
@@ -27,7 +27,8 @@ namespace SwordsAndSandals
         {
             Category = CategoryEnum.Bashing;
             ID = 0;
-            Damage = 5;
+            MinDamage = 1;
+            MaxDamage = 5;
         }
 
         public Weapon(CategoryEnum category, int id)
@@ -36,16 +37,21 @@ namespace SwordsAndSandals
             ID = id;
         }
          
-        public Weapon(CategoryEnum category, int id, string name, int cost, int damage, int damage2, int requiredStrength, float cellScale)
+        public Weapon(CategoryEnum category, int id, string name, int cost, int minDamage, int maxDamage, int requiredStrength, float cellScale)
         {
             Category = category;
             ID = id;
             Name = name;
             Cost = cost;
-            Damage = damage;
-            Damage2 = damage2;
+            MinDamage = minDamage;
+            MaxDamage = maxDamage;
             RequiredStrength = requiredStrength;
             CellScale = cellScale;
+        }
+
+        public int GetRandMinMaxDamage()
+        {
+            return UnityEngine.Random.Range(MinDamage, MaxDamage + 1);
         }
     }
 }

@@ -9,8 +9,10 @@ namespace SwordsAndSandals
     public class PlayerData : ISaveData
     {
         public string Name;
-        public float MoveRange = 1f;
-        public float JumpForce = 2f;
+        [JsonIgnore]
+        public const float MOVE_DISTANCE = 1f;
+        [JsonIgnore]
+        public const float JUMP_FORCE = 2f;
         public float Money;
         [JsonIgnore]
         public bool InBattle = false;

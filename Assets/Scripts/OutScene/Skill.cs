@@ -26,10 +26,14 @@ namespace SwordsAndSandals
 
     public class Strength : Skill
     {
-        private const float SIZE_PER_VALUE = 0.4f;
+        private const float SIZE_PER_VALUE = 0.004f;
+        private const float DAMAGE_PER_VALUE = 0.1f;
 
         [JsonIgnore]
-        public float ScaleCoeff => SIZE_PER_VALUE * Value * 0.01f + 1;
+        public float ScaleCoeff => SIZE_PER_VALUE * Value + 1;
+
+        [JsonIgnore]
+        public float DamageCoeff => DAMAGE_PER_VALUE * Value + 1;
 
         public Strength()
         {
@@ -42,6 +46,14 @@ namespace SwordsAndSandals
      
     public class Agility : Skill
     {
+        private const float JUMPFORCE_PER_VALUE = 0.05f;
+        private const float MOVEDISTANCE_PER_VALUE = 0.05f;
+
+        [JsonIgnore]
+        public float JumpCoeff => JUMPFORCE_PER_VALUE * Value + 1;
+        [JsonIgnore]
+        public float MoveDistanceCoeff => MOVEDISTANCE_PER_VALUE * Value + 1;
+
         public Agility()
         {
         }

@@ -45,7 +45,7 @@ namespace SwordsAndSandals
                 return;
 
             int dir = _injector.Direction == Enums.Direction.Left ? -1 : 1;
-            var force = new Vector2(1 * dir, 1) * _data.JumpForce;
+            var force = new Vector2(1 * dir, 1) * PlayerData.JUMP_FORCE * _data.DataSkills.Get<Agility>().JumpCoeff;
 
             _rigidbody.AddForce(force, ForceMode2D.Impulse);
         }
@@ -71,14 +71,15 @@ namespace SwordsAndSandals
 
             var target = new Vector3
             (
-                transform.position.x + _data.MoveRange * sign,
+                transform.position.x + PlayerData.MOVE_DISTANCE * sign * _data.DataSkills.Get<Agility>().MoveDistanceCoeff,
                 transform.position.y,
                 transform.position.z
             );
 
+            float speed = 0.02f;
             while ((target.x - transform.position.x) * sign > 0)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target, 0.01f);
+                transform.position = Vector3.MoveTowards(transform.position, target, speed);
                 yield return new WaitForEndOfFrame();
             }
 
@@ -105,9 +106,9 @@ namespace SwordsAndSandals
                 sign = -1;
             }
 
-            var force = new Vector2(1 * sign, 2);
+            var force = new Vector2(1 * sign, 2) * PlayerData.JUMP_FORCE * _data.DataSkills.Get<Agility>().JumpCoeff;
 
-            _rigidbody.AddForce(force * _data.JumpForce, ForceMode2D.Impulse);
+            _rigidbody.AddForce(force, ForceMode2D.Impulse);
 
             while (!_groundCheck.IsGrounded)
             {

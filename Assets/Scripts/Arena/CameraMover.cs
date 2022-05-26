@@ -53,23 +53,39 @@ namespace SwordsAndSandals.Arena
 
         private void Split(Enums.Team team)
         {
-            var playerWorld = _playerCamera.ScreenToWorldPoint(new Vector3(_playerCamera.pixelWidth, 0, 0));
-            var aiWorld = _aiCamera.ScreenToWorldPoint(new Vector3(_playerCamera.pixelWidth, 0, 0));
+            var playerCameraWidth = _playerCamera.ScreenToWorldPoint(
+                new Vector3(_playerCamera.pixelWidth, 0, 0));
+            var aiCameraWidthRight = _aiCamera.ScreenToWorldPoint(
+                new Vector3(_playerCamera.pixelWidth, 0, 0));
+            var aiCameraWidthLeft = _aiCamera.ScreenToWorldPoint(
+                new Vector3(-_playerCamera.pixelWidth, 0, 0));
 
-            if (playerWorld.x >= aiWorld.x)
+            if(_playerCamera.transform.position.x < _aiCamera.transform.position.x)
             {
-                var target = new Vector3(_playerInjector.transform.position.x + _arenaHandler.GetAbsDistance() / 2f, _playerInjector.transform.position.y + 2.5f, 2);
-
-                Move(_ourCamera, target, team);
-                SwitchCameras(true);
+                _playerCamera.rect = new Rect(0, 0, 0.5f, 1);
+                _aiCamera.rect = new Rect(0.5f, 0, 1, 1);
             }
             else
             {
-                SwitchCameras(false);
+                _aiCamera.rect = new Rect(0, 0, 0.5f, 1);
+                _playerCamera.rect = new Rect(0.5f, 0, 1, 1);
+            }
+
+            if (
+                _playerInjector.Direction == Enums.Direction.Right && playerCameraWidth.x >= aiCameraWidthRight.x || 
+                _playerInjector.Direction == Enums.Direction.Left && playerCameraWidth.x < Mathf.Abs(aiCameraWidthLeft.x))
+            {
+                var target = new Vector3(_playerInjector.transform.position.x - _arenaHandler.GetDistance() / 2f, _playerInjector.transform.position.y + 2.5f, 2);
+                Move(_ourCamera, target, team);
+                SetOurCamera(true);
+            }
+            else
+            {
+                SetOurCamera(false);
             }
         }
 
-        private void SwitchCameras(bool active)
+        private void SetOurCamera(bool active)
         {
             if (active)
             {

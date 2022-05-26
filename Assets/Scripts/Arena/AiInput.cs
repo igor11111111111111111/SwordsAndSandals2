@@ -32,7 +32,7 @@ namespace SwordsAndSandals.Arena
 
             _playerRotator.CheckRotation();
 
-            Actions[UnityEngine.Random.Range(0, 9)]?.Invoke();
+            Actions[4/*UnityEngine.Random.Range(0, 9)*/]?.Invoke();
         }
     }
 }

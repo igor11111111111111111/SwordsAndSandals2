@@ -16,7 +16,7 @@ namespace SwordsAndSandals.Arena
         private PlayerData _playerArenaData;
         private ArenaHandler _arenaHandler;
 
-        private Dictionary<Enums.AttackType, float> _attackCoeff = 
+        private Dictionary<Enums.AttackType, float> _attackTypeCoeff = 
             new Dictionary<Enums.AttackType, float>
         {
             { Enums.AttackType.Charge, 0.7f },
@@ -58,9 +58,10 @@ namespace SwordsAndSandals.Arena
 
             if (Hit(attackType))
             {
-                var weaponDamage = _enemy.Data.DataWeapons.Current.Damage;
-                var fullDamage = Mathf.RoundToInt(weaponDamage * _attackCoeff[attackType]);
-                 
+                var weaponDamage = _enemy.Data.DataWeapons.Current.GetRandMinMaxDamage();
+
+                var fullDamage = Mathf.RoundToInt(weaponDamage * _attackTypeCoeff[attackType] * _player.Data.DataSkills.Get<Strength>().DamageCoeff);
+
                 if (_playerArenaData.ArmorData.Current <= fullDamage)
                 {
                     fullDamage -= _playerArenaData.ArmorData.Current;

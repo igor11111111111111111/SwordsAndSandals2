@@ -8,11 +8,12 @@ namespace SwordsAndSandals.Arena
         [SerializeField] private PlayerInjector _defender;
         [SerializeField] private Animator _animator;
 
-        public void Init(PlayerInjector attacker, PlayerInjector defender, Camera camera)
+        public void Init(PlayerInjector attacker, PlayerInjector defender, Camera camera) 
         {
             camera.orthographicSize = 3;
             SetupPlayer(_attacker, attacker, Enums.Direction.Left);
             SetupPlayer(_defender, defender, Enums.Direction.Right);
+            camera.transform.position = transform.position;
 
             var index = Random.Range(1, 4);
             _animator.SetTrigger("OnFatality");
