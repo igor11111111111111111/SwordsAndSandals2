@@ -9,15 +9,15 @@ namespace SwordsAndSandals.PreArena
     {
         [SerializeField] private MenuPanel _menuPanel;
         [SerializeField] private MoneyInfo _moneyInfo;
-        [SerializeField] private Button _duel;
-        [SerializeField] private Button _tournament;
         [SerializeField] private Button _moveToStreet;
 
         private void Awake()
         {
-            var playerData = new Json().Load<PlayerData>(Enums.SaveFilename.Player);
+            var json = new Json();
+            var playerData = json.Load<PlayerData>();
+            var tournamentData = json.Load<TournamentData>();
 
-            _menuPanel.Init(_duel, _tournament);
+            _menuPanel.Init(tournamentData, playerData);
             _moneyInfo.Init(playerData.Money);
 
             _moveToStreet.onClick.AddListener

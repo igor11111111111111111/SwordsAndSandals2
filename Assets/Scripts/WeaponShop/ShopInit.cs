@@ -15,7 +15,7 @@ namespace SwordsAndSandals.WeaponShop
 
         private void Awake()
         {
-            var playerData = new Json().Load<PlayerData>(Enums.SaveFilename.Player);
+            var playerData = new Json().Load<PlayerData>();
 
             var playerInjector = _playerSpawner.Init
                 (
@@ -32,7 +32,7 @@ namespace SwordsAndSandals.WeaponShop
 
             _moveToStreet.onClick.AddListener(() =>
             {
-                new Json().Save(playerData, Enums.SaveFilename.Player);
+                new Json().Save(playerData);
                 new SceneChanger().MoveTo(Enums.Scene.Street);
             });
         }

@@ -44,7 +44,8 @@
         public enum SaveFilename
         {
             Player,
-            Settings
+            Settings,
+            Tournament
         }
 
         public enum Scene

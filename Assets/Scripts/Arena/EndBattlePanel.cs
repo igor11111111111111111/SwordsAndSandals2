@@ -116,12 +116,12 @@ namespace SwordsAndSandals.Arena
             if (newXP >= XPToNewLevel)
             {
                 _playerData.DataSkills.AddPointsPerLevel();
-                new Json().Save(_playerData, Enums.SaveFilename.Player);
+                new Json().Save(_playerData);
                 new SceneChanger().MoveTo(Enums.Scene.LevelUp);
             }
             else
             {
-                new Json().Save(_playerData, Enums.SaveFilename.Player);
+                new Json().Save(_playerData);
                 new SceneChanger().MoveTo(Enums.Scene.Street);
             }
 

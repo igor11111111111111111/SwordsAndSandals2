@@ -20,9 +20,10 @@ namespace SwordsAndSandals
             Init();
         }
 
-        public PlayerDataExperience(int xp)
+        public PlayerDataExperience(int level)
         {
-            CurrentXP = xp;
+            Init();
+            CurrentXP = _thresholdToLevel[level];
             Init();
         }
 
@@ -38,7 +39,7 @@ namespace SwordsAndSandals
                 7000,
                 9000,
                 12000,
-                15000,
+                15000, 
                 20000,
                 24000,
                 28500

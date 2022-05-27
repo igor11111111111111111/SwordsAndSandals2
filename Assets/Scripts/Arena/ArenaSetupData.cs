@@ -91,7 +91,8 @@ namespace SwordsAndSandals.Arena
             _endBattlePanel.Init(_playerData, _aiData, _endBattleHandler);
             _fatalityLogic.Init(_endBattleHandler);
             _playerInputUI.Init(_endBattleHandler);
-            //_aiAttackHandler.Test();//!
+
+            _aiAttackHandler.Test();//!
         }
     }
 }

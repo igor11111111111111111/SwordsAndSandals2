@@ -23,7 +23,7 @@ namespace SwordsAndSandals
                 new Armor(Armor.CategoryEnum.Pauldron),
                 new Armor(Armor.CategoryEnum.Shield),
             };
-        }
+        } 
 
         public PlayerDataArmors(int helmetId, int cuirassId, int shortsId, int bootId, int gaiterId, int legginId, int mittenId, int pauldronId, int shieldId)
         {
@@ -65,13 +65,10 @@ namespace SwordsAndSandals
             Array[index] = newArmor;//
         }
 
-        public void SetFull(int id)
+        public void Set(AllArmorData allArmorData, int index)
         {
-            AllArmorData allArmorData = new AllArmorData();
-            for (int i = 0; i < Array.Length; i++)
-            {
-                Array[i] = allArmorData.Get(Array[i].Category, id);
-            }
+            if (Array[index].ID > 0)
+                Array[index] = allArmorData.Get(Array[index].Category, Array[index].ID);
         }
     }
 }

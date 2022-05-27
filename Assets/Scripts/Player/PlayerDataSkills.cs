@@ -48,7 +48,6 @@ namespace SwordsAndSandals
                 new Stamina(stamina),
                 new Magicka(magicka)
             };
-
         }
 
         ~ PlayerDataSkills()

@@ -7,7 +7,7 @@ namespace SwordsAndSandals.Arena
         [SerializeField] private PlayerInjector _attacker;
         [SerializeField] private PlayerInjector _defender;
         [SerializeField] private Animator _animator;
-
+         
         public void Init(PlayerInjector attacker, PlayerInjector defender, Camera camera) 
         {
             camera.orthographicSize = 3;
@@ -31,7 +31,6 @@ namespace SwordsAndSandals.Arena
             oldInjector.transform.localPosition.y,
             oldInjector.transform.localPosition.z);
 
-            newInjector.transform.localRotation = oldInjector.transform.localRotation;
             newInjector.transform.localScale = oldInjector.transform.localScale;
 
             Destroy(oldInjector.gameObject);

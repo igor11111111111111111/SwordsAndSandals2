@@ -1,25 +1,19 @@
-﻿using SwordsAndSandals.OutScene;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace SwordsAndSandals.PreArena
 {
+
     public class MenuPanel : MonoBehaviour
     {
-        public void Init(Button duel, Button tournament)
-        {
-            duel.onClick.AddListener(Duel);
-            tournament.onClick.AddListener(Tournament);
-        }
+        [SerializeField] private EnterToDuelButton _enterToDuelButton;
+        [SerializeField] private EnterToTournamentButton _enterToTournamentButton;
 
-        private void Duel()
+        public void Init(TournamentData tournamentData, PlayerData playerData)
         {
-            new SceneChanger().MoveTo(Enums.Scene.Arena);
-        }
+            //if(tournamentData.LevelComplete[playerData.DataLevel.Level])
 
-        private void Tournament()
-        {
-            //new SceneChanger().MoveTo(Enums.Scene.Arena);
-        }
+            _enterToDuelButton.Init();
+            _enterToTournamentButton.Init();
+        } 
     }
 }

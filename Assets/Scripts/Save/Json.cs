@@ -9,9 +9,9 @@ namespace CustomJson
 {
     public class Json
     {
-        public void Save(ISaveData data, Enums.SaveFilename saveFilename)
+        public void Save<T>(T data) where T : ISaveData
         {
-            var path = Application.persistentDataPath + "/" + saveFilename + ".json";
+            var path = Application.persistentDataPath + "/" + typeof(T).Name + ".json";
 
             if (!File.Exists(path))
                 File.WriteAllText(path, "");
@@ -20,9 +20,9 @@ namespace CustomJson
             File.WriteAllText(path, json);
         }
 
-        public T Load<T>(Enums.SaveFilename saveFilename)
+        public T Load<T>() where T : ISaveData
         {
-            var path = Application.persistentDataPath + "/" + saveFilename + ".json";
+            var path = Application.persistentDataPath + "/" + typeof(T).Name + ".json";
 
             string json = File.ReadAllText(path);
             return JsonUtility.FromJson<T>(json);

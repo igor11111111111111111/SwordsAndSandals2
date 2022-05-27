@@ -36,7 +36,10 @@ namespace SwordsAndSandals.Editor
             _playerData.Name = _inputField.text;
             _playerData.SkinColor = _playerColorChanger.CurrentColor;
 
-            new Json().Save(_playerData, Enums.SaveFilename.Player);
+            var json = new Json();
+            json.Save(_playerData);
+            json.Save(new TournamentData());
+
             new SceneChanger().MoveTo(Enums.Scene.Street);
         }
 

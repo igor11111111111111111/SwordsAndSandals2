@@ -17,7 +17,7 @@ namespace SwordsAndSandals.LevelUp
 
         private void Awake()
         {
-            _playerData = new Json().Load<PlayerData>(Enums.SaveFilename.Player);
+            _playerData = new Json().Load<PlayerData>();
             _playerSpawner.Init
                 (
                     _playerData,
@@ -32,7 +32,7 @@ namespace SwordsAndSandals.LevelUp
 
         private void MoveToStreet()
         {
-            new Json().Save(_playerData, Enums.SaveFilename.Player);
+            new Json().Save(_playerData);
             new SceneChanger().MoveTo(Enums.Scene.Street);
         }
     }

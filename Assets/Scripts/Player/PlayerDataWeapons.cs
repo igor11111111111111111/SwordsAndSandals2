@@ -19,9 +19,12 @@ namespace SwordsAndSandals
             Current = new Weapon(category, id);
         }
 
-        public void Set()
+        public void Set(AllWeaponData allWeaponData)
         {
-            Current = new AllWeaponData().Get(Weapon.CategoryEnum.Bashing, 3);
+            if (Current.ID > 0)
+            {
+                Current = allWeaponData.Get(Current.Category, Current.ID);
+            }
         }
 
         public void Set(Weapon newWeapon)

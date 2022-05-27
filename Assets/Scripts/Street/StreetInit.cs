@@ -14,7 +14,7 @@ namespace SwordsAndSandals.Street
 
         private void Awake()
         {
-            var playerData = new Json().Load<PlayerData>(Enums.SaveFilename.Player);
+            var playerData = new Json().Load<PlayerData>();
 
             _playerSpawner.Init
             (
