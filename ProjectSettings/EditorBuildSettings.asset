@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WeaponShop.unity
     guid: 96cdf5b1954c4344f87785a492a9552b
+  - enabled: 1
+    path: Assets/Scenes/Tournament.unity
+    guid: 01253184d881ae549bf64c0cc86a5c96
   m_configObjects: {}

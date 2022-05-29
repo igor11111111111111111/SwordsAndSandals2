@@ -16,7 +16,7 @@ namespace SwordsAndSandals.Arena
 
             _list = new List<SwordsAndSandals.PlayerData>()
             {
-                //0
+                //0 - level
                 new SwordsAndSandals.PlayerData
                    (
                         names.GetRandomFullName(),

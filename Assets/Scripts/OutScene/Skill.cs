@@ -22,7 +22,7 @@ namespace SwordsAndSandals
         {
             Value = value;
         }
-    } 
+    }
 
     public class Strength : Skill
     {

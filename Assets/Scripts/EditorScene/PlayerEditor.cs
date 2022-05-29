@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using CustomJson;
 using SwordsAndSandals.OutScene;
+using Newtonsoft.Json;
 
 namespace SwordsAndSandals.Editor
 { 

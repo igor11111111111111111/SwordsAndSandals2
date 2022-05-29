@@ -57,7 +57,8 @@
             Menu,
             LevelUp,
             ArmorShop,
-            WeaponShop
+            WeaponShop,
+            Tournament
         }
 
         public enum Team

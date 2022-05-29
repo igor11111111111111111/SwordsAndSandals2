@@ -9,10 +9,15 @@ namespace SwordsAndSandals.PreArena
         [SerializeField] private GameObject _body;
         [SerializeField] private Button _button;
 
-        public void Init()
+        public void Init(bool active)
         {
-            _button.onClick.AddListener( () =>
-                new SceneChanger().MoveTo(Enums.Scene.Arena));
+            _body.SetActive(active);
+
+            if (active)
+            {
+                _button.onClick.AddListener(() =>
+                    new SceneChanger().MoveTo(Enums.Scene.Arena));
+            }
         }
     }
 }

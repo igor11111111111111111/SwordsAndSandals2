@@ -35,6 +35,10 @@ namespace SwordsAndSandals
             Shield
         }
 
+        public Armor()
+        {
+        }
+
         public Armor(CategoryEnum category)
         {
             Category = category;
