@@ -14,7 +14,7 @@ namespace SwordsAndSandals.Tournament
             var tournamentDataScene = FindObjectOfType<TournamentDataDontDestroy>();
             if(tournamentDataScene != null)
             {
-                _listParticipantsUI.Init(tournamentDataScene);
+                _listParticipantsUI.Init(tournamentDataScene.TournamentData);
                 _tournamentPanel.Init(tournamentDataScene.TournamentData);
             }
             else

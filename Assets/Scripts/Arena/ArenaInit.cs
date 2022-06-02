@@ -1,5 +1,7 @@
 ﻿using CustomJson;
 using SwordsAndSandals.OutScene;
+using SwordsAndSandals.Tournament;
+using System.Linq;
 using UnityEngine;
 
 namespace SwordsAndSandals.Arena
@@ -26,7 +28,15 @@ namespace SwordsAndSandals.Arena
         {
             _playerData = new Json().Load<SwordsAndSandals.PlayerData>();
 
-            _aiData = new AllEnemyData().Get(_playerData.DataLevel.Level);
+            var tournamentDataDontDestroy = FindObjectOfType<TournamentDataDontDestroy>();
+            if (tournamentDataDontDestroy != null)
+            {
+                _aiData = tournamentDataDontDestroy.TournamentData.Participants.Where(p => p.IsAlive).FirstOrDefault().PlayerData;
+            }
+            else
+            {
+                _aiData = new AllEnemyData().Get(_playerData.DataLevel.Level);
+            }
 
             var playerInjector = _playerSpawner.Init
                 (
@@ -43,7 +53,7 @@ namespace SwordsAndSandals.Arena
 
             _introductionPanel.Init(_playerData, _aiData);
             _arenaPanel.Init(_fatalityPanel);
-            _endBattlePanel.Init(_fatalityPanel);
+            _endBattlePanel.Init(_fatalityPanel, tournamentDataDontDestroy);
             _fatalityLogic.Init(playerInjector, aiInjector, _fatalityPrefab, _fatalityPanel, _ourCamera);
 
             _introductionPanel.OnEnterArena += () => EnterArena(playerInjector, aiInjector);

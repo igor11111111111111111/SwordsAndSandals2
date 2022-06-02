@@ -10,7 +10,7 @@ namespace SwordsAndSandals.Arena
         [SerializeField] private GameObject _body;
         [SerializeField] private Button _button;
         public Action OnClicked;
-
+         
         public void Init()
         {
             _body.SetActive(false);

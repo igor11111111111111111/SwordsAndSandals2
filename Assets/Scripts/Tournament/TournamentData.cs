@@ -12,10 +12,10 @@ namespace SwordsAndSandals.Tournament
         private string _iconPath;
         public string LocationPath => _locationPath;
         private string _locationPath;
-        public List<PlayerData> Participants => _participants;
-        private List<PlayerData> _participants;
+        public List<ParticipantData> Participants => _participants;
+        private List<ParticipantData> _participants;
 
-        public TournamentData(string name, string info, string iconPath, string locationPath, List<PlayerData> participants)
+        public TournamentData(string name, string info, string iconPath, string locationPath, List<ParticipantData> participants)
         {
             _name = name;
             _info = info;

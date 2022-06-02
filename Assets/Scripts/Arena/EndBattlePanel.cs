@@ -1,5 +1,6 @@
 ﻿using CustomJson;
 using SwordsAndSandals.OutScene;
+using SwordsAndSandals.Tournament;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,9 +23,13 @@ namespace SwordsAndSandals.Arena
 
         private SwordsAndSandals.PlayerData _playerData;
         private SwordsAndSandals.PlayerData _aiData;
+        private EndBattleHandler.Info _endBattleInfo;
+        private TournamentDataDontDestroy _tournamentDataDontDestroy;
 
-        public void Init(FatalityPanel fatalityPanel)
+        public void Init(FatalityPanel fatalityPanel, TournamentDataDontDestroy tournamentDataDontDestroy)
         {
+            _tournamentDataDontDestroy = tournamentDataDontDestroy;
+
             Show(false);
 
             _accept.onClick.AddListener(Accept);
@@ -45,7 +50,9 @@ namespace SwordsAndSandals.Arena
 
         private async void EndBattle(EndBattleHandler.Info info)
         {
-            if (info.IsWin)
+            _endBattleInfo = info;
+
+            if (info.WinningTeam == Enums.Team.Player)
             {
                 _aboutCharactersInfo.text = "First blood to " + _playerData.Name + "! " + _aiData.Name + " yields.";
                 _goldInfo.text = _aiData.Reward.Money /*+ crowd apprecation*/ + " gold won."/* + "..% crowd apprecation"*/;
@@ -70,6 +77,15 @@ namespace SwordsAndSandals.Arena
                 {
                     _percentToNextLevelInfo.text = "YOU HAVE LEVELLED UP !";
                 }
+            }
+            else
+            {
+                _goldInfo.text = null;
+                _battleXPInfo.text = "As a result of the battle, you got ... You didn’t get anything, hello, you lost.";
+                _percentToNextLevelInfo.text = null;
+                _sliderXP.gameObject.SetActive(false);
+                _aboutCharactersInfo.text = "Every defeat makes us stronger (c) Jason Statham ... or Confucius, but the person clearly understood 2d games.";
+                Show(true);
             }
         }
 
@@ -105,26 +121,51 @@ namespace SwordsAndSandals.Arena
 
         private void Accept()
         {
-            var playerXP = _playerData.DataLevel.CurrentXP;
-            var reward = _aiData.Reward.XP;
-            var newXP = playerXP + reward;
-            float XPToNewLevel = _playerData.DataLevel.GetXPToNewLevel();
-
-            _playerData.DataLevel.CurrentXP = newXP;
-            _playerData.Money += _aiData.Reward.Money; // * coeff apprecation
-
-            if (newXP >= XPToNewLevel)
+            if(_endBattleInfo.WinningTeam == Enums.Team.Player)
             {
-                _playerData.DataSkills.AddPointsPerLevel();
-                new Json().Save(_playerData);
-                new SceneChanger().MoveTo(Enums.Scene.LevelUp);
+                var playerXP = _playerData.DataLevel.CurrentXP;
+                var reward = _aiData.Reward.XP;
+                var newXP = playerXP + reward;
+                float XPToNewLevel = _playerData.DataLevel.GetXPToNewLevel();
+
+                _playerData.DataLevel.CurrentXP = newXP;
+                _playerData.Money += _aiData.Reward.Money; // * coeff apprecation
+
+                if (newXP >= XPToNewLevel)
+                {
+                    _playerData.DataSkills.AddPointsPerLevel();
+                    new Json().Save(_playerData);
+
+                    if (_tournamentDataDontDestroy != null)
+                    {
+                        _tournamentDataDontDestroy.TournamentData.Participants.Find(ai => ai.PlayerData == _aiData).IsAlive = false;
+                        new SceneChanger().MoveTo(Enums.Scene.Tournament);
+                    }
+                    else
+                    {
+                        new SceneChanger().MoveTo(Enums.Scene.LevelUp);
+                    }
+                }
+                else
+                {
+                    new Json().Save(_playerData);
+
+                    if (_tournamentDataDontDestroy != null)
+                    {
+                        _tournamentDataDontDestroy.TournamentData.Participants.Find(ai => ai.PlayerData == _aiData).IsAlive = false;
+                        new SceneChanger().MoveTo(Enums.Scene.Tournament);
+                    }
+                    else
+                    {
+                        new SceneChanger().MoveTo(Enums.Scene.Street);
+                    }
+                }
             }
             else
             {
-                new Json().Save(_playerData);
+                //new Json().Save(_playerData); cose data dont change
                 new SceneChanger().MoveTo(Enums.Scene.Street);
             }
-
         }
     }
 }

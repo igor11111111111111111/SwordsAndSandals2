@@ -10,22 +10,22 @@ namespace SwordsAndSandals.Tournament
     {
         [SerializeField] private ParticipantUI participantPrefab;
 
-        public void Init(TournamentDataDontDestroy tournamentDataScene)
+        public void Init(TournamentData tournamentData)
         {
-            Deads(tournamentDataScene);
+            Losts(tournamentData);
             Player();
-            Alives(tournamentDataScene);
+            Alives(tournamentData);
         }
 
-        private void Deads(TournamentDataDontDestroy tournamentDataScene)
+        private void Losts(TournamentData tournamentData)
         {
-            var deads = tournamentDataScene.TournamentData.Participants.Where(p => !p.IsAlive).ToArray();
+            var Losts = tournamentData.Participants.Where(p => !p.IsAlive).ToArray();
 
-            foreach (var participant in deads)
+            foreach (var participant in Losts)
             {
                 var instParticipant = Instantiate(participantPrefab, transform);
 
-                instParticipant.Init(participant.Name + "(dead)", Color.gray);
+                instParticipant.Init(participant.PlayerData.Name + "(lost)", Color.gray);
             }
         }
 
@@ -36,21 +36,21 @@ namespace SwordsAndSandals.Tournament
             player.Init(name, Color.green);
         }
 
-        private void Alives(TournamentDataDontDestroy tournamentDataScene)
+        private void Alives(TournamentData tournamentData)
         {
-            var alives = tournamentDataScene.TournamentData.Participants.Where(p => p.IsAlive).ToArray();
+            var alives = tournamentData.Participants.Where(p => p.IsAlive).ToArray();
 
             foreach (var participant in alives)
             {
                 var instParticipant = Instantiate(participantPrefab, transform);
 
-                if (participant.Name.Contains("(boss)"))
+                if (participant.IsBoss)
                 {
-                    instParticipant.Init(participant.Name, Color.yellow);
+                    instParticipant.Init(participant.PlayerData.Name, Color.yellow);
                 }
                 else
                 {
-                    instParticipant.Init(participant.Name);
+                    instParticipant.Init(participant.PlayerData.Name);
                 }
             }
         }

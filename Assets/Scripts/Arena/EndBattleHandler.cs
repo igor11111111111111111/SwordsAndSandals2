@@ -5,7 +5,7 @@ namespace SwordsAndSandals.Arena
     public class EndBattleHandler
     {
         public Action<Info> OnEndBattle;
-         
+          
         public EndBattleHandler()
         {
 
@@ -14,19 +14,17 @@ namespace SwordsAndSandals.Arena
         public void Init(AttackHandler playerAttackHandler)
         {
             // !!!false tournament
-            playerAttackHandler.OnWin += () => OnEndBattle?.Invoke(new Info(false, true));
-            playerAttackHandler.OnLose += () => OnEndBattle?.Invoke(new Info(false, false));
+            playerAttackHandler.OnWin += () => OnEndBattle?.Invoke(new Info(Enums.Team.Player));
+            playerAttackHandler.OnLose += () => OnEndBattle?.Invoke(new Info(Enums.Team.AI));
         }
 
         public class Info
         {
-            public readonly bool IsTournament;
-            public readonly bool IsWin;
+            public Enums.Team WinningTeam;
 
-            public Info(bool isTournament, bool isWin)
+            public Info(Enums.Team winningTeam)
             {
-                IsTournament = isTournament;
-                IsWin = isWin;
+                WinningTeam = winningTeam;
             }
         }
     }

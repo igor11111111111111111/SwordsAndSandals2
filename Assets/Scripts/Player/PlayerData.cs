@@ -25,8 +25,6 @@ namespace SwordsAndSandals
         public Enums.Team Team;
         [JsonIgnore] 
         public Reward Reward;
-        [JsonIgnore]
-        public bool IsAlive; // for tournament participants list
 
         public PlayerData()
         {
@@ -36,9 +34,8 @@ namespace SwordsAndSandals
             DataArmors = new PlayerDataArmors();
             DataWeapons = new PlayerDataWeapons();
             Team = Enums.Team.Player;
-            IsAlive = true;
         }
-
+         
         public PlayerData(string name, SerializedColor skinColor, PlayerDataExperience dataLevel, PlayerDataSkills dataSkills, Reward reward, PlayerDataArmors dataArmors, PlayerDataWeapons dataWeapons)
         {
             Name = name;
@@ -49,7 +46,6 @@ namespace SwordsAndSandals
             DataWeapons = dataWeapons;
             Reward = reward;
             Team = Enums.Team.AI;
-            IsAlive = true;
         }
     }
 }

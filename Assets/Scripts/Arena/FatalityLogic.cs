@@ -22,10 +22,19 @@ namespace SwordsAndSandals.Arena
 
         public void Init(EndBattleHandler endBattleHandler)
         {
-            endBattleHandler.OnEndBattle += (info) =>
+            endBattleHandler.OnEndBattle += EndBattle;
+        }
+
+        private void EndBattle(EndBattleHandler.Info info)
+        {
+            if (info.WinningTeam == Enums.Team.Player)
             {
                 _panel.Show();
-            };
+            }
+            else
+            {
+                // 50 на 50 помиловние или фаталити от бота
+            }
         }
     }
 }
