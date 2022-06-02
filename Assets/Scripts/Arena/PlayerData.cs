@@ -27,7 +27,7 @@ namespace SwordsAndSandals.Arena
             int sign = direction == Enums.Direction.Left ? -1 : 1;
 
             injector.GetComponent<Rigidbody2D>().simulated = true;
-
+            injector.transform.parent = null;
             injector.transform.position = new Vector3(4.89f * sign, -2.5f, 3);
 
             var sceneScale = new Vector3(3.2f, 3.2f, 3.2f);

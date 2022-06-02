@@ -122,17 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0409daae476c8024483c5011daac00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _head: {fileID: 8098480814712554945}
-  _body: {fileID: 1091891563126384030}
-  _torso: {fileID: 4813011397911420818}
-  _leftForearm: {fileID: 8016120965815070814}
-  _rightForearm: {fileID: 7112532886339808854}
-  _leftHip: {fileID: 2724299844778896531}
-  _rightHip: {fileID: 2035378150585124537}
-  _leftShin: {fileID: 7519618236520615625}
-  _rightShin: {fileID: 2817955674935261733}
-  _leftShoulder: {fileID: 7812112384969878222}
-  _rightShoulder: {fileID: 7992460240409133306}
   _sprites:
   - {fileID: 8098480814712554945}
   - {fileID: 1091891563126384030}

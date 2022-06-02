@@ -119,7 +119,40 @@ namespace SwordsAndSandals.Arena
                         new Reward(800, 1800),
                         new PlayerDataArmors(2, 2, 1, 1, 1, 1, 1, 0, 0),
                         new PlayerDataWeapons(Weapon.CategoryEnum.Hacking, 2)
-                    )
+                    ),
+                //4 
+                new SwordsAndSandals.PlayerData
+                (
+                    names.GetRandomFullName(),
+                    colors.Get(),
+                    new PlayerDataExperience(4),
+                    new PlayerDataSkills(8, 3, 4, 3, 1, 1, 1, 0),
+                    new Reward(800, 1800),
+                    new PlayerDataArmors(1, 1, 1, 1, 1, 1, 1, 1, 1),
+                    new PlayerDataWeapons(Weapon.CategoryEnum.Bashing, 2)
+                ),
+                //5 
+                new SwordsAndSandals.PlayerData
+                (
+                    names.GetRandomFullName(),
+                    colors.Get(),
+                    new PlayerDataExperience(5),
+                    new PlayerDataSkills(8, 3, 4, 3, 1, 1, 1, 0),
+                    new Reward(800, 1800),
+                    new PlayerDataArmors(1, 1, 1, 1, 1, 1, 1, 1, 1),
+                    new PlayerDataWeapons(Weapon.CategoryEnum.Bashing, 2)
+                ),
+                //6
+                new SwordsAndSandals.PlayerData
+                (
+                    names.GetRandomFullName(),
+                    colors.Get(),
+                    new PlayerDataExperience(6),
+                    new PlayerDataSkills(8, 3, 4, 3, 1, 1, 1, 0),
+                    new Reward(800, 1800),
+                    new PlayerDataArmors(1, 1, 1, 1, 1, 1, 1, 1, 1),
+                    new PlayerDataWeapons(Weapon.CategoryEnum.Bashing, 2)
+                ),
             };
         }
 

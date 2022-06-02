@@ -7,7 +7,7 @@ namespace SwordsAndSandals
 {
     [Serializable]
     public class PlayerDataSkills
-    {
+    { 
         [NonSerialized] 
         public Action<int> OnUnallocatedPointsChanged;
 
@@ -60,9 +60,9 @@ namespace SwordsAndSandals
             return (T)System.Array.Find(Array, t => t is T);
         }
 
-        public void AddPointsPerLevel()
+        public void AddPointsPerLevel(int levels)
         {
-            UnallocatedPoints += POINTS_PER_LEVEL;
+            UnallocatedPoints += POINTS_PER_LEVEL * levels;
         }
 
         private void ChangePoints(int delta)

@@ -7,7 +7,7 @@ namespace SwordsAndSandals.Tournament
         private static bool _created = false;
         public TournamentData TournamentData => _tournamentData;
         private TournamentData _tournamentData;
-
+         
         private void Awake()
         {
             if (!_created)

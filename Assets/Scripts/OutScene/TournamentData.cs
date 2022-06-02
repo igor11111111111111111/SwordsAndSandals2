@@ -25,5 +25,10 @@ namespace SwordsAndSandals
         {
             return Array.Where(a => a.Complete == isComplete).FirstOrDefault();
         }
+
+        public void SetCurrentComplete()
+        {
+            Array.Where(a => a.Complete == false).FirstOrDefault().Complete = true;
+        }
     }
 }

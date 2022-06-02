@@ -23,61 +23,61 @@ namespace SwordsAndSandals.Tournament
                     "Test",//!!
                     new List<ParticipantData>
                     {
-                        //new ParticipantData
-                        //(
-                        //    false,
-                        //    names.GetRandomFullName(),
-                        //    colors.Get(),
-                        //    new PlayerDataExperience(3),
-                        //    new PlayerDataSkills(8, 3, 2, 2, 2, 2, 1, 0),
-                        //    new Reward(),
-                        //    new PlayerDataArmors(2, 2, 1, 1, 1, 1, 1, 0, 0),
-                        //    new PlayerDataWeapons(Weapon.CategoryEnum.Hacking, 2)
-                        //),
-                        //new ParticipantData
-                        //(
-                        //    false,
-                        //    names.GetRandomFullName(),
-                        //    colors.Get(),
-                        //    new PlayerDataExperience(3),
-                        //    new PlayerDataSkills(8, 3, 2, 2, 2, 2, 1, 0),
-                        //    new Reward(),
-                        //    new PlayerDataArmors(2, 2, 1, 1, 1, 1, 1, 0, 0),
-                        //    new PlayerDataWeapons(Weapon.CategoryEnum.Hacking, 2)
-                        //),
-                        //new ParticipantData
-                        //(
-                        //    false,
-                        //    names.GetRandomFullName(),
-                        //    colors.Get(),
-                        //    new PlayerDataExperience(3),
-                        //    new PlayerDataSkills(8, 3, 2, 2, 2, 2, 1, 0),
-                        //    new Reward(),
-                        //    new PlayerDataArmors(2, 2, 1, 1, 1, 1, 1, 0, 0),
-                        //    new PlayerDataWeapons(Weapon.CategoryEnum.Hacking, 2)
-                        //),
-                        //new ParticipantData
-                        //(
-                        //    false,
-                        //    names.GetRandomFullName(),
-                        //    colors.Get(),
-                        //    new PlayerDataExperience(3),
-                        //    new PlayerDataSkills(8, 3, 2, 2, 2, 2, 1, 0),
-                        //    new Reward(),
-                        //    new PlayerDataArmors(2, 2, 1, 1, 1, 1, 1, 0, 0),
-                        //    new PlayerDataWeapons(Weapon.CategoryEnum.Hacking, 2)
-                        //),
-                        //new ParticipantData
-                        //(
-                        //    false,
-                        //    names.GetRandomFullName(),
-                        //    colors.Get(),
-                        //    new PlayerDataExperience(3),
-                        //    new PlayerDataSkills(8, 3, 2, 2, 2, 2, 1, 0),
-                        //    new Reward(),
-                        //    new PlayerDataArmors(2, 2, 1, 1, 1, 1, 1, 0, 0),
-                        //    new PlayerDataWeapons(Weapon.CategoryEnum.Hacking, 2)
-                        //),
+                        new ParticipantData
+                        (
+                            false,
+                            names.GetRandomFullName(),
+                            colors.Get(),
+                            new PlayerDataExperience(3),
+                            new PlayerDataSkills(8, 3, 2, 2, 2, 2, 1, 0),
+                            new Reward(),
+                            new PlayerDataArmors(2, 2, 1, 1, 1, 1, 1, 0, 0),
+                            new PlayerDataWeapons(Weapon.CategoryEnum.Hacking, 2)
+                        ),
+                        new ParticipantData
+                        (
+                            false,
+                            names.GetRandomFullName(),
+                            colors.Get(),
+                            new PlayerDataExperience(3),
+                            new PlayerDataSkills(8, 3, 2, 2, 2, 2, 1, 0),
+                            new Reward(),
+                            new PlayerDataArmors(2, 2, 1, 1, 1, 1, 1, 0, 0),
+                            new PlayerDataWeapons(Weapon.CategoryEnum.Hacking, 2)
+                        ),
+                        new ParticipantData
+                        (
+                            false,
+                            names.GetRandomFullName(),
+                            colors.Get(),
+                            new PlayerDataExperience(3),
+                            new PlayerDataSkills(8, 3, 2, 2, 2, 2, 1, 0),
+                            new Reward(),
+                            new PlayerDataArmors(2, 2, 1, 1, 1, 1, 1, 0, 0),
+                            new PlayerDataWeapons(Weapon.CategoryEnum.Hacking, 2)
+                        ),
+                        new ParticipantData
+                        (
+                            false,
+                            names.GetRandomFullName(),
+                            colors.Get(),
+                            new PlayerDataExperience(3),
+                            new PlayerDataSkills(8, 3, 2, 2, 2, 2, 1, 0),
+                            new Reward(),
+                            new PlayerDataArmors(2, 2, 1, 1, 1, 1, 1, 0, 0),
+                            new PlayerDataWeapons(Weapon.CategoryEnum.Hacking, 2)
+                        ),
+                        new ParticipantData
+                        (
+                            false,
+                            names.GetRandomFullName(),
+                            colors.Get(),
+                            new PlayerDataExperience(3),
+                            new PlayerDataSkills(8, 3, 2, 2, 2, 2, 1, 0),
+                            new Reward(),
+                            new PlayerDataArmors(2, 2, 1, 1, 1, 1, 1, 0, 0),
+                            new PlayerDataWeapons(Weapon.CategoryEnum.Hacking, 2)
+                        ),
                         new ParticipantData
                         (
                             true,

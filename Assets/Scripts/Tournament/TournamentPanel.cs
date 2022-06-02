@@ -22,8 +22,6 @@ namespace SwordsAndSandals.Tournament
 
             _enterToArena.onClick.AddListener(() =>
             new SceneChanger().MoveTo(Enums.Scene.Arena));
-            // BossEnter ui
-            //Participants.Where(p => p.IsAlive).FirstOrDefault()
         }
     }
 }
