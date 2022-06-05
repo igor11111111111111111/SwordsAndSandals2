@@ -7,7 +7,7 @@ namespace SwordsAndSandals
 {
     [Serializable]
     public class Weapon
-    {
+    { 
         public CategoryEnum Category;
         public int ID;
         public string Name;
@@ -16,6 +16,7 @@ namespace SwordsAndSandals
         public int MaxDamage;
         public int RequiredStrength;
         public float CellScale;
+        [JsonIgnore] public Price Price;
 
         public enum CategoryEnum
         {

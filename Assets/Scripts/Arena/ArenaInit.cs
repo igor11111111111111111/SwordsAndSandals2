@@ -15,13 +15,10 @@ namespace SwordsAndSandals.Arena
         [SerializeField] private EndBattlePanel _endBattlePanel;
         [SerializeField] private PlayerInputUI _playerInputUI;
         [SerializeField] private DamageInfo _damageInfo;
-        [SerializeField] private Camera _playerCamera;
-        [SerializeField] private Camera _aiCamera;
-        [SerializeField] private Camera _ourCamera;
-        [SerializeField] private Camera _uiCamera;
-        [SerializeField] private FatalityLogic _fatalityLogic;
+        [SerializeField] private CameraInit _cameraInit;
         [SerializeField] private FatalityPanel _fatalityPanel;
         [SerializeField] private BossEnterPanel _bossEnterPanel;
+        private FatalityLogic _fatalityLogic;
         private SwordsAndSandals.PlayerData _playerData;
         private SwordsAndSandals.PlayerData _aiData;
 
@@ -59,45 +56,45 @@ namespace SwordsAndSandals.Arena
                 }
                 else
                 {
-                    // merge 1 and 2
-                    aiInjector = _playerSpawner.Init// 1
-                        (
-                            _aiData,
-                            new Vector3(5.52f, -14.51f, 0),
-                            15
-                        );
-
-                    _introductionPanel.Init(_playerData, _aiData);
-                    _bossEnterPanel.Show(false);
-
-                    _introductionPanel.OnEnterArena += () => EnterArena(playerInjector, aiInjector);// 1
-                }
-            }
-            else
-            {
-                _aiData = new AllEnemyData().Get(_playerData.DataLevel.Level);
-                aiInjector = _playerSpawner.Init// 2
+                    aiInjector = _playerSpawner.Init
                     (
                         _aiData,
                         new Vector3(5.52f, -14.51f, 0),
                         15
                     );
 
+                    _introductionPanel.Init(_playerData, _aiData);
+                    _bossEnterPanel.Show(false);
+
+                    _introductionPanel.OnEnterArena += () => EnterArena(playerInjector, aiInjector);
+                }
+            }
+            else
+            {
+                _aiData = new AllEnemyData().Get(_playerData.DataLevel.Level);
+
+                aiInjector = _playerSpawner.Init
+                (
+                    _aiData,
+                    new Vector3(5.52f, -14.51f, 0),
+                    15
+                );
+
                 _introductionPanel.Init(_playerData, _aiData);
                 _bossEnterPanel.Show(false);
 
-                _introductionPanel.OnEnterArena += () => EnterArena(playerInjector, aiInjector);// 2
+                _introductionPanel.OnEnterArena += () => EnterArena(playerInjector, aiInjector);
             }
 
             _arenaPanel.Init(_fatalityPanel);
             _endBattlePanel.Init(_fatalityPanel, tournamentDataDontDestroy);
-            _fatalityLogic.Init(playerInjector, aiInjector, _fatalityPrefab, _fatalityPanel, _ourCamera);
+            _fatalityLogic = new FatalityLogic(playerInjector, aiInjector, _fatalityPrefab, _fatalityPanel, _cameraInit.Our);
         }
 
         private void EnterArena(PlayerInjector player, PlayerInjector ai)
         {
             var turnLogic = new TurnLogic();
-            var cameraMover = new CameraMover(_playerCamera, _aiCamera, _ourCamera, _uiCamera, player, ai, turnLogic);
+            var cameraMover = new CameraMover(_cameraInit, player, ai, turnLogic);
 
             new ArenaSetupData(_arenaPanel, player, _playerData, ai, _aiData, turnLogic, cameraMover, _playerInputUI, _damageInfo, _endBattlePanel, _fatalityLogic);
             _arenaPanel.Show(true);

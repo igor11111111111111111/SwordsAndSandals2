@@ -10,7 +10,7 @@ namespace SwordsAndSandals.Arena
         {
 
         }
-
+         
         public void Init(AttackHandler playerAttackHandler)
         {
             // !!!false tournament

@@ -1,8 +1,4 @@
-﻿using CustomJson;
-using SwordsAndSandals.OutScene;
-using SwordsAndSandals.Tournament;
-using System;
-using System.Linq;
+﻿using SwordsAndSandals.Tournament;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -33,7 +29,17 @@ namespace SwordsAndSandals.Arena
 
             Show(false);
 
-            _accept.onClick.AddListener(Accept);
+            _accept.onClick.AddListener(
+                () => new AcceptEndBattlePanel
+                    (
+                        _playerData,
+                        _aiData,
+                        _endBattleInfo.WinningTeam,
+                        _tournamentDataDontDestroy,
+                        _XPData
+                    )
+            );
+
             fatalityPanel.OnClicked += () => 
             { 
                 Show(false);
@@ -52,6 +58,7 @@ namespace SwordsAndSandals.Arena
         private void EndBattle(EndBattleHandler.Info info)
         {
             _endBattleInfo = info;
+            CreateXPData();
 
             if (info.WinningTeam == Enums.Team.Player)
             {
@@ -63,12 +70,8 @@ namespace SwordsAndSandals.Arena
             }
         }
 
-        private async void ShowWinPanel()
+        private void CreateXPData()
         {
-            _aboutCharactersInfo.text = "First blood to " + _playerData.Name + "! " + _aiData.Name + " yields.";
-            _goldInfo.text = _aiData.Reward.Money /*+ crowd apprecation*/ + " gold won."/* + "..% crowd apprecation"*/;
-            _battleXPInfo.text = _aiData.Reward.XP + " xp won for this fight";
-
             _XPData = new XPData
             (
                 _playerData.DataLevel.Level,
@@ -76,6 +79,13 @@ namespace SwordsAndSandals.Arena
                 _aiData.Reward.XP,
                 _playerData.DataLevel.GetXPToNewLevel()
             );
+        }
+
+        private async void ShowWinPanel()
+        {
+            _aboutCharactersInfo.text = "First blood to " + _playerData.Name + "! " + _aiData.Name + " yields.";
+            _goldInfo.text = _aiData.Reward.Money /*+ crowd apprecation*/ + " gold won."/* + "..% crowd apprecation"*/;
+            _battleXPInfo.text = _aiData.Reward.XP + " xp won for this fight";
 
             _percentToNextLevelInfo.text = null;
 
@@ -131,101 +141,7 @@ namespace SwordsAndSandals.Arena
             _body.SetActive(active);
         }
 
-        // remowe out all logic
-        private void Accept()
-        {
-            if (_endBattleInfo.WinningTeam == Enums.Team.Player)
-            {
-                Win();
-            }
-            else
-            {
-                Lose();
-            }
-        }
-
-        private void Win()
-        {
-            _playerData.DataLevel.CurrentXP = _XPData.NewXP;
-            _playerData.Money += _aiData.Reward.Money; // * coeff apprecation
-
-            _XPData.SetNewLevel(_playerData.DataLevel.Level);
-
-            if (_tournamentDataDontDestroy != null)
-            {
-                WinTournament();
-            }
-            else
-            {
-                WinRegularFight();
-            }
-        }
-
-        private void WinTournament()
-        {
-            var aliveParticipants = _tournamentDataDontDestroy.TournamentData.Participants.Where(p => p.IsAlive);
-
-            if (aliveParticipants.Count() == 1)
-            {
-                WinAllTournament();
-            }
-            else
-            {
-                WinTournamentFight();
-            }
-        }
-
-        private void WinAllTournament()
-        {
-            Destroy(_tournamentDataDontDestroy);// move out ui logic
-
-            var tournamentData = new Json().Load<TournamentData>();
-            tournamentData.SetCurrentComplete();
-            new Json().Save(tournamentData);//
-
-            AddSkillPoints();
-            new Json().Save(_playerData);
-            new SceneChanger().MoveTo(Enums.Scene.LevelUp);
-        }
-
-        private void WinTournamentFight()
-        {
-            if (_XPData.NewXP >= _XPData.XPToNewLevel)
-            {
-                AddSkillPoints();
-                new Json().Save(_playerData);
-            }
-
-            _tournamentDataDontDestroy.TournamentData.Participants.Find(ai => ai.PlayerData == _aiData).IsAlive = false;
-            new SceneChanger().MoveTo(Enums.Scene.Tournament);
-        }
-
-        private void WinRegularFight()
-        {
-            if (_XPData.NewXP >= _XPData.XPToNewLevel)
-            {
-                AddSkillPoints();
-                new Json().Save(_playerData);
-                new SceneChanger().MoveTo(Enums.Scene.LevelUp);
-            }
-            else
-            {
-                new Json().Save(_playerData);
-                new SceneChanger().MoveTo(Enums.Scene.Street);
-            }
-        }
-
-        private void Lose()
-        {
-            new SceneChanger().MoveTo(Enums.Scene.Street);
-        }
-
-        private void AddSkillPoints()
-        {
-            _playerData.DataSkills.AddPointsPerLevel(_XPData.GetDeltaLevels());
-        }
-        //
-        private class XPData
+        public class XPData
         {
             public int PlayerXP => _playerXP;
             private int _playerXP;

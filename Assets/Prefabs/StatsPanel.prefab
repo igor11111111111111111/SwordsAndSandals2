@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3802785867176524365}
   - component: {fileID: 3802785867176524354}
   m_Layer: 5
-  m_Name: Text
+  m_Name: CrowdInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,6 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3802785867852921764}
   - component: {fileID: 3802785867852921767}
+  - component: {fileID: 8250765540920692354}
   m_Layer: 5
   m_Name: StatsPanel
   m_TagString: Untagged
@@ -312,6 +313,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &8250765540920692354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802785867852921765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b80d9142d13448c4396fd912ec93f4cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _crowd: {fileID: 3802785868403643442}
+  _crowdInfo: {fileID: 3802785867176524365}
 --- !u!1 &3802785867920151904
 GameObject:
   m_ObjectHideFlags: 0

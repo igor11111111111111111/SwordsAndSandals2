@@ -2,20 +2,19 @@
 
 namespace SwordsAndSandals.Arena
 {
-    public class FatalityLogic : MonoBehaviour
+    public class FatalityLogic
     {
-        public FatalityPanel Panel => _panel;
         private FatalityPanel _panel;
 
-        public void Init(PlayerInjector attacker, PlayerInjector defender, PlayersFatality fatalityPrefab, FatalityPanel fatalityPanel, Camera camera)
+        public FatalityLogic (PlayerInjector attacker, PlayerInjector defender, PlayersFatality fatalityPrefab, FatalityPanel fatalityPanel, Camera camera)
         {
             _panel = fatalityPanel;
-            _panel.Init();
+            _panel.Init(); 
 
             _panel.OnClicked += () =>
             {
                 // затемнение экрана ит д 
-                var fatality = Instantiate(fatalityPrefab);
+                var fatality = Object.Instantiate(fatalityPrefab);
                 fatality.Init(attacker, defender, camera);
             };
         }

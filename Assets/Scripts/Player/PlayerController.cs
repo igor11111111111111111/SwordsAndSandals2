@@ -39,15 +39,15 @@ namespace SwordsAndSandals
             _data = data;
             _animationClips = animationClips;
 
-            input.Actions[0] += Button0;
-            input.Actions[1] += Button1;
-            input.Actions[2] += Button2;
-            input.Actions[3] += Button3;
-            input.Actions[4] += Button4;
-            input.Actions[5] += Button5;
-            input.Actions[6] += Button6;
-            input.Actions[7] += Button7;
-            input.Actions[8] += Button8;
+            input.Actions[0] += JumpLeft;
+            input.Actions[1] += MoveLeft;
+            input.Actions[2] += PunchOrRage;
+            input.Actions[3] += Sleep;
+            input.Actions[4] += Dance;
+            input.Actions[5] += RightJumpOrHardAttack;
+            input.Actions[6] += RightMoveOrMediumAttack;
+            input.Actions[7] += ChargeOrWeakAttack;
+            input.Actions[8] += SuperAttack;
 
             input.OnInBattle += (b) =>
             {
@@ -67,21 +67,37 @@ namespace SwordsAndSandals
             OnInBattle?.Invoke(true);
         }
 
-        private void Button0()
+        public void Init(RageLogic rageLogic)
+        {
+            rageLogic.OnAction += (team) =>
+            {
+                if (_data.Team == team)
+                    return;
+
+                OnTakeDamage?.Invoke(Enums.AttackType.Yell);
+
+                //ChargeOrWeakAttack();
+                //Move()
+                //... etc
+                // dont work correct, cose turn logic show PlayerInputPanel and Player can use 2 action per 1 time
+            };
+        }
+
+        private void JumpLeft()
         {
             _currentState = Enums.CurrentState.Jump;
             OnStartAction?.Invoke(_currentState);
             OnJump?.Invoke(Enums.Direction.Left);
         }
 
-        private void Button1()
+        private void MoveLeft()
         {
             _currentState = Enums.CurrentState.Move;
             OnStartAction?.Invoke(_currentState);
             OnMove?.Invoke(Enums.Direction.Left);
         }
         
-        private async void Button2()
+        private async void PunchOrRage()
         {
             if (_data.InBattle)
             {
@@ -100,7 +116,7 @@ namespace SwordsAndSandals
             OnEndAction?.Invoke();
         }
 
-        private async void Button3()
+        private async void Sleep()
         {
             _currentState = Enums.CurrentState.Sleep;
             OnStartAction?.Invoke(_currentState);
@@ -110,7 +126,7 @@ namespace SwordsAndSandals
             OnEndAction?.Invoke();
         }
 
-        private async void Button4()
+        private async void Dance()
         {
             _currentState = Enums.CurrentState.Dance;
             OnStartAction?.Invoke(_currentState);
@@ -120,7 +136,7 @@ namespace SwordsAndSandals
             OnEndAction?.Invoke();
         }
 
-        private async void Button5()
+        private async void RightJumpOrHardAttack()
         {
             if (_data.InBattle)
             {
@@ -139,7 +155,7 @@ namespace SwordsAndSandals
             }
         }
 
-        private async void Button6()
+        private async void RightMoveOrMediumAttack()
         {
             if (_data.InBattle)
             {
@@ -158,7 +174,7 @@ namespace SwordsAndSandals
             }
         }
 
-        private async void Button7()
+        private async void ChargeOrWeakAttack()
         {
             if (_data.InBattle)
             {
@@ -177,7 +193,7 @@ namespace SwordsAndSandals
             OnEndAction?.Invoke();
         }
 
-        private async void Button8()
+        private async void SuperAttack()
         {
             if(_currentState == Enums.CurrentState.SuperAttack1)
             {

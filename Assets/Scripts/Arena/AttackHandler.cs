@@ -32,10 +32,13 @@ namespace SwordsAndSandals.Arena
             _playerArenaData = playerArenaData;
             _arenaHandler = arenaHandler;
 
-            _player.Controller.OnAttack += Attack;
+            _player.Controller.OnAttack += (attackType) => // fix later
+            {
+                _enemy.Controller.OnTakeDamage?.Invoke(attackType);
+            };//
             _player.Controller.OnTakeDamage += TakeDamage;
         }
-
+         
         public void Init(AttackHandler enemyAttackHandler)
         {
             enemyAttackHandler.OnLose += () => OnWin?.Invoke();
@@ -46,40 +49,14 @@ namespace SwordsAndSandals.Arena
             OnLose?.Invoke();
         }
 
-        private void Attack(Enums.AttackType attackType)
-        {
-            _enemy.Controller.OnTakeDamage?.Invoke(attackType);
-        }
-
         private void TakeDamage(Enums.AttackType attackType)
         {
             if (attackType == Enums.AttackType.Charge && Mathf.Abs(_arenaHandler.GetDistance()) > 3.5f)
                 return;
 
-            if (Hit(attackType))
+            if (CanHit(attackType))
             {
-                var weaponDamage = _enemy.Data.DataWeapons.Current.GetRandMinMaxDamage();
-
-                var fullDamage = Mathf.RoundToInt(weaponDamage * _attackTypeCoeff[attackType] * _player.Data.DataSkills.Get<Strength>().DamageCoeff);
-
-                if (_playerArenaData.ArmorData.Current <= fullDamage)
-                {
-                    fullDamage -= _playerArenaData.ArmorData.Current;
-                    _playerArenaData.ArmorData.Current = 0;
-                    _playerArenaData.HealthData.Current -= fullDamage;
-                }
-                else
-                {
-                    _playerArenaData.ArmorData.Current -= fullDamage;
-                }
-
-                if(_playerArenaData.HealthData.Current == 0)
-                {
-                    OnLose?.Invoke();
-                    return; 
-                }
-
-                OnTakeDamage?.Invoke(fullDamage, _player.transform.position);
+                Attack(attackType);
             }
             else
             {
@@ -87,10 +64,64 @@ namespace SwordsAndSandals.Arena
             }
         }
 
-        private bool Hit(Enums.AttackType attackType)
+        private void Attack(Enums.AttackType attackType)
         {
-            var enemyAttackChance = _enemy.Data.DataSkills.Get<Attack>().GetHitChance(attackType);
-            var playerDefenceChance = _player.Data.DataSkills.Get<Defence>().GetDefenceChance(attackType);
+            var damage = GetDamage(attackType);
+
+            if (_playerArenaData.ArmorData.Current <= damage)
+            {
+                damage -= _playerArenaData.ArmorData.Current;
+                _playerArenaData.ArmorData.Current = 0;
+                _playerArenaData.HealthData.Current -= damage;
+            }
+            else
+            {
+                _playerArenaData.ArmorData.Current -= damage;
+            }
+
+            if (_playerArenaData.HealthData.Current == 0)
+            {
+                OnLose?.Invoke();
+                return;
+            }
+
+            OnTakeDamage?.Invoke(damage, _player.transform.position);
+        }
+
+        private int GetDamage(Enums.AttackType attackType)
+        {
+            int fullDamage = 0;
+
+            if (attackType == Enums.AttackType.Yell)
+            {
+                fullDamage = _enemy.Data.DataSkills.Get<Charisma>().GetDamage();
+            }
+            else
+            {
+                var weaponDamage = _enemy.Data.DataWeapons.Current.GetRandMinMaxDamage();
+
+                fullDamage = Mathf.RoundToInt(weaponDamage * _attackTypeCoeff[attackType] * _enemy.Data.DataSkills.Get<Strength>().DamageCoeff);
+            }
+
+            return fullDamage;
+        }
+
+        private bool CanHit(Enums.AttackType attackType)
+        {
+            int enemyAttackChance = 0;
+            int playerDefenceChance = 0;
+
+            if (attackType == Enums.AttackType.Yell)
+            {
+                enemyAttackChance = _enemy.Data.DataSkills.Get<Charisma>().GetHitChance();
+                playerDefenceChance = _player.Data.DataSkills.Get<Charisma>().GetDefenceChance();
+            }
+            else
+            {
+                enemyAttackChance = _enemy.Data.DataSkills.Get<Attack>().GetHitChance(attackType);
+                playerDefenceChance = _player.Data.DataSkills.Get<Defence>().GetDefenceChance(attackType);
+            }
+
             var totalChance = Mathf.Clamp(enemyAttackChance - playerDefenceChance, 1, 99);
             var randomChance = UnityEngine.Random.Range(0, 101);
 

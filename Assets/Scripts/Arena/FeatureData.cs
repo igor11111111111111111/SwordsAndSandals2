@@ -14,11 +14,7 @@ namespace SwordsAndSandals.Arena
             }
             set
             {
-                _current = value;
-                if (_current <= 0)
-                    _current = 0;
-                else if (_current > _max)
-                    _current = _max;
+                _current = Mathf.Clamp(value, 0, _max);
                 OnValueChanged?.Invoke(_current, _max);
             }
         }
@@ -59,6 +55,6 @@ namespace SwordsAndSandals.Arena
         public StaminaData(Skill skill)
         {
             _current = _max = _baseValue + skill.Value * _valuePerPoint;
-        }
+        } 
     }
 }

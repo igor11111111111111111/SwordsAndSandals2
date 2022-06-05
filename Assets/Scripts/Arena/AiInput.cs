@@ -10,12 +10,13 @@ namespace SwordsAndSandals.Arena
         private ArenaHandler _arenaHandler;
         private PlayerInjector _injector;
         private PlayerRotator _playerRotator;
+        private PlayerData _playerData;
 
-        public void Init(PlayerInjector aiInjector, TurnLogic turnLogic, ArenaHandler arenaHandler)
+        public void Init(PlayerInjector aiInjector, TurnLogic turnLogic, ArenaHandler arenaHandler, PlayerData playerData)
         { 
             _injector = aiInjector;
             _arenaHandler = arenaHandler;
-
+            _playerData = playerData;
             _playerRotator = new PlayerRotator(_injector, _arenaHandler);
 
             Actions = new Action[9];
@@ -32,7 +33,14 @@ namespace SwordsAndSandals.Arena
 
             _playerRotator.CheckRotation();
 
-            Actions[4/*UnityEngine.Random.Range(0, 9)*/]?.Invoke();
+            if (_playerData.StaminaData.Current <= 16)
+            {
+                Actions[3]?.Invoke();
+            }
+            else
+            {
+                Actions[4/*UnityEngine.Random.Range(0, 9)*/]?.Invoke();
+            }
         }
     }
 }

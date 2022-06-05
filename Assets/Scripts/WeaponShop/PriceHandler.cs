@@ -21,10 +21,10 @@ namespace SwordsAndSandals.WeaponShop
 
         public void ClickedAcceptPrice(Weapon weapon)
         {
-            var cost = weapon.Cost; // - discont etc
-            if (_playerData.Money >= cost)
+            var price = weapon.Price.Final;
+            if (_playerData.Money >= price)
             {
-                _playerData.Money -= cost;
+                _playerData.Money -= price;
                 _playerData.DataWeapons.Set(weapon);
                 _clothChanger.Set(weapon);
 

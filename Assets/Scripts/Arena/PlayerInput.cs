@@ -11,12 +11,14 @@ namespace SwordsAndSandals.Arena
         private PlayerRotator _playerRotator;
         private ArenaHandler _arenaHandler;
         private PlayerInputUI _playerInputUI;
-         
-        public PlayerInput(PlayerInjector injector, TurnLogic turnLogic, ArenaHandler arenaHandler, PlayerInputUI playerInputUI)
+        private PlayerData _playerData;
+
+        public PlayerInput(PlayerInjector injector, TurnLogic turnLogic, ArenaHandler arenaHandler, PlayerInputUI playerInputUI, PlayerData playerData)
         {
             _injector = injector;
             _arenaHandler = arenaHandler;
             _playerInputUI = playerInputUI;
+            _playerData = playerData;
             _playerRotator = new PlayerRotator(_injector, _arenaHandler);
 
             Actions = new Action[9];
@@ -41,6 +43,11 @@ namespace SwordsAndSandals.Arena
             OnInBattle?.Invoke(_arenaHandler.InBattleDistance());
 
             _playerRotator.CheckRotation();
+
+            if(_playerData.StaminaData.Current <= 16)
+            {
+                Actions[3]?.Invoke();
+            }
         }
     }
 }

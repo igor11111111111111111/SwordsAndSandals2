@@ -17,8 +17,8 @@ namespace SwordsAndSandals.Tournament
         {
             _name.text = data.Name;
             _info.text = data.Info;
-            _icon.sprite = Resources.Load<Sprite>(data.IconPath);
-            _locationInfo.text = "This tournament is being held in the " + Resources.Load<Sprite>(data.LocationPath).name;
+            _icon.sprite = Resources.LoadAll<Sprite>("ArenaIcons")[data.IconIndex];
+            _locationInfo.text = "This tournament is being held in the " + data.LocationPath;
 
             _enterToArena.onClick.AddListener(() =>
             new SceneChanger().MoveTo(Enums.Scene.Arena));

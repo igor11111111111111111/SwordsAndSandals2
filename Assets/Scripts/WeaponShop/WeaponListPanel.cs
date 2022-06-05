@@ -64,6 +64,11 @@ namespace SwordsAndSandals.WeaponShop
             else
             {
                 _body.SetActive(false);
+
+                var charismaDiscount = _playerData.DataSkills.Get<Charisma>().GetDiscount();
+                var tradeInDiscount = (int)(_playerData.DataWeapons.Current.Cost / 10f);
+                weapon.Price = new Price(weapon.Cost, charismaDiscount, tradeInDiscount);
+
                 _armorPricePanel.Show(weapon);
             }
         }

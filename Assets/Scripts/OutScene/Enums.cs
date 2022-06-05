@@ -31,7 +31,8 @@
             Charge = 0,
             WeakAttack = 1,
             MediumAttack = 2,
-            HardAttack = 3
+            HardAttack = 3,
+            Yell = 4
         }
 
         public enum SuperAttackState

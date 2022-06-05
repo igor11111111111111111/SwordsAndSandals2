@@ -21,13 +21,13 @@ namespace SwordsAndSandals.ArmorShop
 
         public void ClickedAcceptPrice(Armor armor)
         {
-            var cost = armor.Cost; // - discont etc
-            if (_playerData.Money >= cost)
+            var price = armor.Price.Final;
+            if (_playerData.Money >= price)
             {
-                _playerData.Money -= cost;
+                _playerData.Money -= price;
                 _playerData.DataArmors.Set(armor);
                 _clothChanger.Set(armor);
-
+                 
                 OnAcceptPrice?.Invoke();
             }
             else

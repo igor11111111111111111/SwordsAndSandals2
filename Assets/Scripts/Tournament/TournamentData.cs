@@ -8,18 +8,18 @@ namespace SwordsAndSandals.Tournament
         private string _name;
         public string Info => _info;
         private string _info;
-        public string IconPath => _iconPath;
-        private string _iconPath;
+        public int IconIndex => _iconIndex;
+        private int _iconIndex; 
         public string LocationPath => _locationPath;
         private string _locationPath;
         public List<ParticipantData> Participants => _participants;
         private List<ParticipantData> _participants;
 
-        public TournamentData(string name, string info, string iconPath, string locationPath, List<ParticipantData> participants)
+        public TournamentData(string name, string info, int iconIndex, string locationPath, List<ParticipantData> participants)
         {
             _name = name;
             _info = info;
-            _iconPath = iconPath;
+            _iconIndex = iconIndex;
             _locationPath = locationPath;
             _participants = participants;
         }

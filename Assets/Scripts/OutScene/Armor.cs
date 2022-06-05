@@ -15,12 +15,7 @@ namespace SwordsAndSandals
         public int Defence;
         public int RequiredLevel;
         public float CellScale;
-        //[JsonIgnore] public bool IsHavePair => 
-        //    Category == CategoryEnum.Boot ||
-        //    Category == CategoryEnum.Gaiter ||
-        //    Category == CategoryEnum.Leggin ||
-        //    Category == CategoryEnum.Mitten ||
-        //    Category == CategoryEnum.Pauldron;
+        [JsonIgnore] public Price Price;
 
         public enum CategoryEnum
         {

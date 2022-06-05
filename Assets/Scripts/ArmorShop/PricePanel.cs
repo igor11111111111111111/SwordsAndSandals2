@@ -42,16 +42,15 @@ namespace SwordsAndSandals.ArmorShop
             _body.SetActive(true);
             _name.text = armor.Name;
 
+            var price = armor.Price;
             _info.text = null;
             //4 % extra charge distance
             _info.text += "Adds " + armor.Defence + " to your armour";
             _info.text += "\n Required gladiator level " + armor.RequiredLevel;
-            _info.text += "\n Original armour cost: " + armor.Cost + " gold";
-
-            //Charisma discount: 365 gold
-            //Trade~in discount: 270 gold
-
-            //Final armour cost: 133 gold
+            _info.text += "\n Original armour cost: " + price.Original + " gold";
+            _info.text += "\n Charisma discount : " + price.CharismaDiscount + " gold" + "(" + price.CharismaPercentDiscount + "%)";
+            _info.text += "\n Trade~in discount: " + price.TradeInDiscount + " gold";
+            _info.text += "\n \n Final armour cost: " + price.Final + " gold";
         }
     }
 }

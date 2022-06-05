@@ -71,7 +71,7 @@ namespace SwordsAndSandals
         public Dictionary<Enums.AttackType, int> ValueChance;
 
         public Attack()
-        {
+        { 
             Init();
         }
 
@@ -150,14 +150,42 @@ namespace SwordsAndSandals
         }
     }
 
-    public class Charisma : Skill
+    public class Charisma : Skill 
     {
+        private int _baseHitChance = 25;
+        private int _baseDefChance = 0;
+        private int _perValueChance = 7;
+        private int _baseDamage = 5;
+        private int _perValueDamage = 5;
+        private int _baseDiscount = 0;
+        private int _perValueDiscount = 1;
+
         public Charisma()
         {
         }
 
         public Charisma(int value) : base(value)
         {
+        }
+
+        public int GetHitChance() 
+        {
+            return _baseHitChance + Value * _perValueChance;
+        }
+
+        public int GetDefenceChance()
+        {
+            return _baseDefChance + Value * _perValueChance;
+        }
+
+        public int GetDamage()
+        {
+            return _baseDamage + Value * _perValueDamage;
+        }
+
+        public int GetDiscount()
+        {
+            return _baseDiscount + Value * _perValueDiscount;
         }
     }
 

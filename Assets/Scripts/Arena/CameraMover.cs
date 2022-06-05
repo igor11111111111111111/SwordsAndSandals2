@@ -20,12 +20,12 @@ namespace SwordsAndSandals.Arena
         private float _speed = 0.1f;
         private Enums.Team _oldTeam;
 
-        public CameraMover(Camera playerCamera, Camera aiCamera, Camera ourCamera, Camera uiCamera, PlayerInjector playerInjector, PlayerInjector aiInjector, TurnLogic turnLogic)
+        public CameraMover(CameraInit cameraInit, PlayerInjector playerInjector, PlayerInjector aiInjector, TurnLogic turnLogic)
         {
-            _playerCamera = playerCamera;
-            _aiCamera = aiCamera;
-            _ourCamera = ourCamera;
-            _uiCamera = uiCamera;
+            _playerCamera = cameraInit.Player;
+            _aiCamera = cameraInit.Ai;
+            _ourCamera = cameraInit.Our;
+            _uiCamera = cameraInit.Ui;
             _playerInjector = playerInjector;
             _aiInjector = aiInjector;
             _turnLogic = turnLogic;

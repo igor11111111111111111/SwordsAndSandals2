@@ -53,7 +53,7 @@ namespace SwordsAndSandals.Arena
         {
             _arenaPlayerData = new PlayerData(_playerData, _playerInjector, Enums.Direction.Left);
             _playerInputUI.Init(_playerInjector, _turnLogic);
-            PlayerInput input = new PlayerInput(_playerInjector, _turnLogic, _arenaHandler, _playerInputUI);
+            PlayerInput input = new PlayerInput(_playerInjector, _turnLogic, _arenaHandler, _playerInputUI, _arenaPlayerData);
 
             _playerInjector.Init(input);
             _playerAttackHandler = new AttackHandler(_arenaPlayerData, _playerInjector, _aiInjector, _arenaHandler);
@@ -69,7 +69,7 @@ namespace SwordsAndSandals.Arena
         {
             _arenaAiData = new PlayerData(_aiData, _aiInjector, Enums.Direction.Right);
             var aiInput = new AiInput();
-            aiInput.Init(_aiInjector, _turnLogic, _arenaHandler);
+            aiInput.Init(_aiInjector, _turnLogic, _arenaHandler, _arenaAiData);
             _aiInjector.Init(aiInput);
 
             _aiAttackHandler = new AttackHandler(_arenaAiData, _aiInjector, _playerInjector, _arenaHandler);
@@ -86,7 +86,12 @@ namespace SwordsAndSandals.Arena
             _aiAttackHandler.Init(_playerAttackHandler);
             _endBattleHandler.Init(_playerAttackHandler);
             _turnLogic.Init(_playerInjector, _aiInjector, _endBattleHandler);
-            _arenaPanel.Init(_arenaPlayerData, _arenaAiData);
+
+            var audienceMoodData = new AudienceMoodData();
+            new AudienceMoodLogic(_playerInjector.Controller, _aiInjector.Controller, audienceMoodData);
+            new RageLogic(_playerInjector, _aiInjector);
+
+            _arenaPanel.Init(_arenaPlayerData, _arenaAiData, audienceMoodData);
             _cameraMover.Init(_arenaHandler);
             _endBattlePanel.Init(_playerData, _aiData, _endBattleHandler);
             _fatalityLogic.Init(_endBattleHandler);
