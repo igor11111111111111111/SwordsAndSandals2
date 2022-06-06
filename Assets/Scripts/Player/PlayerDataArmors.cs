@@ -5,7 +5,7 @@ using UnityEngine;
 namespace SwordsAndSandals
 {
     [Serializable]
-    public class PlayerDataArmors
+    public class PlayerDataArmors : IPlayerData
     {
         public Armor[] Array;
           

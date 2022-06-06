@@ -1,6 +1,7 @@
-﻿using System;
+﻿using SwordsAndSandals.ArmorShop;
+using System;
 
-namespace SwordsAndSandals.ArmorShop
+namespace SwordsAndSandals.Shop
 {
     public class PriceHandler
     {
@@ -19,14 +20,14 @@ namespace SwordsAndSandals.ArmorShop
             armorPricePanel.OnClickAccept += ClickedAcceptPrice;
         }
 
-        public void ClickedAcceptPrice(Armor armor)
+        public void ClickedAcceptPrice(IData data)
         {
-            var price = armor.Price.Final;
+            var price = data.Price.Final;
             if (_playerData.Money >= price)
             {
                 _playerData.Money -= price;
-                _playerData.DataArmors.Set(armor);
-                _clothChanger.Set(armor);
+                _playerData.Set(data);
+                _clothChanger.Set(data);
                  
                 OnAcceptPrice?.Invoke();
             }

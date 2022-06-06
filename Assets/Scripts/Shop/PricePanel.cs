@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SwordsAndSandals.Shop;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace SwordsAndSandals.ArmorShop
+namespace SwordsAndSandals.Shop
 {
     public class PricePanel : MonoBehaviour
     {
@@ -14,15 +15,15 @@ namespace SwordsAndSandals.ArmorShop
         [SerializeField] private Button _accept;
         [SerializeField] private Button _deny;
 
-        public Action<Armor> OnClickAccept;
+        public Action<IData> OnClickAccept;
 
-        private Armor _armor;
+        private IData _data;
 
         public void Init(UnityAction onClickDeny)
         {
             _body.SetActive(false);
 
-            _accept.onClick.AddListener(() => OnClickAccept(_armor));
+            _accept.onClick.AddListener(() => OnClickAccept(_data));
 
             _deny.onClick.AddListener(onClickDeny);
             _deny.onClick.AddListener(() =>
@@ -36,17 +37,22 @@ namespace SwordsAndSandals.ArmorShop
             armorPriceHandler.OnAcceptPrice += () => _body.SetActive(false);
         }
 
-        public void Show(Armor armor)
+        public void Show(IData data)
         {
-            _armor = armor;
+            _data = data;
             _body.SetActive(true);
-            _name.text = armor.Name;
+            _name.text = data.Name;
 
-            var price = armor.Price;
+            var price = data.Price;
             _info.text = null;
             //4 % extra charge distance
-            _info.text += "Adds " + armor.Defence + " to your armour";
-            _info.text += "\n Required gladiator level " + armor.RequiredLevel;
+
+            //_info.text += "Adds " + data.Defence + " to your armour";
+            //_info.text += "\n Required gladiator level " + data.RequiredLevel;
+
+            //_info.text += weapon.MinDamage + " - " + weapon.MaxDamage + " Damage";
+            //_info.text += "\n Required gladiator strength " + weapon.RequiredStrength;
+
             _info.text += "\n Original armour cost: " + price.Original + " gold";
             _info.text += "\n Charisma discount : " + price.CharismaDiscount + " gold" + "(" + price.CharismaPercentDiscount + "%)";
             _info.text += "\n Trade~in discount: " + price.TradeInDiscount + " gold";

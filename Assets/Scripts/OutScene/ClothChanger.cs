@@ -48,6 +48,14 @@ namespace SwordsAndSandals
             Set(weapon);
         }
 
+        public void Set(IData data)
+        {
+            if (data is Armor)
+            {
+                Set(data as Armor);
+            }
+        }
+
         public void Set(Weapon weapon)
         {
             var path = "Weapon/" + weapon.Category.ToString();

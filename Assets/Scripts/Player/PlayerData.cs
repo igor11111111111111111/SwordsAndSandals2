@@ -47,5 +47,17 @@ namespace SwordsAndSandals
             Reward = reward;
             Team = Enums.Team.AI;
         }
+
+        public void Set(IData data)// fix
+        {
+            if(data is Armor)
+            {
+                DataArmors.Set(data as Armor);
+            }
+            else if(data is Weapon)
+            {
+                DataWeapons.Set(data as Weapon);
+            }
+        }//
     }
 }

@@ -800,7 +800,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 521973204}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25feedf69e95d9c4c9241304aefe08ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d8a5781ae22e9d4fb591cf1a7e4b45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 2093521021}
@@ -1545,7 +1545,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 943393251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec3f6272f6c9cda44826e8ede33b90ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 901e60aaaf98ac242b23343aeb2c25d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _armorButtonsPanel: {fileID: 364779074}
@@ -2414,13 +2414,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1297025996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64ed9e271dcf11a428ca2a9527140f92, type: 3}
+  m_Script: {fileID: 11500000, guid: b37e29cdfeb26034d92783501c10c58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 198631191}
-  _armorCell: {fileID: 1218182519637744196, guid: b11678357c0b7ad4d975acdeb175857d, type: 3}
+  _cell: {fileID: 676941294777024646, guid: aa36480e3ef9b364dbc0c3596f9bbf43, type: 3}
   _content: {fileID: 57287513}
-  _armorPricePanel: {fileID: 521973206}
+  _pricePanel: {fileID: 521973206}
   _deny: {fileID: 531274860}
 --- !u!1 &1348469730
 GameObject:
@@ -2766,7 +2766,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1730660993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a792f235bfab5ec42a3308582e5d7292, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a817617b9b06a74e9107ead155dd142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 605635667}

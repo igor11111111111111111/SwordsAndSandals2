@@ -1,7 +1,8 @@
-﻿using TMPro;
+﻿using SwordsAndSandals.Shop;
+using TMPro;
 using UnityEngine;
 
-namespace SwordsAndSandals.ArmorShop
+namespace SwordsAndSandals.Shop
 {
     public class SellerMessage : MonoBehaviour
     {
@@ -9,16 +10,21 @@ namespace SwordsAndSandals.ArmorShop
         [SerializeField] private TextMeshProUGUI _text;
         private float _infoTime = 2f;
 
-        public void Init(ArmorListPanel armorListPanel, PriceHandler armorPriceHandler)
+        public void Init(DataListPanel dataListPanel, PriceHandler priceHandler)
         {
             _body.SetActive(false);
 
-            armorListPanel.OnRequiredLevel += (level) =>
+            dataListPanel.OnRequiredLevel += (level) =>
             {
                 Message(36, "Need " + level + " level");
             };
 
-            armorPriceHandler.OnRejectPrice += () =>
+            dataListPanel.OnRequiredStrength += (strength) =>
+            {
+                Message(36, "Need " + strength + " strength");
+            };
+
+            priceHandler.OnRejectPrice += () =>
             {
                 Message(22, "Pay or get lost, don't scratch my eyes with your presence");
             };

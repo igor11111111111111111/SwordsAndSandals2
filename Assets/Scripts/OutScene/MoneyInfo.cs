@@ -1,4 +1,4 @@
-﻿
+﻿using SwordsAndSandals.Shop;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,8 +12,8 @@ namespace SwordsAndSandals.OutScene
         {
             _text.text = money.ToString();
         }
-        // fix later: merge 2 init betw ArmorShop & WeaponShop
-        public void Init(PlayerData playerData, ArmorShop.PriceHandler armorPriceHandler)
+
+        public void Init(PlayerData playerData, PriceHandler armorPriceHandler)
         {
             _text.text = playerData.Money.ToString();
 
@@ -22,17 +22,6 @@ namespace SwordsAndSandals.OutScene
                 _text.text = playerData.Money.ToString();
             };
         }
-
-        public void Init(PlayerData playerData, WeaponShop.PriceHandler armorPriceHandler)
-        {
-            _text.text = playerData.Money.ToString();
-
-            armorPriceHandler.OnAcceptPrice += () =>
-            {
-                _text.text = playerData.Money.ToString();
-            };
-        }
-        //
     }
 }
 

@@ -3574,9 +3574,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 198631191}
-  _armorCell: {fileID: 676941294777024646, guid: aa36480e3ef9b364dbc0c3596f9bbf43, type: 3}
+  _cell: {fileID: 676941294777024646, guid: aa36480e3ef9b364dbc0c3596f9bbf43, type: 3}
   _content: {fileID: 57287513}
-  _armorPricePanel: {fileID: 521973206}
+  _pricePanel: {fileID: 521973206}
   _deny: {fileID: 531274860}
 --- !u!1 &1348213002
 GameObject:

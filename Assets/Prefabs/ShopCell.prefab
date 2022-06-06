@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 8438058093334624493}
   - component: {fileID: 676941294777024646}
   m_Layer: 5
-  m_Name: ArmorCell
+  m_Name: ShopCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

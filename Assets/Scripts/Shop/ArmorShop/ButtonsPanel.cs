@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using SwordsAndSandals.Shop;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace SwordsAndSandals.ArmorShop
 {
-    public class ButtonsPanel : MonoBehaviour
+    public class ButtonsPanel : AbstractButtonsPanel
     {
-        public GameObject Body => _body;
+        public override GameObject Body => _body;
         [SerializeField] private GameObject _body;
-        [SerializeField] private ArmorListPanel _armorListPanel;
+        [SerializeField] private DataListPanel _armorListPanel;
         [SerializeField] private SellerMessage _sellerMessage;
 
         [SerializeField] private Button _helmet;
@@ -24,7 +25,7 @@ namespace SwordsAndSandals.ArmorShop
 
         private AllArmorData _allArmorData = new AllArmorData();
 
-        public void Init(PlayerData playerData, PriceHandler armorPriceHandler)
+        public override void Init(PlayerData playerData, PriceHandler armorPriceHandler)
         {
             _sellerMessage.Init(_armorListPanel, armorPriceHandler);
             _armorListPanel.Init(playerData, () => _body.SetActive(true));
@@ -58,7 +59,8 @@ namespace SwordsAndSandals.ArmorShop
             _body.SetActive(false);
 
             List<Armor> armors = _allArmorData.Get(category);
-            _armorListPanel.Show(armors);
+            List<IData> datas = armors.Select(a => a as IData).ToList();
+            _armorListPanel.Show(datas);
         }
     }
 }

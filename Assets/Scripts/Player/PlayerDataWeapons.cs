@@ -5,7 +5,7 @@ using static SwordsAndSandals.Weapon;
 namespace SwordsAndSandals
 {
     [Serializable]
-    public class PlayerDataWeapons
+    public class PlayerDataWeapons : IPlayerData
     {
         public Weapon Current;
 

@@ -6,16 +6,17 @@ using UnityEngine;
 namespace SwordsAndSandals
 {
     [Serializable]
-    public class Armor 
+    public class Armor : IData
     {
-        public CategoryEnum Category;
+        [JsonIgnore] public CategoryEnum Category;
         public int ID;
-        public string Name;
-        public int Cost;
-        public int Defence;
-        public int RequiredLevel;
-        public float CellScale;
-        [JsonIgnore] public Price Price;
+        int IData.ID { get => ID; set => ID = value; }
+        [JsonIgnore] public string Name { get; set; }
+        [JsonIgnore] public int Cost { get; set; }
+        [JsonIgnore] public int Defence;
+        [JsonIgnore] public int RequiredLevel;
+        [JsonIgnore] public float CellScale { get; set; }
+        [JsonIgnore] public Price Price { get; set; }
 
         public enum CategoryEnum
         {
