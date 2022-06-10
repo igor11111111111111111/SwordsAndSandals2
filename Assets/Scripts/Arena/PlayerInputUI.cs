@@ -13,7 +13,7 @@ namespace SwordsAndSandals.Arena
         private List<ActionIcon> _actionIcons;
         private PlayerController _controller;
         private PlayerInjector _injector;
-
+         
         public void Init(PlayerInjector injector, TurnLogic turnLogic)
         {
             _injector = injector;
@@ -50,16 +50,6 @@ namespace SwordsAndSandals.Arena
                 return;
 
             SetBodyActive(true);
-            MoveBody();
-        }
-
-        private void MoveBody()
-        {
-            if (_injector == null)
-                return;
-
-            Vector3 offset = new Vector3(0, 3.5f, -2);
-            _body.transform.position = _injector.transform.position + offset;
         }
 
         private void SetBodyActive(bool active)

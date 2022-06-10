@@ -87,16 +87,6 @@ namespace SwordsAndSandals.Arena
 
         private void SetOurCamera(bool active)
         {
-            if (active)
-            {
-                _uiCamera.transform.SetParent(_ourCamera.transform);
-                _uiCamera.transform.localPosition = new Vector3(0, 0, -2);
-            }
-            else
-            {
-                _uiCamera.transform.SetParent(_playerCamera.transform);
-            }
-
             _ourCamera.gameObject.SetActive(active);
             _playerCamera.gameObject.SetActive(!active);
             _aiCamera.gameObject.SetActive(!active);

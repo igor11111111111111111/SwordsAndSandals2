@@ -22,7 +22,7 @@ namespace SwordsAndSandals.Arena
         private EndBattlePanel _endBattlePanel;
         private FatalityLogic _fatalityLogic;
         private EndBattleHandler _endBattleHandler;
-
+         
         public ArenaSetupData(ArenaPanel arenaPanel, PlayerInjector playerInjector, SwordsAndSandals.PlayerData playerData, PlayerInjector aiInjector, SwordsAndSandals.PlayerData aiData, TurnLogic turnLogic, CameraMover cameraMover, PlayerInputUI playerInputUI, DamageInfo damageInfo, EndBattlePanel endBattlePanel, FatalityLogic fatalityLogic)
         {
             _arenaPanel = arenaPanel; 

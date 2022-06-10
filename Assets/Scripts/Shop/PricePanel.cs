@@ -45,13 +45,19 @@ namespace SwordsAndSandals.Shop
 
             var price = data.Price;
             _info.text = null;
-            //4 % extra charge distance
 
-            //_info.text += "Adds " + data.Defence + " to your armour";
-            //_info.text += "\n Required gladiator level " + data.RequiredLevel;
+            //4 % extra charge distance etc bonuses
 
-            //_info.text += weapon.MinDamage + " - " + weapon.MaxDamage + " Damage";
-            //_info.text += "\n Required gladiator strength " + weapon.RequiredStrength;
+            if(data is Weapon)
+            {
+                _info.text += (data as Weapon).MinDamage + " - " + (data as Weapon).MaxDamage + " Damage";
+                _info.text += "\n Required gladiator strength " + (data as Weapon).RequiredStrength;
+            }
+            if (data is Armor)
+            {
+                _info.text += "Adds " + (data as Armor).Defence + " to your armour";
+                _info.text += "\n Required gladiator level " + (data as Armor).RequiredLevel;
+            }
 
             _info.text += "\n Original armour cost: " + price.Original + " gold";
             _info.text += "\n Charisma discount : " + price.CharismaDiscount + " gold" + "(" + price.CharismaPercentDiscount + "%)";

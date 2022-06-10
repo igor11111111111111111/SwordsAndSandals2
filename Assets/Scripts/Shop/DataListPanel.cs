@@ -104,7 +104,8 @@ namespace SwordsAndSandals.Shop
             int tradeInDiscount = 0;
             if (data is Armor)
             {
-                tradeInDiscount = (int)(_playerData.DataArmors.Get((data as Armor).Category).Cost / 10f);
+                var armor = _playerData.DataArmors.Get((data as Armor).Category);
+                tradeInDiscount = (int)(armor.Cost / 10f);
             }
             else if (data is Weapon)
             {

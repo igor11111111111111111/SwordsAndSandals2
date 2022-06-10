@@ -32,6 +32,8 @@ namespace SwordsAndSandals.Arena
             _playerArenaData = playerArenaData;
             _arenaHandler = arenaHandler;
 
+            InitWeaponFromSaveData();
+
             _player.Controller.OnAttack += (attackType) => // fix later
             {
                 _enemy.Controller.OnTakeDamage?.Invoke(attackType);
@@ -47,6 +49,11 @@ namespace SwordsAndSandals.Arena
         public void Test()
         { 
             OnLose?.Invoke();
+        }
+
+        private void InitWeaponFromSaveData()
+        {
+            _player.Data.DataWeapons.Current = new AllWeaponData().Get(_player.Data.DataWeapons.Current);
         }
 
         private void TakeDamage(Enums.AttackType attackType)

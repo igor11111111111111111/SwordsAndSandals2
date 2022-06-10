@@ -11,12 +11,25 @@ namespace SwordsAndSandals
         {
             _weapons = new List<Weapon>();
 
-            Hacking();
+            Hacking(); 
             Bashing();
         }
 
         public void Hacking()
         {
+            _weapons.Add(
+            new Weapon
+            (
+                Weapon.CategoryEnum.Hacking,
+                0,
+                "",
+                0,
+                1,
+                5,
+                0,
+                2
+            ));
+
             _weapons.Add(
             new Weapon
             (
@@ -111,6 +124,19 @@ namespace SwordsAndSandals
 
         public void Bashing()
         {
+            _weapons.Add(
+            new Weapon
+            (
+                Weapon.CategoryEnum.Bashing,
+                0,
+                "",
+                0,
+                1,
+                5,
+                0,
+                2
+            ));
+
             _weapons.Add(
             new Weapon
             (
@@ -211,6 +237,11 @@ namespace SwordsAndSandals
         public Weapon Get(Weapon.CategoryEnum category, int id)
         {
             return _weapons.Where(a => a.Category == category && a.ID == id).FirstOrDefault();
+        }
+
+        public Weapon Get(Weapon weapon)
+        {
+            return _weapons.Where(a => a.Category == weapon.Category && a.ID == weapon.ID).FirstOrDefault();
         }
     }
 }

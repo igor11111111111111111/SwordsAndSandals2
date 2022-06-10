@@ -39,7 +39,7 @@ namespace SwordsAndSandals.WeaponShop
             _body.SetActive(false);
 
             List<Weapon> weapons = _allWeaponData.Get(category);
-            List<IData> datas = weapons.Select(a => a as IData).ToList();
+            List<IData> datas = weapons.Where(a => a.ID != 0).Select(a => a as IData).ToList();
             _armorListPanel.Show(datas);
         }
     }

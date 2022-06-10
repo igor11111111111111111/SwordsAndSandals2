@@ -8,7 +8,7 @@ namespace SwordsAndSandals
     [Serializable]
     public class Armor : IData
     {
-        [JsonIgnore] public CategoryEnum Category;
+        public CategoryEnum Category;
         public int ID;
         int IData.ID { get => ID; set => ID = value; }
         [JsonIgnore] public string Name { get; set; }

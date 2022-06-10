@@ -26,19 +26,6 @@ namespace SwordsAndSandals
         {
             var category = Armor.CategoryEnum.Helmet;
 
-            //_armors.Add(
-            //new Armor
-            //(
-            //    // 3% crit hit protection
-            //    0,
-            //    category,
-            //    "",
-            //    0,
-            //    0,
-            //    0,
-            //    0
-            //));
-
             _armors.Add(
             new Armor
             (
@@ -1065,6 +1052,11 @@ namespace SwordsAndSandals
         public Armor Get(Armor.CategoryEnum category, int id)
         {
             return _armors.Where(a => a.Category == category && a.ID == id).FirstOrDefault();
+        }
+
+        public Armor Get(Armor armor)
+        {
+            return _armors.Where(a => a.Category == armor.Category && a.ID == armor.ID).FirstOrDefault();
         }
     }
 }

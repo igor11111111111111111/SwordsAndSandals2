@@ -23,7 +23,7 @@ namespace SwordsAndSandals.Arena
 
             var sceneScale = new Vector3(3.2f, 3.2f, 3.2f);
             injector.transform.localScale = sceneScale * playerData.DataSkills.Get<Strength>().ScaleCoeff;
-
+             
             _armorData = new ArmorData(playerData.DataArmors.GetDefence());
             _healthData = new HealthData(playerData.DataSkills.Get<Vitality>());
             _staminaData = new StaminaData(playerData.DataSkills.Get<Stamina>());

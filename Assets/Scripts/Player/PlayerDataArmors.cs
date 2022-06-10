@@ -47,12 +47,15 @@ namespace SwordsAndSandals
         }
 
         public int GetDefence()
-        {
+        { 
             int value = 0;
+            var allArmor = new AllArmorData();
 
             foreach (var armor in Array)
             {
-                value += armor.Defence;
+                var findedArmor = allArmor.Get(armor.Category, armor.ID);
+                if(findedArmor != null)
+                    value += findedArmor.Defence;
             }
 
             return value;
