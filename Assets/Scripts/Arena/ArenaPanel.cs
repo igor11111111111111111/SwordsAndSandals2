@@ -17,7 +17,7 @@ namespace SwordsAndSandals.Arena
         }
 
         public void Init(PlayerData playerData, PlayerData aiData, AudienceMoodData audienceMoodData)
-        {
+        { 
             _playerPanel.Init(playerData);
             _aiPanel.Init(aiData);
             _statsPanel.Init(audienceMoodData);

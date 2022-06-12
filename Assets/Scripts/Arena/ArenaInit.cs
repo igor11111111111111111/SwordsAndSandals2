@@ -21,6 +21,7 @@ namespace SwordsAndSandals.Arena
         private FatalityLogic _fatalityLogic;
         private SwordsAndSandals.PlayerData _playerData;
         private SwordsAndSandals.PlayerData _aiData;
+        private AudienceMoodData _audienceMoodData;
 
         private void Awake()
         {
@@ -34,10 +35,9 @@ namespace SwordsAndSandals.Arena
 
             PlayerInjector aiInjector = null;
 
-            var tournamentDataDontDestroy = FindObjectOfType<TournamentDataDontDestroy>();
-            if (tournamentDataDontDestroy != null)
+            if (TournamentDataDontDestroy.TournamentData != null)
             {
-                var participant = tournamentDataDontDestroy.TournamentData.Participants.Where(p => p.IsAlive).FirstOrDefault();
+                var participant = TournamentDataDontDestroy.TournamentData.Participants.Where(p => p.IsAlive).FirstOrDefault();
                 _aiData = participant.PlayerData;
 
                 if (participant.IsBoss)
@@ -86,8 +86,10 @@ namespace SwordsAndSandals.Arena
                 _introductionPanel.OnEnterArena += () => EnterArena(playerInjector, aiInjector);
             }
 
+            _audienceMoodData = new AudienceMoodData();
+
             _arenaPanel.Init(_fatalityPanel);
-            _endBattlePanel.Init(_fatalityPanel, tournamentDataDontDestroy);
+            _endBattlePanel.Init(_fatalityPanel, _audienceMoodData);
             _fatalityLogic = new FatalityLogic(playerInjector, aiInjector, _fatalityPrefab, _fatalityPanel, _cameraInit.Our);
         }
 
@@ -96,7 +98,7 @@ namespace SwordsAndSandals.Arena
             var turnLogic = new TurnLogic();
             var cameraMover = new CameraMover(_cameraInit, player, ai, turnLogic);
 
-            new ArenaSetupData(_arenaPanel, player, _playerData, ai, _aiData, turnLogic, cameraMover, _playerInputUI, _damageInfo, _endBattlePanel, _fatalityLogic);
+            new ArenaSetupData(_arenaPanel, player, _playerData, ai, _aiData, turnLogic, cameraMover, _playerInputUI, _damageInfo, _endBattlePanel, _fatalityLogic, _audienceMoodData);
             _arenaPanel.Show(true);
         }
     } 

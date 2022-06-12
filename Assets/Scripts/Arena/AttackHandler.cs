@@ -58,7 +58,7 @@ namespace SwordsAndSandals.Arena
 
         private void TakeDamage(Enums.AttackType attackType)
         {
-            if (attackType == Enums.AttackType.Charge && Mathf.Abs(_arenaHandler.GetDistance()) > 3.5f)
+            if (attackType == Enums.AttackType.Charge && Mathf.Abs(_arenaHandler.GetDistance()) > 4f)
                 return;
 
             if (CanHit(attackType))

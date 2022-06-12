@@ -10,16 +10,16 @@ namespace SwordsAndSandals.Tournament
     {
         [SerializeField] private ParticipantUI participantPrefab;
 
-        public void Init(TournamentData tournamentData)
+        public void Init()
         {
-            Losts(tournamentData);
+            Losts();
             Player();
-            Alives(tournamentData);
+            Alives();
         }
 
-        private void Losts(TournamentData tournamentData)
+        private void Losts()
         {
-            var Losts = tournamentData.Participants.Where(p => !p.IsAlive).ToArray();
+            var Losts = TournamentDataDontDestroy.TournamentData.Participants.Where(p => !p.IsAlive).ToArray();
 
             foreach (var participant in Losts)
             {
@@ -36,9 +36,9 @@ namespace SwordsAndSandals.Tournament
             player.Init(name, Color.green);
         }
 
-        private void Alives(TournamentData tournamentData)
+        private void Alives()
         {
-            var alives = tournamentData.Participants.Where(p => p.IsAlive).ToArray();
+            var alives = TournamentDataDontDestroy.TournamentData.Participants.Where(p => p.IsAlive).ToArray();
 
             foreach (var participant in alives)
             {

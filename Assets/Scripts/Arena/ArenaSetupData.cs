@@ -22,8 +22,8 @@ namespace SwordsAndSandals.Arena
         private EndBattlePanel _endBattlePanel;
         private FatalityLogic _fatalityLogic;
         private EndBattleHandler _endBattleHandler;
-         
-        public ArenaSetupData(ArenaPanel arenaPanel, PlayerInjector playerInjector, SwordsAndSandals.PlayerData playerData, PlayerInjector aiInjector, SwordsAndSandals.PlayerData aiData, TurnLogic turnLogic, CameraMover cameraMover, PlayerInputUI playerInputUI, DamageInfo damageInfo, EndBattlePanel endBattlePanel, FatalityLogic fatalityLogic)
+        private AudienceMoodData _audienceMoodData;
+        public ArenaSetupData(ArenaPanel arenaPanel, PlayerInjector playerInjector, SwordsAndSandals.PlayerData playerData, PlayerInjector aiInjector, SwordsAndSandals.PlayerData aiData, TurnLogic turnLogic, CameraMover cameraMover, PlayerInputUI playerInputUI, DamageInfo damageInfo, EndBattlePanel endBattlePanel, FatalityLogic fatalityLogic, AudienceMoodData audienceMoodData)
         {
             _arenaPanel = arenaPanel; 
             _playerInjector = playerInjector;
@@ -36,6 +36,7 @@ namespace SwordsAndSandals.Arena
             _damageInfo = damageInfo;
             _endBattlePanel = endBattlePanel;
             _fatalityLogic = fatalityLogic;
+            _audienceMoodData = audienceMoodData;
 
             Handlers();
             Player();
@@ -63,6 +64,7 @@ namespace SwordsAndSandals.Arena
 
             _damageInfo.Init(_playerAttackHandler);
             new StaminaLogic(_playerInjector.Controller, _arenaPlayerData);
+            new RegenerationLogic(_playerInjector.Controller, _arenaPlayerData);
         }
 
         private void AI()
@@ -78,6 +80,7 @@ namespace SwordsAndSandals.Arena
 
             new PlayerRotator().Rotate(_aiInjector);
             new StaminaLogic(_aiInjector.Controller, _arenaAiData);
+            new RegenerationLogic(_aiInjector.Controller, _arenaAiData);
         }
 
         private void LateInit()
@@ -87,11 +90,10 @@ namespace SwordsAndSandals.Arena
             _endBattleHandler.Init(_playerAttackHandler);
             _turnLogic.Init(_playerInjector, _aiInjector, _endBattleHandler);
 
-            var audienceMoodData = new AudienceMoodData();
-            new AudienceMoodLogic(_playerInjector.Controller, _aiInjector.Controller, audienceMoodData);
+            new AudienceMoodLogic(_playerInjector.Controller, _aiInjector.Controller, _audienceMoodData);
             new RageLogic(_playerInjector, _aiInjector);
 
-            _arenaPanel.Init(_arenaPlayerData, _arenaAiData, audienceMoodData);
+            _arenaPanel.Init(_arenaPlayerData, _arenaAiData, _audienceMoodData);
             _cameraMover.Init(_arenaHandler);
             _endBattlePanel.Init(_playerData, _aiData, _endBattleHandler);
             _fatalityLogic.Init(_endBattleHandler);

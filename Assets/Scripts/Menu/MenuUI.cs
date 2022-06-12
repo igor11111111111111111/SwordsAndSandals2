@@ -1,4 +1,8 @@
-﻿using SwordsAndSandals.OutScene;
+﻿using CustomJson;
+using SwordsAndSandals.OutScene;
+using System;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +19,7 @@ namespace SwordsAndSandals.Menu
 
         [SerializeField] private SettingsUI _settingsUI;
         [SerializeField] private AboutUI _aboutUI;
+        [SerializeField] private LoadUI _loadUI;
 
         public void Init()
         { 
@@ -27,21 +32,47 @@ namespace SwordsAndSandals.Menu
 
             _settingsUI.Init();
             _aboutUI.Init();
+            _loadUI.Init();
         }
 
         private void New()
         {
+            var saveName = "NewGame " + GetFreeIndex();
+            Directory.CreateDirectory(Application.persistentDataPath + "/Saves/" + saveName);
+            
+            new Json().Save(new CurrentSaveData(saveName));
+
             new SceneChanger().MoveTo(Enums.Scene.Editor);
+        }
+
+        private int GetFreeIndex()
+        {
+            int index = Directory
+                .GetDirectories(Application.persistentDataPath + "/Saves")
+                .Select(d => new DirectoryInfo(d).Name)
+                .Where(d => d.Contains("NewGame"))
+                .Select(d => d.Replace("NewGame", ""))
+                .Select(d =>
+                {
+                    int value;
+                    bool success = int.TryParse(d, out value);
+                    return new { value, success };
+                })
+                .Where(pair => pair.success)
+                .Select(pair => pair.value)
+                .LastOrDefault();
+
+            return index + 1;
         }
 
         private void Save()
         {
-
+             
         }
 
         private void Load()
         {
-            new SceneChanger().MoveTo(Enums.Scene.Street);
+            _loadUI.Activate(true);
         }
 
         private void Settings()

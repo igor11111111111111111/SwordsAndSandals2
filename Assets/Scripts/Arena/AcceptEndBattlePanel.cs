@@ -12,16 +12,16 @@ namespace SwordsAndSandals.Arena
         private SwordsAndSandals.PlayerData _playerData;
         private SwordsAndSandals.PlayerData _aiData;
         private Enums.Team _winningTeam;
-        private TournamentDataDontDestroy _tournamentDataDontDestroy;
         private XPData _XPData;
+        private AudienceMoodData _audienceMoodData;
 
-        public AcceptEndBattlePanel(SwordsAndSandals.PlayerData playerData, SwordsAndSandals.PlayerData aiData, Enums.Team winningTeam, TournamentDataDontDestroy tournamentDataDontDestroy, XPData xPData)
+        public AcceptEndBattlePanel(SwordsAndSandals.PlayerData playerData, SwordsAndSandals.PlayerData aiData, Enums.Team winningTeam, XPData xPData, AudienceMoodData audienceMoodData)
         {
             _playerData = playerData;
             _aiData = aiData;
             _winningTeam = winningTeam;
-            _tournamentDataDontDestroy = tournamentDataDontDestroy;
             _XPData = xPData;
+            _audienceMoodData = audienceMoodData;
 
             Accept();
         }
@@ -41,11 +41,11 @@ namespace SwordsAndSandals.Arena
         private void Win()
         {
             _playerData.DataLevel.CurrentXP = _XPData.NewXP;
-            _playerData.Money += _aiData.Reward.Money; // * coeff apprecation
+            _playerData.Money += _aiData.Reward.Money * _audienceMoodData.Coeff;
 
             _XPData.SetNewLevel(_playerData.DataLevel.Level);
 
-            if (_tournamentDataDontDestroy != null)
+            if (TournamentDataDontDestroy.TournamentData != null) 
             {
                 WinTournament();
             }
@@ -57,7 +57,7 @@ namespace SwordsAndSandals.Arena
 
         private void WinTournament()
         {
-            var aliveParticipants = _tournamentDataDontDestroy.TournamentData.Participants.Where(p => p.IsAlive);
+            var aliveParticipants = TournamentDataDontDestroy.TournamentData.Participants.Where(p => p.IsAlive);
 
             if (aliveParticipants.Count() == 1)
             {
@@ -71,7 +71,7 @@ namespace SwordsAndSandals.Arena
 
         private void WinAllTournament()
         {
-            Object.Destroy(_tournamentDataDontDestroy.gameObject);
+            Object.Destroy(TournamentDataDontDestroy.Instance.gameObject);
 
             var tournamentData = new Json().Load<TournamentData>();
             tournamentData.SetCurrentComplete();
@@ -90,7 +90,7 @@ namespace SwordsAndSandals.Arena
                 new Json().Save(_playerData);
             }
 
-            _tournamentDataDontDestroy.TournamentData.Participants.Find(ai => ai.PlayerData == _aiData).IsAlive = false;
+            TournamentDataDontDestroy.TournamentData.Participants.Find(ai => ai.PlayerData == _aiData).IsAlive = false;
             new SceneChanger().MoveTo(Enums.Scene.Tournament);
         }
 

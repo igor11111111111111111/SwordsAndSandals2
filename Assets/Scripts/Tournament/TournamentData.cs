@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace SwordsAndSandals.Tournament
 {
@@ -15,6 +16,7 @@ namespace SwordsAndSandals.Tournament
         public List<ParticipantData> Participants => _participants;
         private List<ParticipantData> _participants;
 
+        private GameObject _gameObject;
         public TournamentData(string name, string info, int iconIndex, string locationPath, List<ParticipantData> participants)
         {
             _name = name;

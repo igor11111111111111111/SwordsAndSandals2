@@ -27,7 +27,7 @@ namespace SwordsAndSandals.Arena
             controller.OnStartAction += (state) =>
             {
                 arenaPlayerData.StaminaData.Current -= _stateValue[state];
-            };
+            }; 
         }
     }
 } 

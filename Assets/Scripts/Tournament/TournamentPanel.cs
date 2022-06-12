@@ -13,8 +13,9 @@ namespace SwordsAndSandals.Tournament
         [SerializeField] private Image _icon;
         [SerializeField] private Button _enterToArena;
          
-        public void Init(TournamentData data)
+        public void Init()
         {
+            var data = TournamentDataDontDestroy.TournamentData;
             _name.text = data.Name;
             _info.text = data.Info;
             _icon.sprite = Resources.LoadAll<Sprite>("ArenaIcons")[data.IconIndex];

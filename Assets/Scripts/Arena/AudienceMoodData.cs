@@ -7,7 +7,7 @@ namespace SwordsAndSandals.Arena
     {
         public event Action<int, int> OnValueChanged;
         public int Current
-        {
+        { 
             get
             {
                 return _current;
@@ -21,16 +21,13 @@ namespace SwordsAndSandals.Arena
         private int _current;
         public int Max => _max;
         private int _max;
-
+        public float Percent => _currentToMax * 100;
+        public float Coeff => 1 + _currentToMax;
+        private float _currentToMax => _current / (float)_max;
         public AudienceMoodData()
         {
             _max = 100;
             Current = 0;
         }
-
-        //public void Init()
-        //{
-        //    Current = 0;
-        //}
     }
 }

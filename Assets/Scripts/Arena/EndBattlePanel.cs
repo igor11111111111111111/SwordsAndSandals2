@@ -20,12 +20,12 @@ namespace SwordsAndSandals.Arena
         private SwordsAndSandals.PlayerData _playerData;
         private SwordsAndSandals.PlayerData _aiData;
         private EndBattleHandler.Info _endBattleInfo;
-        private TournamentDataDontDestroy _tournamentDataDontDestroy;
         private XPData _XPData;
+        private AudienceMoodData _audienceMoodData;
 
-        public void Init(FatalityPanel fatalityPanel, TournamentDataDontDestroy tournamentDataDontDestroy)
+        public void Init(FatalityPanel fatalityPanel, AudienceMoodData audienceMoodData)
         {
-            _tournamentDataDontDestroy = tournamentDataDontDestroy;
+            _audienceMoodData = audienceMoodData;
 
             Show(false);
 
@@ -35,8 +35,8 @@ namespace SwordsAndSandals.Arena
                         _playerData,
                         _aiData,
                         _endBattleInfo.WinningTeam,
-                        _tournamentDataDontDestroy,
-                        _XPData
+                        _XPData,
+                        _audienceMoodData
                     )
             );
 
@@ -84,7 +84,7 @@ namespace SwordsAndSandals.Arena
         private async void ShowWinPanel()
         {
             _aboutCharactersInfo.text = "First blood to " + _playerData.Name + "! " + _aiData.Name + " yields.";
-            _goldInfo.text = _aiData.Reward.Money /*+ crowd apprecation*/ + " gold won."/* + "..% crowd apprecation"*/;
+            _goldInfo.text = _aiData.Reward.Money * _audienceMoodData.Coeff + " gold won." + "(Crowd apprecation " + _audienceMoodData.Percent + " %)";
             _battleXPInfo.text = _aiData.Reward.XP + " xp won for this fight";
 
             _percentToNextLevelInfo.text = null;

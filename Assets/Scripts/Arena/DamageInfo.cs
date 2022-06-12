@@ -19,8 +19,6 @@ namespace SwordsAndSandals.Arena
         public async void Show(int value, Vector3 pos)
         {
             _body.SetActive(true);
-            var offset = new Vector3(0, 5, 1);
-            _body.transform.position = new Vector3(pos.x, pos.y, 0) + offset;
 
             if (value == 0)
             {

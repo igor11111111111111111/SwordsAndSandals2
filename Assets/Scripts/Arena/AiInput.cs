@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace SwordsAndSandals.Arena
 {
@@ -12,9 +13,9 @@ namespace SwordsAndSandals.Arena
         private PlayerRotator _playerRotator;
         private PlayerData _playerData;
 
-        public void Init(PlayerInjector aiInjector, TurnLogic turnLogic, ArenaHandler arenaHandler, PlayerData playerData)
+        public void Init(PlayerInjector injector, TurnLogic turnLogic, ArenaHandler arenaHandler, PlayerData playerData)
         { 
-            _injector = aiInjector;
+            _injector = injector;
             _arenaHandler = arenaHandler;
             _playerData = playerData;
             _playerRotator = new PlayerRotator(_injector, _arenaHandler);
@@ -33,14 +34,7 @@ namespace SwordsAndSandals.Arena
 
             _playerRotator.CheckRotation();
 
-            if (_playerData.StaminaData.Current <= 16)
-            {
-                Actions[3]?.Invoke();
-            }
-            else
-            {
-                Actions[4/*UnityEngine.Random.Range(0, 9)*/]?.Invoke();
-            }
+            new AILogic(_arenaHandler, _playerData, Actions, OnInBattle);
         }
     }
 }

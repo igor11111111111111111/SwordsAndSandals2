@@ -11,11 +11,10 @@ namespace SwordsAndSandals.Tournament
 
         private void Awake()
         {
-            var tournamentDataScene = FindObjectOfType<TournamentDataDontDestroy>();
-            if(tournamentDataScene != null)
+            if(TournamentDataDontDestroy.TournamentData != null)
             {
-                _listParticipantsUI.Init(tournamentDataScene.TournamentData);
-                _tournamentPanel.Init(tournamentDataScene.TournamentData);
+                _listParticipantsUI.Init();
+                _tournamentPanel.Init();
             }
             else
             {
