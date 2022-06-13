@@ -67,5 +67,11 @@
             Player,
             AI
         }
+
+        public enum Setting
+        {
+            Music,
+            Sounds
+        }
     }
 }

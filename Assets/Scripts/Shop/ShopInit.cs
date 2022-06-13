@@ -52,6 +52,8 @@ namespace SwordsAndSandals.Shop
                 new Json().Save(playerData);
                 new SceneChanger().MoveTo(Enums.Scene.Street);
             });
+
+            MusicDontDestroy.SetClip("Shop", true);
         }
 
         private void InitSaveDataWeapons(ref PlayerData playerData)

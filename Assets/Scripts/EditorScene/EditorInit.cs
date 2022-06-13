@@ -21,6 +21,7 @@ namespace SwordsAndSandals.Editor
                 );
 
             _playerEditor.Init(playerData, playerInjector);
+            MusicDontDestroy.SetClip("Editor", true);
         }
     }
 }

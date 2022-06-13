@@ -17,10 +17,10 @@ namespace SwordsAndSandals.Menu
         [SerializeField] private Button _about;
         [SerializeField] private Button _exit;
 
-        [SerializeField] private SettingsUI _settingsUI;
+        [SerializeField] private SettingsUIPanel _settingsUI;
         [SerializeField] private AboutUI _aboutUI;
         [SerializeField] private LoadUI _loadUI;
-
+         
         public void Init()
         { 
             _new.onClick.AddListener(New);

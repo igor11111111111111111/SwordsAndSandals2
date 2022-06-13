@@ -29,6 +29,11 @@ namespace SwordsAndSandals.Menu
         {
             var saves = Directory
                .GetDirectories(Application.persistentDataPath + "/Saves")
+               .Where(d =>// need more check
+               {
+                   var files = new DirectoryInfo(d).GetFiles();
+                   return (files.Length > 0) ? true : false;
+               })//
                .Select(d => new DirectoryInfo(d).Name)
                .ToArray();
 

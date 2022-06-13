@@ -28,6 +28,8 @@ namespace SwordsAndSandals.LevelUp
             _levelUpInfo.Init(_playerData.DataLevel.Level);
 
             _moveToStreet.onClick.AddListener(MoveToStreet);
+
+            MusicDontDestroy.SetClip("LevelUp", false);
         }
 
         private void MoveToStreet()

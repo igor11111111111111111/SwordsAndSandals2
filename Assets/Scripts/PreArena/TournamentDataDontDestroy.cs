@@ -4,8 +4,8 @@ using UnityEngine;
 namespace SwordsAndSandals.Tournament
 {
     public class TournamentDataDontDestroy : MonoBehaviour
-    {
-        public static TournamentDataDontDestroy Instance;
+    { 
+        public static TournamentDataDontDestroy Instance { get; private set; }
         private static bool _created = false;
         public static TournamentData TournamentData => _tournamentData;
         private static TournamentData _tournamentData;

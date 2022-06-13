@@ -23,8 +23,7 @@ namespace SwordsAndSandals.PreArena
                     var json = new Json();
                     var tournamentData = json.Load<TournamentData>();
 
-                    var go = Instantiate(new GameObject());
-                    go.name = "TournamentDataScene";
+                    var go = new GameObject("TournamentDataScene");
                     var data = go.AddComponent<TournamentDataDontDestroy>();
                     var notCompleteTournament = tournamentData.GetFirstComplete(false);
                     var index = Array.IndexOf(tournamentData.Array, notCompleteTournament);
