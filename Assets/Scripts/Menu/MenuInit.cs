@@ -12,7 +12,7 @@ namespace SwordsAndSandals.Menu
         private void Awake()
         {
             _menuUI.Init();
-            MusicDontDestroy.SetClip("Menu", true);
+            MusicDontDestroy.SetClip("Menu", true, true);
         }
     }
 }

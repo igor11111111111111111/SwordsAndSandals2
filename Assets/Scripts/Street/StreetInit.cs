@@ -27,7 +27,7 @@ namespace SwordsAndSandals.Street
             _weaponPanel.Init(Enums.Scene.WeaponShop);
             _armorPanel.Init(Enums.Scene.ArmorShop);
 
-            MusicDontDestroy.SetClip("Street", true);
+            MusicDontDestroy.SetClip("Street", true, true);
         }
     }
 }

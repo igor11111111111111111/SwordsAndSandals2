@@ -29,7 +29,7 @@ namespace SwordsAndSandals.LevelUp
 
             _moveToStreet.onClick.AddListener(MoveToStreet);
 
-            MusicDontDestroy.SetClip("LevelUp", false);
+            MusicDontDestroy.SetClip("LevelUp", false, false);
         }
 
         private void MoveToStreet()

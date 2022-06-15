@@ -92,7 +92,7 @@ namespace SwordsAndSandals.Arena
             _endBattlePanel.Init(_fatalityPanel, _audienceMoodData);
             _fatalityLogic = new FatalityLogic(playerInjector, aiInjector, _fatalityPrefab, _fatalityPanel, _cameraInit.Our);
 
-            MusicDontDestroy.SetClip("ArenaIntroduction", false);
+            MusicDontDestroy.SetClip("ArenaIntroduction", false, false);
         }
 
         private void EnterArena(PlayerInjector player, PlayerInjector ai)
@@ -103,7 +103,7 @@ namespace SwordsAndSandals.Arena
             new ArenaSetupData(_arenaPanel, player, _playerData, ai, _aiData, turnLogic, cameraMover, _playerInputUI, _damageInfo, _endBattlePanel, _fatalityLogic, _audienceMoodData);
             _arenaPanel.Show(true);
 
-            MusicDontDestroy.SetClip("Battle" + Random.Range(1, 3), true);
+            MusicDontDestroy.SetClip("Battle" + Random.Range(1, 3), true, true);
         }
     } 
 }

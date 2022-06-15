@@ -13,11 +13,16 @@ namespace SwordsAndSandals.Arena
          
         public void Init(AttackHandler playerAttackHandler)
         {
-            // !!!false tournament
             playerAttackHandler.OnWin += () => OnEndBattle?.Invoke(new Info(Enums.Team.Player));
             playerAttackHandler.OnLose += () => OnEndBattle?.Invoke(new Info(Enums.Team.AI));
-        }
 
+            OnEndBattle += (info) =>
+            {
+                if (info.WinningTeam == Enums.Team.AI)
+                    MusicDontDestroy.SetClip("ArenaLose", false, false);
+            };
+        }
+         
         public class Info
         {
             public Enums.Team WinningTeam;

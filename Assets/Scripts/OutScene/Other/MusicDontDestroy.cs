@@ -29,7 +29,7 @@ namespace SwordsAndSandals
             }
         }
 
-        public static void SetClip(string name, bool useRandom)
+        public static void SetClip(string name, bool useRandom, bool loop)
         {
             if (!_created || !_audio.enabled || _audio.clip && _audio.clip.name == name) 
                 return;
@@ -48,7 +48,7 @@ namespace SwordsAndSandals
             }
 
             _audio.clip = clip;
-            _audio.loop = true;
+            _audio.loop = loop;
             _audio.Play();
         }
 

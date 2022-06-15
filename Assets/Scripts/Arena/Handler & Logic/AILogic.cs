@@ -15,11 +15,13 @@ namespace SwordsAndSandals.Arena
             this._playerData = _playerData;
             this._actions = _actions;
 
+            var chance = UnityEngine.Random.Range(0, 101);
+
             if (_playerData.StaminaData.Current <= 16)
             {
                 _actions[3]?.Invoke(); // sleep
             }
-            else if (_playerData.HealthData.Current / (float)_playerData.HealthData.Max <= 0.3f)
+            else if (chance > 50 && _playerData.HealthData.Current / (float)_playerData.HealthData.Max <= 0.3f)
             {
                 if (_arenaHandler.GetAbsDistance() < 6)
                 {

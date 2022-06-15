@@ -33,7 +33,7 @@ namespace SwordsAndSandals.Menu
             {
                 MusicDontDestroy.SetActive(isOn);
                 if (isOn)
-                    MusicDontDestroy.SetClip("Menu", true);
+                    MusicDontDestroy.SetClip("Menu", true, true);
             });
 
             exit.onClick.AddListener(() =>

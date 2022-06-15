@@ -53,7 +53,7 @@ namespace SwordsAndSandals.Shop
                 new SceneChanger().MoveTo(Enums.Scene.Street);
             });
 
-            MusicDontDestroy.SetClip("Shop", true);
+            MusicDontDestroy.SetClip("Shop", true, true);
         }
 
         private void InitSaveDataWeapons(ref PlayerData playerData)

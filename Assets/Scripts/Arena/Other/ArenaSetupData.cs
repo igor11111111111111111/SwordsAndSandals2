@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace SwordsAndSandals.Arena
@@ -41,7 +42,7 @@ namespace SwordsAndSandals.Arena
             Handlers();
             Player();
             AI();
-            LateInit();
+            LateInitAsync();
         }
 
         private void Handlers()
@@ -83,7 +84,7 @@ namespace SwordsAndSandals.Arena
             new RegenerationLogic(_aiInjector.Controller, _arenaAiData);
         }
 
-        private void LateInit()
+        private void LateInitAsync()
         {
             _playerAttackHandler.Init(_aiAttackHandler);
             _aiAttackHandler.Init(_playerAttackHandler);
@@ -102,4 +103,4 @@ namespace SwordsAndSandals.Arena
             //_aiAttackHandler.Test();//! 
         }
     }
-}
+} 

@@ -35,7 +35,7 @@ namespace SwordsAndSandals.Loading
             var settingsSaveData = new Json().Load<SettingsSaveData>();
             if (settingsSaveData == null)
             {
-                new Json().Save(new SettingsSaveData());
+                new Json().Save(new SettingsSaveData(true, 0.2f, true, 0.2f));
             }
         }
 
